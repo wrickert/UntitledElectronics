@@ -1,4 +1,4 @@
-21082780220754107
+21101145769892131
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -524,6 +524,20 @@ SK-3296S_switch
 0
 7
 4
+Bsides22
+BackLogo
+
+
+0
+0
+0
+Bsides22
+CapSense
+
+
+0
+1
+1
 Button_Switch_Keyboard
 SW_Cherry_MX_1.00u_PCB
 Cherry MX keyswitch, 1.00u, PCB mount, http://cherryamericas.com/wp-content/uploads/2014/12/mx_cat.pdf
@@ -78854,6 +78868,55 @@ WiFi IEEE802.11 b/g/n
 0
 44
 44
+RedVillage
+AA_TH
+
+
+0
+2
+2
+RedVillage
+BZCN-TSC005A_Button
+
+
+0
+6
+2
+RedVillage
+C_0805_2012Metric
+Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
+capacitor
+0
+2
+2
+RedVillage
+Omron_XF2M-4015-1A_1x40-1MP_P0.5mm_Horizontal
+Omron FPC connector, 40 top-side contacts, 0.5mm pitch, SMT, https://omronfs.omron.com/en_US/ecb/products/pdf/en-xf2m.pdf
+omron fpc xf2m
+0
+42
+40
+RedVillage
+SIQ-02FVS3_Encoder
+
+
+0
+10
+4
+RedVillage
+StartSel
+
+
+0
+4
+3
+RedVillage
+XL-3227RGB_LED
+
+
+0
+4
+4
 Relay_SMD
 Relay_2P2T_10x6mm_TE_IMxxG
 Signal Relay, 10x6mm, 2 Form C, Gull Wings, https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7F108-98001%7FZ.1%7Fpdf%7FEnglish%7FENG_DS_108-98001_Z.1.pdf
