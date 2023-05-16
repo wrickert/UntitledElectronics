@@ -1,0 +1,10 @@
+(unit MM)
+
+(package "ESP32S2WROOMIM22S2H3200US3Q0"
+    (type UNDEF)
+    (uver 2)
+    (mountForm default
+        (footprintRef "ESP32S2WROOMIM22S2H3200US3Q0")
+        (spec "default")
+    )
+)

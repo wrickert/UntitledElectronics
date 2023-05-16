@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'ESP32_S2_WROOM_I_M22S2H3200US3Q0_'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Espressif Systems", "ESP32-S2-WROOM-I(M22S2H3200US3Q0)" (!) = "", "ESP32S2WROOMIM22S2H3200US3Q0", "Other", "356-ESP32S2WRMI320US", "https://www.mouser.co.uk/ProductDetail/Espressif-Systems/ESP32-S2-WROOM-IM22S2H3200US3Q0?qs=W%2FMpXkg%252BdQ6NhxEeKuPVlg%3D%3D", "WiFi Modules (802.11) SMD module , ESP32-S2, 4 MB SPI flash, IPEX antenna connector,-40 C +105 C", "", "3.45 mm"
+END_PART
+
+END.

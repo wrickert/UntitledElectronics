@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ESP32-S2-WROOM-I_M22S2H3200US3Q0_
+D WiFi Modules (802.11) SMD module , ESP32-S2, 4 MB SPI flash, IPEX antenna connector,-40 C +105 C
+K
+F 
+$ENDCMP
+#
+#End Doc Library
