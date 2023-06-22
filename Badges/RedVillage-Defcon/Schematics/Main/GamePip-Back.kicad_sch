@@ -2794,7 +2794,6 @@
     )
   )
 
-
   (junction (at 257.175 58.42) (diameter 0) (color 0 0 0 0)
     (uuid 09257f06-b8e6-4794-8c67-99b70ba066a5)
   )
@@ -2912,11 +2911,6 @@
   (no_connect (at 31.75 113.03) (uuid ef63af4a-6a3f-4b94-aabd-564c9699ce17))
   (no_connect (at 31.75 143.51) (uuid f59126f6-99e6-4fc4-86d2-32aea686c1b0))
   (no_connect (at 31.75 128.27) (uuid f62705d8-4911-45b2-ad1f-8cef86c25175))
-
-  (bus_entry (at 306.705 57.15) (size 2.54 2.54)
-    (stroke (width 0) (type default))
-    (uuid 68a813ef-817c-4e4b-a1b4-129d74fbadd1)
-  )
 
   (wire (pts (xy 278.765 100.965) (xy 285.115 100.965))
     (stroke (width 0) (type default))
@@ -3870,6 +3864,14 @@
   (text "IM0 = 0\nIM1 = 1\nIM2 = 1\nIM3 = 1" (at 45.72 104.14 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 6093b932-d997-4790-bb35-cc8f3222532c)
+  )
+  (text "MOSI" (at 271.78 83.82 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 8e32c5e2-fa8f-4b18-852c-8fd25ad98370)
+  )
+  (text "DC" (at 274.32 81.28 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid b7388f66-7756-4d2a-9fb9-a33a88edd88e)
   )
   (text "I dont know if these pins need to be used\n" (at 45.72 151.765 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
