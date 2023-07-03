@@ -6,6 +6,10 @@
 #define wheelDn 9 
 #define wheelIn 10
 
+
+// Okay... So I dont know how to make the encoder work. Onto the next problem
+
+//TODO Fix encoder
 int32_t RotaryCount = 0; //used to track rotary position
 MD_REncoder encoderObj = MD_REncoder(wheelUp, wheelDn);
 
