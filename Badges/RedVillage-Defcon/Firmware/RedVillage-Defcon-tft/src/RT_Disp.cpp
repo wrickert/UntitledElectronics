@@ -4,6 +4,8 @@
 #include "Assets/RedTeamVillage.h"
 #include "Assets/CyberFloor.h"
 #include "RT_Disp.h"
+#include "RT_Button.h"
+#include "RT_wifi.h"
 #include "Assets/Guy_30x38.h"
 #include "Assets/circle.h"
 #include "Assets/arrow.h"
@@ -11,6 +13,7 @@
 #include "Assets/Guy_open_50x63.h"
 #include "Assets/NotoSansBold15.h"
 
+#define ENbtnPin 10
 
 PNG png; // PNG decoder inatance
 
@@ -41,6 +44,10 @@ void RT_Disp_init(){
     startFaceTime = millis();
 
   Serial.println("\r\nTFT Initialisation done."); 
+}
+
+TFT_eSPI RT_GetTFT(){
+    return tft;
 }
 
 void RT_Disp_Splash(){
@@ -96,6 +103,22 @@ void RT_Sprite_init(){
 int x=20;
 int y=20;
 
+void setX(int newX){
+    x = newX;
+}
+
+void setY(int newY){
+    y = newY;
+}
+
+int getX(){
+    return x;
+}
+
+int getY(){
+    return y;
+}
+
 void RT_background_refresh(int button){
     background.pushImage(0,0,320,240,CyberFloor);
 
@@ -117,6 +140,158 @@ void RT_background_refresh(int button){
         y-=5;
 }
 
+void text_Box_in(int x, int y, int w, int l, u_int32_t color1, u_int32_t color2){
+    Serial.println("in Text box");
+    int xstep = (w - x)/10;
+    int ystep= (l - y )/10;
+    int xmiddle = (w - x)/2;
+    int ymiddle = (l - y)/2;
+
+    TFT_eSPI tft = RT_GetTFT();
+
+    for(int i = 1; i<=5; i++){
+        //Serial.printf("Doing box x: %d, y: %d, %n",(xmiddle-i*xstep),(ymiddle-i*ystep));
+        tft.fillRectHGradient((xmiddle-i*xstep),(ymiddle-i*ystep),((i*2)*xstep),((i*2)*ystep),color1,color2);
+        delay(100);
+    }
+}
+
+// TODO: change this to use rectangles of black instead of filling the screen to only refill
+void text_Box_out(int x, int y, int w, int l, u_int32_t color1, u_int32_t color2){
+    Serial.println("in Text box out");
+
+    int xstep = (w - x)/10;
+    int ystep= (l - y )/10;
+    int xmiddle = (w - x)/2;
+    int ymiddle = (l - y)/2;
+
+    TFT_eSPI tft = RT_GetTFT();
+
+    for(int i = 4; i>=1; i--){
+        //Serial.printf("Doing box x: %d, y: %d, %n",(xmiddle-i*xstep),(ymiddle-i*ystep));
+        //tft.fillScreen(TFT_BLACK);
+        tft.fillRect((xmiddle-(i+1)*xstep),(ymiddle-(i+1)*ystep),(((i+1)*2)*xstep),(((i+1)*2)*ystep),TFT_BLACK);
+        tft.fillRectHGradient((xmiddle-i*xstep),(ymiddle-i*ystep),((i*2)*xstep),((i*2)*ystep),color1,color2);
+        delay(100);
+    }
+    tft.fillScreen(TFT_BLACK);
+}
+
+void blackScreen(){
+    tft.fillScreen(TFT_BLACK);
+}
+
+int getColorSchemeOne(){
+    return TFT_RED;
+}
+
+int getColorSchemeTwo(){
+    return TFT_PINK;
+}
+
+int aX = 120;
+int aY = 28;
+//M is the last menu position
+int M = 0;
+
+void RT_Menu(){
+    tft.fillScreen(TFT_BLACK);
+
+    tft.fillRectHGradient(20, 10, 90, 150, getColorSchemeOne(), getColorSchemeTwo());
+
+    tft.loadFont(AA_FONT_SMALL);
+    tft.setCursor(30,20);
+    tft.println("Game");
+    tft.setCursor(30,50);
+    tft.println("WiFi");
+    tft.setCursor(30,80);
+    tft.println("Settings");
+    tft.setCursor(30,110);
+    tft.println("About");
+
+        int er = 0;
+        int oldEr = 0;
+
+    while(encButtonRead() == 0){}
+
+    //Okay, lets add a cursor
+    //Arrow X and Y are the location of the left tip
+    while(encButtonRead() == 1){
+        tft.fillTriangle(aX-2,aY,aX+52,aY-17,aX+52,aY+17,TFT_BLACK);
+
+        aY = 27 + 30 * M;
+        tft.drawTriangle(aX,aY,aX+50,aY-15,aX+50,aY+15,TFT_WHITE);
+        tft.fillTriangle(aX+2,aY,aX+49,aY-13,aX+49,aY+13,TFT_RED);
+
+        er = encRead();
+
+        if(er != oldEr){
+            Serial.print("Er is: ");
+            Serial.println(er);
+            if(er > oldEr){
+                Serial.println("Moving down");
+                M--;
+                if(M<0 && touchRead(4) < 100000)
+                    M = 3;
+                if(M<0 && touchRead(4) > 100000)
+                    M = 4;
+                oldEr = er;
+            }
+                oldEr = er;
+            /*
+            else if(er < oldEr){
+                M++;
+                Serial.println("Moving up");
+                Serial.println(touchRead(4));
+                if(M>3 && touchRead(4) < 100000)
+                    M = 0;
+                if(M>3 && touchRead(4) > 100000)
+                    M = 4;
+                oldEr = er;
+            }
+            */
+        }
+
+    }
+
+    enableEncoderInturrupt();
+
+    switch(M){
+        //Game
+        case 0:
+            RT_background_refresh(1);
+            break;
+        //WiFi
+        case 1:
+            RT_Wifi_Scan();
+            break;
+        //Settings
+        case 2:
+            RT_Settings();
+            break;
+        //About
+        case 3:
+            RT_About();
+            break;
+        //Secret
+        case 4:
+            RT_Secret();
+            break;
+
+    }
+}
+
+void RT_Settings(){
+
+}
+
+void RT_About(){
+
+}
+
+void RT_Secret(){
+    
+}
 
 //unsigned long lastChange;
 int currentFace = 1;

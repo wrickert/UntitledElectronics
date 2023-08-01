@@ -2,6 +2,7 @@
 
 
 #include <PNGdec.h>
+#include <TFT_eSPI.h>
 
 
 void RT_Disp_init();
@@ -14,3 +15,20 @@ void Hackio(int x, int y);
 void RT_Sprite_init();
 void RT_background_refresh(int);
 bool RT_Conversation(int button);
+
+void setX(int);
+void setY(int);
+int getX();
+int getY();
+TFT_eSPI RT_GetTFT();
+
+void text_Box_in(int x, int y, int l, int w, u_int32_t color1, u_int32_t color2);
+void text_Box_out(int x, int y, int l, int w, u_int32_t color1, u_int32_t color2);
+
+void blackScreen();
+int getColorSchemeOne();
+int getColorSchemeTwo();
+void RT_Menu();
+void RT_Settings();
+void RT_About();
+void RT_Secret();

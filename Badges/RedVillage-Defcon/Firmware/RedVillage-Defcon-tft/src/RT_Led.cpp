@@ -8,7 +8,10 @@
 #define WBpin 37
 #define WGpin 36
 
+#define BLPin 1
+
 unsigned long startTime = millis();
+bool LightsOut = false;
 
 void RT_Led_init(){
     pinMode(PRpin, OUTPUT);
@@ -17,39 +20,76 @@ void RT_Led_init(){
     pinMode(WRpin, OUTPUT);
     pinMode(WBpin, OUTPUT);
     pinMode(WGpin, OUTPUT);
+
+    pinMode(BLPin, OUTPUT);
+    
     startTime = millis();
+
+    Serial.println("LED Initialisation done.");
+}
+
+void setLightsOut(bool value){
+    LightsOut = value;
+}
+
+bool getLightsOut(){
+    return LightsOut;
+}
+
+void Backlight_on(){
+    digitalWrite(BLPin, HIGH);
+}
+
+void Backlight_off(){
+    digitalWrite(BLPin, LOW);
 }
 
 void PowerLed_on(){
-    digitalWrite(PRpin, LOW);
+    if(!LightsOut){
+        digitalWrite(PRpin, HIGH);
+        digitalWrite(PBpin, HIGH);
+        digitalWrite(PGpin, LOW);
+    }
+    else{
+        digitalWrite(PRpin, HIGH);
+        digitalWrite(PBpin, HIGH);
+        digitalWrite(PGpin, HIGH);
 
+    }
 }
 
 unsigned long lastChange;
 int currentColor = 0;
 
 void WifiCycle(){
-    unsigned long currentTime = millis();
-    if(currentTime - startTime >= 1000) {
-        currentColor++;
-        startTime = currentTime;
-        if(currentColor > 3)
-            currentColor = 1;
-        if(currentColor == 1){
-            digitalWrite(WRpin, LOW);
-            digitalWrite(WBpin, HIGH);
-            digitalWrite(WGpin, HIGH);
+    if(!LightsOut){
+        unsigned long currentTime = millis();
+        if(currentTime - startTime >= 1000) {
+            currentColor++;
+            startTime = currentTime;
+            if(currentColor > 3)
+                currentColor = 1;
+            if(currentColor == 1){
+                digitalWrite(WRpin, LOW);
+                digitalWrite(WBpin, HIGH);
+                digitalWrite(WGpin, HIGH);
+            }
+            if(currentColor == 2){
+                digitalWrite(WRpin, HIGH);
+                digitalWrite(WBpin, LOW);
+                digitalWrite(WGpin, HIGH);
+            }
+            if(currentColor == 3){
+                digitalWrite(WRpin, HIGH);
+                digitalWrite(WBpin, HIGH);
+                digitalWrite(WGpin, LOW);
+            }
         }
-        if(currentColor == 2){
-            digitalWrite(WRpin, HIGH);
-            digitalWrite(WBpin, LOW);
-            digitalWrite(WGpin, HIGH);
-        }
-        if(currentColor == 3){
-            digitalWrite(WRpin, HIGH);
-            digitalWrite(WBpin, HIGH);
-            digitalWrite(WGpin, LOW);
-        }
+    }
+    else{
+        digitalWrite(WRpin, HIGH);
+        digitalWrite(WBpin, HIGH);
+        digitalWrite(WGpin, HIGH);
 
     }
 
