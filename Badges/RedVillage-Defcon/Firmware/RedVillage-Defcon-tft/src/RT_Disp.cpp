@@ -11,6 +11,9 @@
 #include "Assets/Open.h"
 #include "Assets/Closed.h"
 #include "Assets/ConvoStrings.h"
+#include "Assets/BrickBottom.h"
+#include "Assets/BrikTop.h"
+#include "Assets/BrickSide.h"
 //#include "Assets/Guy_smile_50x63.h"
 //#include "Assets/Guy_open_50x63.h"
 #include "Assets/NotoSansBold15.h"
@@ -34,6 +37,10 @@ TFT_eSprite background = TFT_eSprite(&tft);
 TFT_eSprite guy = TFT_eSprite(&tft);  // Create Sprite object "img" with pointer to "tft" object
                                       // the pointer is used by pushSprite() to push it onto the TFT
 TFT_eSprite talkingGuy = TFT_eSprite(&tft);
+TFT_eSprite brickTop =  TFT_eSprite(&tft);
+TFT_eSprite brickBottom =  TFT_eSprite(&tft);
+TFT_eSprite brickLeft =  TFT_eSprite(&tft);
+TFT_eSprite brickRight =  TFT_eSprite(&tft);
 //TFT_eSprite talkingGuyO = TFT_eSprite(&tft);
 //TFT_eSprite text = TFT_eSprite(&tft);
 
@@ -99,6 +106,9 @@ void RT_Sprite_init(){
     talkingGuy.createSprite(14,9);
     talkingGuy.setSwapBytes(true);
     tft.setSwapBytes(true);
+
+    brickBottom.createSprite(320,36);
+    brickTop.createSprite(320,45);
 //    talkingGuyO.createSprite(50,63);
 //    talkingGuyO.setSwapBytes(true);
  //   text.createSprite(250,240);
@@ -438,6 +448,18 @@ void drawHexagon(int x, int y, int sideLength) {
   }
 }
 
+void Pedagogy(){
+    drawHexagonGrid(5, 5, -14, -2, 25, 16); // Customize parameters as needed
+
+    tft.pushImage(0,214,320,42,BrickBottom);
+    tft.pushImage(0,0,320,36,BrikTop);
+    tft.pushImage(0,36,18,182,BrickSide);
+    tft.pushImage(304,36,18,182,BrickSide);
+    
+    //brickBottom.pushImage(0,0,320,36,BrickBottom);
+    //talkingGuy.pushToSprite(&background,0,204);
+    //background.pushSprite(0,0);
+}
 
 //=========================================v==========================================
 //                                      pngDraw

@@ -48,8 +48,7 @@ void setup() {
 
         RT_Sprite_init();
        // RT_Conversation();
-         drawHexagonGrid(5, 5, -14, -2, 25, 16); // Customize parameters as needed
-
+        Pedagogy();
     }
     else if(bootVal == 1){
         RT_Wifi_only_init();

@@ -39,3 +39,4 @@ void RT_Convo_Text_Wrap(int s);
 void RT_Battery_Warning();
 void drawHexagon(int x, int y, int sideLength) ;
 void drawHexagonGrid(int startX, int startY, int offsetX, int offsetY, int numColumns, int numRows) ;
+void Pedagogy();
