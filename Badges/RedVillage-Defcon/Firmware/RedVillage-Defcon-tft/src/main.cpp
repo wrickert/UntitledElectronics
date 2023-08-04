@@ -4,30 +4,56 @@
 #include "RT_Button.h"
 #include "RT_Led.h"
 #include "RT_wifi.h"
-
+#include "RT_wifi_only.h"
+#include <EEPROM.h>
+#include <rom/rtc.h>
+#include "RT_EEPROM.h"
 
 
 void setup() {
-  Serial.begin(115200);
+    Serial.begin(115200);
 
-  RT_Disp_init();
-  RT_Button_init();
-  RT_Led_init();
+    Serial.println("\n\nWelcome To the Red Team Village Badge! \n");
+    LastTimeOnDragonBallZ();
 
-  Backlight_on();
-  PowerLed_on();
-  RT_Button_Interrupt_init();
-
- // RT_Wifi_Scan();
+    Serial.print("Boot Value is: ");
+    int bootVal = get_Wifi_eeprom();
+    Serial.println(bootVal);
 
 
- //RT_Disp_Splash();
-//delay(3000);
+    int rebootReason = rtc_get_reset_reason(0);
+    Serial.print("Most recent reboot reason: ");
+    Serial.println(rebootReason);
 
-RT_Sprite_init();
-//RT_Conversation(1);
-//delay(6000);
+    if(rebootReason == 15){
+        Restore_Normal_Mode();
+        RT_Battery_Warning();
+    }
 
+    if(bootVal == 0){
+        Serial.println("Booting Normal Mode");
+        RT_Disp_init();
+        RT_Button_init();
+        RT_Led_init();
+
+        Backlight_on();
+        PowerLed_on();
+        RT_Button_Interrupt_init();
+
+        // RT_Wifi_Scan();
+
+
+        //RT_Disp_Splash();
+        //delay(3000);
+
+        RT_Sprite_init();
+       // RT_Conversation();
+         drawHexagonGrid(5, 5, -14, -2, 25, 16); // Customize parameters as needed
+
+    }
+    else if(bootVal == 1){
+        RT_Wifi_only_init();
+    }
 }
 
 bool once = true;

@@ -14,7 +14,7 @@ void Hackio(int x, int y);
 
 void RT_Sprite_init();
 void RT_background_refresh(int);
-bool RT_Conversation(int button);
+void RT_Conversation();
 
 void setX(int);
 void setY(int);
@@ -32,3 +32,10 @@ void RT_Menu();
 void RT_Settings();
 void RT_About();
 void RT_Secret();
+void Wifi_Warning();
+void Wifi_Results(int n );
+void RT_Talking(int stage);
+void RT_Convo_Text_Wrap(int s);
+void RT_Battery_Warning();
+void drawHexagon(int x, int y, int sideLength) ;
+void drawHexagonGrid(int startX, int startY, int offsetX, int offsetY, int numColumns, int numRows) ;
