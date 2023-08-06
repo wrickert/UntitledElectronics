@@ -28,3 +28,35 @@ void Menu_Beep(){
     tone(BZpin, 700, 200);
     tone(BZpin, 900, 200);
 }
+
+void Siren(){
+    tone(BZpin, 900,200);
+    tone(BZpin, 100,200);
+}
+
+void shutUp(){
+    noTone(BZpin);
+}
+
+void Happy(){
+    tone(BZpin, 400, 200);
+    tone(BZpin, 900, 200);
+}
+
+void Sad(){
+    tone(BZpin, 900, 200);
+    tone(BZpin, 400, 200);
+}
+
+void Success(){
+    tone(BZpin, 600, 200);
+    tone(BZpin, 400, 200);
+    tone(BZpin, 600, 200);
+    tone(BZpin, 800, 200);
+}
+
+void Failure(){
+    tone(BZpin, 300, 200);
+    tone(BZpin, 300, 200);
+    tone(BZpin, 300, 200);
+}

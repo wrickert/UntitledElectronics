@@ -49,3 +49,24 @@ std::vector<std::string> Lessons{
 
 
 };
+
+
+std::vector<std::string> QuizQ{
+    "",
+    "What does open encryption  refer to in WiFi networks?",
+    "a) A network with no security measures & encryption",
+    "b) A network secured with the latest WPA encryption",
+    "c) A network using MAC filtering for access control",
+    "Is an open encryption in a public place safe to use?",
+    "a) Yes, its completely safe as there is no encryption",
+    "b) No, it is not safe, as your data has no protection",
+    "c) Yes, it is safe, you can trust people and places.",
+    "Which WiFi encryption types provides smallest amount of security?",
+    "a) WEP (Wired Equivalent Privacy)   ",
+    "b) WPA (Wi-Fi Protected Access)   ",
+    "c) Open   ",
+    "",
+    "",
+    "",
+    ""
+};

@@ -49,8 +49,8 @@ std::vector<std::int8_t> RoomLayout{
 };
 
 //Array to keep track of which rooms need information logos
-//                  1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1
-int bossRoom[21] = {0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1};
+//                  0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1
+int bossRoom[22] = {0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1};
 
 //Multidimensional lookup table for where each room leads.
 //-1 means wall. Order is NESW
@@ -98,6 +98,24 @@ int RoomMap[21][4] = {
     //20
     {19,-1,-1,-1}
 };
+
+
+int QuizAnswers[4][4]{
+    // Padding
+    {-1,-1,-1,-1},
+    // Quiz 1, Open Quiz
+    {0,1,2,3},
+    // Quiz 2, WEP Quiz
+    {0,1,2,3},
+    // Quiz 3, WPA Quiz
+    {0,1,2,3}
+
+};
+
+int getQuizAnswer(int BossNumber, int QuestionNumber){
+    return QuizAnswers[BossNumber][QuestionNumber];
+}
+
 
 int get_IsBossRoom(int RoomNumber){
     return bossRoom[RoomNumber];

@@ -13,12 +13,15 @@
 #define STbtnPin 17
 #define SELbtnPin 18
 
+#define BOOTbtnPin 0
+
 #define ENupPin 16
 #define ENdownPin 9
 #define ENbtnPin 10
 
 //A flag to set if we need to display the menu.
 bool NeedMenu = false;
+bool bootSpecial = false;
 
 
 void RT_Button_init(){
@@ -30,6 +33,8 @@ void RT_Button_init(){
     pinMode(BbtnPin, INPUT_PULLUP);
     pinMode(STbtnPin, INPUT_PULLUP);
     pinMode(SELbtnPin, INPUT_PULLUP);
+
+    pinMode(BOOTbtnPin, INPUT_PULLUP);
 
     pinMode(ENupPin, INPUT_PULLUP);
     pinMode(ENdownPin, INPUT_PULLUP);
@@ -77,6 +82,10 @@ int encButtonRead(){
     return digitalRead(ENbtnPin);
 }
 
+int bootButtonRead(){
+    return digitalRead(BOOTbtnPin);
+}
+
 bool getNeedMenu(){
     return NeedMenu;
 }
@@ -85,6 +94,13 @@ void setNeedMenu(bool newMenu){
     NeedMenu = newMenu;
 }
 
+bool getBootSpecial(){
+    return bootSpecial;
+}
+
+void setBootSpecial(bool newBoot){
+    bootSpecial = newBoot;
+}
 
 
 //variables to keep track of the timing of recent interrupts
@@ -131,6 +147,7 @@ void IRAM_ATTR iDN(){
 }
 */
 
+/*
 void IRAM_ATTR iA(){
     button_time = millis();
     if (button_time - last_button_time > 250){
@@ -146,6 +163,7 @@ void IRAM_ATTR iB(){
         last_button_time = button_time;
     }
 }
+*/
 
 void IRAM_ATTR iST(){
     button_time = millis();
@@ -191,11 +209,22 @@ void IRAM_ATTR iENbtn(){
     if (button_time - last_button_time > 250){
         last_button_time = button_time;
         detachInterrupt(ENbtnPin);
-        //noInterrupts();
         NeedMenu = true;
     }
 }
 
+void IRAM_ATTR iBoot(){
+    button_time = millis();
+    if (button_time - last_button_time > 250){
+        last_button_time = button_time;
+        detachInterrupt(BOOTbtnPin);
+        bootSpecial = true;
+    }
+}
+
+void enableBootInturrupt(){
+    attachInterrupt(BOOTbtnPin, iBoot, FALLING);
+}
 
 void enableEncoderInturrupt(){
     attachInterrupt(ENbtnPin, iENbtn, FALLING);
@@ -208,10 +237,14 @@ void RT_Button_Interrupt_init(){
     attachInterrupt(UPbtnPin, iUP, FALLING);
     attachInterrupt(DNbtnPin, iDN, FALLING);
     */
+    /*
     attachInterrupt(AbtnPin, iA, FALLING);
     attachInterrupt(BbtnPin, iB, FALLING);
     attachInterrupt(STbtnPin, iST, FALLING);
     attachInterrupt(SELbtnPin, iSEL, FALLING);
+    */
+
+    attachInterrupt(BOOTbtnPin, iBoot, FALLING);
 
  //   attachInterrupt(ENupPin, iENup, CHANGE);
  //  attachInterrupt(ENdownPin, iENdn, CHANGE);

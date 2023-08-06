@@ -51,6 +51,26 @@ void set_Story_Location(int number){
     Serial.println(current);
 }
 
+int get_Boot_Presses(){
+    preferences.begin("my-app", false);
+    return preferences.getUInt("BootPress",0);
+}
+
+void set_Boot_Presses(int number){
+    int n = preferences.getUInt("BootPress",0);
+    preferences.putUInt("BootPress",( number));
+}
+
+int get_Siren_Count(){
+    preferences.begin("my-app", false);
+    return preferences.getUInt("SirenCount",0);
+}
+
+void set_Siren_Count(int number){
+    int n = preferences.getUInt("SirenCount",0);
+    preferences.putUInt("SirenCount",(n + number));
+}
+
 int get_Room_Number(){
     preferences.begin("my-app", false);
     return preferences.getUInt("RecRoom",0);
@@ -59,7 +79,21 @@ int get_Room_Number(){
 //Number in this case is added to the Story Loc. 
 void set_Room_Number(int number){
     preferences.putUInt("RecRoom",number);
+    Serial.print("Setting room number to: ");
     Serial.println(number);
+}
+
+//0 means not defeated yet. 0b000 is inital state
+int get_Boss_status(){
+    preferences.begin("my-app", false);
+    return preferences.getUInt("BossList",0);
+}
+
+void set_Boss_status(int number){
+    preferences.putUInt("BossList",number);
+    Serial.print("Setting boss state to ");
+    Serial.println(number);
+
 }
 
 void LastTimeOnDragonBallZ(){

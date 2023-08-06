@@ -24,6 +24,12 @@
 #include "Assets/BrickTopLeft.h"
 #include "Assets/BrickTopRight.h"
 #include "Assets/information.h"
+#include "Assets/OpenBoss.h"
+#include "Assets/MissingNo.h"
+#include "Assets/Nah.h"
+#include "Assets/NahDown.h"
+#include "Assets/WEPBoss.h"
+#include "Assets/WPABoss.h"
 //#include "Assets/Guy_smile_50x63.h"
 //#include "Assets/Guy_open_50x63.h"
 #include "Assets/NotoSansBold15.h"
@@ -308,7 +314,7 @@ void RT_Menu(){
             break;
         //Secret
         case 4:
-            RT_Secret();
+            RT_Secret(1);
             break;
 
     }
@@ -322,16 +328,21 @@ void RT_About(){
 
 }
 
-void RT_Secret(){
+void RT_Secret(int number){
     tft.loadFont(AA_FONT_SMALL);
     tft.fillRectHGradient(50, 50, 250, 150, getColorSchemeOne(), getColorSchemeTwo());
 
     tft.setCursor(70,70);
     tft.println("YOU FOUND A SECRET!");
     tft.setCursor(70,100);
-    tft.println("flag:{FLAGHIDDENMENU}");
+    if(number == 1)
+        tft.println("flag:{FLAGHIDDENMENU}");
+    if(number == 2)
+        tft.println("flag:{FLAGNoDilophosaurusHere}");
+    if(number == 3)
+        tft.println("flag:{WIFIMASTER}");
 
-    delay(3000);
+    delay(6000);
     tft.unloadFont(); // Remove the font to recover memory used
     RT_Menu();
 }
@@ -347,6 +358,180 @@ void RT_Battery_Warning(){
 
     delay(3000);
     tft.unloadFont(); // Remove the font to recover memory used
+}
+
+void RT_BossQuiz(int bossNum){
+    tft.fillScreen(TFT_BLACK);
+
+    tft.fillRectHGradient(20, 10, 235, 230, getColorSchemeOne(), getColorSchemeTwo());
+
+    tft.loadFont(AA_FONT_SMALL);
+    tft.setCursor(30,20);
+
+    // J is which part of the question to display
+    int row = 0;
+    int modNumber = 26;
+    int charCount = 0;
+    int answers[3] = {-1,-1,-1};
+    bool NextQuestion = false;
+    int questionIndex = 1;
+
+
+    Serial.println("NOW! Lets see what you learned");
+
+    //List each question
+    for(int Question = 1; Question <= 3; Question++){  
+        bool answered = false;
+        Serial.println("What are you doing you monstor?!");
+
+        //List each answer
+        for(int j = ((Question -1) * 4 + 1); j < (4 * Question + 1); j++){
+            Serial.print("Printing question ");
+            Serial.print(Question);
+            Serial.print(" part ");
+            Serial.println(j);
+            // Line Wrap
+            for(int i=0; i<  QuizQ[j].size(); i++){
+                tft.print(QuizQ[j][i]);
+                    if(charCount == modNumber){
+                        if(QuizQ[j][i+1] != ' ' || QuizQ[j][i+2] != ' ')
+                            tft.print("-");
+                        row++;
+                        charCount = 0;
+                        tft.setCursor(30,20*row +15);
+                    }
+
+                charCount++;
+            }
+            charCount = 0;
+            row++;
+            tft.setCursor(30,20*row +20);
+        }
+
+        int QaX = 265;
+        int QaY = 200;
+        int QM = 1;
+
+
+        //while(getA() != 0){
+        while(!answered){
+            tft.fillTriangle(QaX-2,QaY,QaX+52,QaY-17,QaX+52,QaY+17,TFT_BLACK);
+
+            QaY = 70 + 35 * QM;
+            tft.drawTriangle(QaX,QaY,QaX+50,QaY-15,QaX+50,QaY+15,TFT_WHITE);
+            tft.fillTriangle(QaX+2,QaY,QaX+49,QaY-13,QaX+49,QaY+13,TFT_RED);
+
+            if(getUp() == 0){
+                while(getUp() == 0){
+                    delay(50);
+                }
+                if(QM == 1)
+                    QM = 3;
+                else
+                    QM--;
+            }
+            else if(getDown() == 0){
+                while(getDown() == 0){
+                    delay(50);
+                }
+                if(QM == 3)
+                    QM = 1;
+                else
+                    QM++;
+
+            }
+            if (getA() == 0) {
+                answered = true;
+                while(getA() == 0){
+                    while(getA() == 0){
+                        delay(20);
+                    }
+                    delay(200);
+                }
+            }
+
+            delay(300);
+        }
+        
+        row = 0;
+        tft.setCursor(30,20);
+        answers[Question] = QM;
+        Serial.print("You answered ");
+        Serial.print(QM);
+        Serial.print(" . The correct answer was ");
+        Serial.println(getQuizAnswer(bossNum,Question));
+
+        if(QM == getQuizAnswer(bossNum,Question)){
+            tft.fillScreen(TFT_GREEN);
+            Happy();
+            delay(50);
+        }
+        else{
+            tft.fillScreen(TFT_RED);
+            Sad();
+            delay(50);
+        }
+        tft.fillScreen(TFT_BLACK);
+        tft.fillRectHGradient(20, 10, 235, 230, getColorSchemeOne(), getColorSchemeTwo());
+
+    }
+
+    if(answers[1] == getQuizAnswer(bossNum, 1) && 
+    answers[2] == getQuizAnswer(bossNum,2) &&
+    answers[3] == getQuizAnswer(bossNum,3)){
+        tft.fillScreen(TFT_GREEN);
+        delay(100);
+
+        Success();
+        tft.fillRectHGradient(20, 10, 235, 230, getColorSchemeOne(), getColorSchemeTwo());
+        tft.setCursor(60,30);
+        tft.println("WELL DONE!");
+        tft.setCursor(50,50);
+        tft.println("All answers correct!");
+
+        if(bossNum == 1 && get_Boss_status() == 0b000)
+            set_Boss_status(0b001);
+        else if(bossNum == 1 && get_Boss_status() == 0b010)
+            set_Boss_status(0b011);
+        else if(bossNum == 1 && get_Boss_status() == 0b100)
+            set_Boss_status(0b101);
+        else if(bossNum == 1 && get_Boss_status() == 0b110)
+            set_Boss_status(0b111);
+
+        else if(bossNum == 2 && get_Boss_status() == 0b000)
+            set_Boss_status(0b010);
+        else if(bossNum == 2 && get_Boss_status() == 0b001)
+            set_Boss_status(0b011);
+        else if(bossNum == 2 && get_Boss_status() == 0b100)
+            set_Boss_status(0b110);
+        else if(bossNum == 2 && get_Boss_status() == 0b101)
+            set_Boss_status(0b111);
+
+        else if(bossNum == 3 && get_Boss_status() == 0b000)
+            set_Boss_status(0b100);
+        else if(bossNum == 3 && get_Boss_status() == 0b010)
+            set_Boss_status(0b110);
+        else if(bossNum == 3 && get_Boss_status() == 0b001)
+            set_Boss_status(0b101);
+        else if(bossNum == 3 && get_Boss_status() == 0b011)
+            set_Boss_status(0b111);
+    }
+    else {
+        tft.fillScreen(TFT_RED);
+        delay(100);
+
+        Failure();
+        tft.fillRectHGradient(20, 10, 235, 230, getColorSchemeOne(), getColorSchemeTwo());
+        tft.setCursor(60,30);
+        tft.println("Try again");
+        tft.setCursor(50,50);
+        tft.println("One or more answers incorrect");
+
+    }
+
+    tft.fillScreen(TFT_BLACK);
+    Draw_Room(get_Room_Number());
+    guy.pushSprite(x,y);
 }
 
 //unsigned long lastChange;
@@ -509,6 +694,91 @@ void drawHexagon(int x, int y, int sideLength) {
   }
 }
 
+void dont(){
+    if(get_Boot_Presses() < 2){
+        while(bootButtonRead() == 0){}
+        setBootSpecial(false);
+        enableBootInturrupt();
+
+        tft.loadFont(AA_FONT_SMALL);
+        tft.fillRectHGradient(50, 50, 250, 150, getColorSchemeOne(), getColorSchemeTwo());
+
+        tft.setCursor(70,70);
+        tft.println("HEY! DONT TOUCH ME THERE!");
+
+        tft.unloadFont();
+
+        set_Boot_Presses(get_Boot_Presses()+1);
+
+        delay(2000);
+
+        tft.fillScreen(TFT_BLACK);
+        Draw_Room(get_Room_Number());
+        guy.pushSprite(x,y);
+    }
+    else {
+        while(bootButtonRead() == 0){}
+        setBootSpecial(false);
+        enableBootInturrupt();
+        /*
+        tft.loadFont(AA_FONT_SMALL);
+        tft.fillRectHGradient(50, 50, 250, 150, getColorSchemeOne(), getColorSchemeTwo());
+
+        tft.setCursor(70,70);
+        tft.println("YOU ASKED FOR IT");
+
+        tft.unloadFont();
+        */
+       if(touchRead(4) > 100000 && touchRead(3) > 100000){
+            RT_Secret(2);
+            set_Boot_Presses(0);
+       }
+       else{
+        bool change = false;
+        bool down = false;
+        int j = 0;
+
+            tft.pushImage(130,90,96,77,Nah);
+
+            for(int i =0; i<100; i++){
+                Siren();
+                set_Siren_Count(1);
+                Serial.print("Siren is ");
+                Serial.print(i);
+                Serial.println(" out of 100");
+                j++;
+                if(j == 2){
+                    j = 0;
+                    if(down){
+                        down = false;
+                        change = true;
+                    }
+                    else{
+                        down = true;
+                        change = true;
+                    }
+                }
+
+                if(change){
+                    if(down)
+                        tft.pushImage(130,90,90,76,NahDown);
+                    else
+                        tft.pushImage(130,90,90,77,Nah);
+                }
+                delay(400);
+            }
+            if(get_Siren_Count() >= 500){
+                set_Boot_Presses(0);
+                }
+        }
+
+        shutUp();
+        tft.fillScreen(TFT_BLACK);
+        Draw_Room(get_Room_Number());
+        guy.pushSprite(x,y);
+    
+    }
+}
 
 void Pedagogy(){
     tft.fillScreen(TFT_BLACK);
@@ -530,6 +800,11 @@ void Pedagogy(){
             RT_Menu();
         }
 
+        if(getBootSpecial()){
+            setBootSpecial(false);
+            dont();
+        }
+
         //guy.pushImage(0, 0, 30, 38, Guy_30x38);
         //guy.pushToSprite(&background, x, y);    
         //background.pushSprite(0,0);
@@ -547,12 +822,18 @@ void Pedagogy(){
                 tft.fillRect(x, y ,30, 38, TFT_BLACK);
                 y -= 10;
                 if(is_on_info(x, y) && !learned){
-                    RT_Conversation(get_Room_Number());
+                    if(get_Room_Number() == 6)
+                        RT_BossQuiz(1);
+                    else
+                        RT_Conversation(get_Room_Number());
                     int x = 100;
                     int y = 101;
                     learned = true;
                     if(get_IsBossRoom(get_Room_Number()) == 0){
                         tft.pushImage(145,105,30,30,information);
+                    }
+                    else{
+                        RT_BossQuiz(get_Room_Number());
                     }
                 }
                 if(get_IsBossRoom(get_Room_Number()) == 0){
@@ -574,7 +855,10 @@ void Pedagogy(){
                 Step_Chirp();
                 x += 10;
                 if(is_on_info(x, y) && !learned){
-                    RT_Conversation(get_Room_Number());
+                    if(get_Room_Number() == 6)
+                        RT_BossQuiz(1);
+                    else
+                        RT_Conversation(get_Room_Number());
                     int x = 100;
                     int y = 101;
                     learned = true;
@@ -601,7 +885,10 @@ void Pedagogy(){
                 Step_Chirp();
                 y += 10;
                 if(is_on_info(x, y) && !learned){
-                    RT_Conversation(get_Room_Number());
+                    if(get_Room_Number() == 6)
+                        RT_BossQuiz(1);
+                    else
+                        RT_Conversation(get_Room_Number());
                     int x = 100;
                     int y = 101;
                     learned = true;
@@ -628,7 +915,10 @@ void Pedagogy(){
                 Step_Chirp();
                 x -= 10;
                 if(is_on_info(x, y) && !learned){
-                    RT_Conversation(get_Room_Number());
+                    if(get_Room_Number() == 6)
+                        RT_BossQuiz(1);
+                    else
+                        RT_Conversation(get_Room_Number());
                     int x = 100;
                     int y = 101;
                     learned = true;
@@ -698,13 +988,28 @@ void Draw_Room(int RoomNumber){
     }
     else
         tft.pushImage(0,36,18,182,BrickSide);
-    Serial.print("\n");
+    
+    Serial.println("");
 
     if(get_IsBossRoom(RoomNumber) == 0){
         tft.pushImage(145,105,30,30,information);
     }
 
-    
+    if(RoomNumber == 6){
+        tft.pushImage(136,95,48,40,OpenBoss);
+    }
+    else if(RoomNumber == 8){
+        tft.pushImage(136,95,35,81,MissingNo);
+        delay(5000);
+        
+    }
+    else if(RoomNumber == 14){
+        tft.pushImage( 133, 85, 53, 70, WEPBoss);
+    }
+    else if(RoomNumber == 20){
+        tft.pushImage( 125, 100, 70, 111, WPABoss);
+    }
+
     //brickBottom.pushImage(0,0,320,36,BrickBottom);
     //talkingGuy.pushToSprite(&background,0,204);
     //background.pushSprite(0,0);

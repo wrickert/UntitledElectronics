@@ -12,6 +12,7 @@ void IRAM_ATTR iA();
 void IRAM_ATTR iB();
 void IRAM_ATTR iST();
 void IRAM_ATTR iSEL();
+void IRAM_ATTR iBoot();
 
 
 int upRead();
@@ -26,3 +27,7 @@ int getDown();
 int getLeft();
 int getRight();
 int getA();
+bool getBootSpecial();
+void setBootSpecial(bool newBoot);
+void enableBootInturrupt();
+int bootButtonRead();

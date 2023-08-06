@@ -53,6 +53,9 @@ void setup() {
             set_Story_Location(1);
         }
 
+        if(get_Boot_Presses() >= 5)
+          dont();
+
         RT_Sprite_init();
         RT_Menu();
        // RT_Conversation();
