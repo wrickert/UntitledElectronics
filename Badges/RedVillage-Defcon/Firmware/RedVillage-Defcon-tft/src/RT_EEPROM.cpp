@@ -58,8 +58,7 @@ int get_Room_Number(){
 
 //Number in this case is added to the Story Loc. 
 void set_Room_Number(int number){
-    preferences.putUInt("StoryLoc",number);
-    Serial.print("The current Room the Player is in is: ");
+    preferences.putUInt("RecRoom",number);
     Serial.println(number);
 }
 

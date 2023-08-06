@@ -21,3 +21,8 @@ int encButtonRead();
 bool getNeedMenu();
 void setNeedMenu(bool);
 void enableEncoderInturrupt();
+int getUp();
+int getDown();
+int getLeft();
+int getRight();
+int getA();

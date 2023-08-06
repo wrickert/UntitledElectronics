@@ -14,7 +14,7 @@ void Hackio(int x, int y);
 
 void RT_Sprite_init();
 void RT_background_refresh(int);
-void RT_Conversation();
+void RT_Conversation(int number);
 
 void setX(int);
 void setY(int);
@@ -40,3 +40,4 @@ void RT_Battery_Warning();
 void drawHexagon(int x, int y, int sideLength) ;
 void drawHexagonGrid(int startX, int startY, int offsetX, int offsetY, int numColumns, int numRows) ;
 void Pedagogy();
+void Draw_Room(int RoomNumber);

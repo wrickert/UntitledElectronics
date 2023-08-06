@@ -5,7 +5,7 @@
 
 
 #define UPbtnPin 45
-#define DNbtnPin 46
+#define DNbtnPin 42
 #define LTbtnPin 8
 #define RTbtnPin 7
 #define AbtnPin 14
@@ -37,6 +37,26 @@ void RT_Button_init(){
 
 Serial.println("Button Initalisation done.");
 
+}
+
+int getUp(){
+    return digitalRead(UPbtnPin);
+}
+
+int getDown(){
+    return digitalRead(DNbtnPin);
+}
+
+int getLeft(){
+    return digitalRead(LTbtnPin);
+}
+
+int getRight(){
+    return digitalRead(RTbtnPin);
+}
+
+int getA(){
+    return digitalRead(AbtnPin);
 }
 
 int upRead(){
@@ -72,6 +92,7 @@ unsigned long button_time = 0;
 unsigned long last_button_time = 0; 
 //int x = 0;
 
+/*
 void IRAM_ATTR iRT(){
     button_time = millis();
     if (button_time - last_button_time > 250){
@@ -108,6 +129,7 @@ void IRAM_ATTR iDN(){
         last_button_time = button_time;
     }
 }
+*/
 
 void IRAM_ATTR iA(){
     button_time = millis();
@@ -180,10 +202,12 @@ void enableEncoderInturrupt(){
 }
 
 void RT_Button_Interrupt_init(){
+    /*        
     attachInterrupt(RTbtnPin, iRT, FALLING);
     attachInterrupt(LTbtnPin, iLT, FALLING);
     attachInterrupt(UPbtnPin, iUP, FALLING);
     attachInterrupt(DNbtnPin, iDN, FALLING);
+    */
     attachInterrupt(AbtnPin, iA, FALLING);
     attachInterrupt(BbtnPin, iB, FALLING);
     attachInterrupt(STbtnPin, iST, FALLING);

@@ -8,6 +8,7 @@
 #include <EEPROM.h>
 #include <rom/rtc.h>
 #include "RT_EEPROM.h"
+#include "RT_Buzz.h"
 
 
 void setup() {
@@ -15,6 +16,8 @@ void setup() {
 
     Serial.println("\n\nWelcome To the Red Team Village Badge! \n");
     LastTimeOnDragonBallZ();
+
+    
 
     Serial.print("Boot Value is: ");
     int bootVal = get_Wifi_eeprom();
@@ -35,20 +38,25 @@ void setup() {
         RT_Disp_init();
         RT_Button_init();
         RT_Led_init();
+        RT_Buzzer_init();
 
         Backlight_on();
         PowerLed_on();
         RT_Button_Interrupt_init();
 
-        // RT_Wifi_Scan();
-
-
-        //RT_Disp_Splash();
-        //delay(3000);
+        //Welcome_Buzz();
+        Buzz_Spin();
+        RT_Disp_Splash();
+        
+        if(get_Story_Location() == 0){
+            RT_Conversation(0);
+            set_Story_Location(1);
+        }
 
         RT_Sprite_init();
+        RT_Menu();
        // RT_Conversation();
-        Pedagogy();
+        //Pedagogy();
     }
     else if(bootVal == 1){
         RT_Wifi_only_init();
@@ -58,8 +66,7 @@ void setup() {
 bool once = true;
 int button = 0;
 
-void loop() {
-
+void loop() { 
  // int button = RT_Button_Scan();
   /*
 if(once == true)
@@ -72,6 +79,7 @@ WifiCycle();
  // RT_Menu();
 //text_Box_out(10, 50, 300, 200, TFT_RED, TFT_PINK);
 
+blackScreen();
 if(getNeedMenu()){
   setNeedMenu(false);
   RT_Menu();
