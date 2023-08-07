@@ -701,6 +701,7 @@ void RT_Convo_Text_Wrap(int s){
                 i++;
                 row++;
                 tft.setCursor(125,20*row +15);
+                charCount = 0;
             }
             charCount++;
         }
@@ -738,6 +739,7 @@ void RT_Convo_Text_Wrap(int s){
                 i++;
                 row++;
                 tft.setCursor(125,20*row +15);
+                charCount = 0;
             }
             charCount++;
         }
@@ -899,11 +901,11 @@ void Pedagogy(){
                 beepOnce = false;
             }
 
-            if(getA() == 0 || getB() ==0 || getUp() == 0 || getDown() == 0){
-                setLightsOut(false);
+            if(getA() == 0 || getB() ==0 || getUp() == 0 || getDown() == 0 || getLeft() == 0 || getRight() == 0){
                 Backlight_on();
                 PowerLed_on();
                 beepOnce = true;
+                movement = true;
 
             }
         }
