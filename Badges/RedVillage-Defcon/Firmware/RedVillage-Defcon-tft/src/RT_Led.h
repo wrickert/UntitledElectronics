@@ -6,3 +6,5 @@ void setLightsOut(bool value);
 bool getLightsOut();
 void Backlight_on();
 void Backlight_off();
+
+void powerBreathe();

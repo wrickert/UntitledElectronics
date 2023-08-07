@@ -9,6 +9,7 @@
 #include "RT_Game.h"
 #include "RT_EEPROM.h"
 #include "RT_Buzz.h"
+#include "RT_Led.h"
 #include "Assets/Guy_30x38.h"
 #include "Assets/TalkBackground.h"
 #include "Assets/Open.h"
@@ -30,6 +31,7 @@
 #include "Assets/NahDown.h"
 #include "Assets/WEPBoss.h"
 #include "Assets/WPABoss.h"
+#include "Assets/UELogoSmall.h"
 //#include "Assets/Guy_smile_50x63.h"
 //#include "Assets/Guy_open_50x63.h"
 #include "Assets/NotoSansBold15.h"
@@ -321,11 +323,56 @@ void RT_Menu(){
 }
 
 void RT_Settings(){
+    tft.loadFont(AA_FONT_SMALL);
+    tft.fillScreen(TFT_BLACK);
+    tft.fillRectHGradient(20, 20, 270, 190, getColorSchemeOne(), getColorSchemeTwo());
+
+    tft.setCursor(30,60);
+    tft.println("PRESS AND HOLD A FOR 5 SECONDS TO CLEAR GAME DATA");
+
+    unsigned long resetGameTime = millis();
+
+    for(int i = 0; i<60;i++){
+        resetGameTime = millis();
+        while(getA() == 0){
+            if(millis() - resetGameTime == 5000){
+                Sad();
+                resetAllGameData();
+                ESP.restart();
+            }
+            if(millis() - resetGameTime == 1000)
+                Step_Chirp();
+            delay(20);
+        }
+            delay(100);
+            if(getNeedMenu()){
+                setNeedMenu(false);
+                RT_Menu();
+            }
+    }
 
 }
 
 void RT_About(){
+    tft.loadFont(AA_FONT_SMALL);
+    tft.fillScreen(TFT_BLACK);
+    tft.fillRectHGradient(10, 10, 310, 220, getColorSchemeOne(), getColorSchemeTwo());
 
+    tft.setCursor(20,20);
+    tft.println("Made with love and significant snark ");
+    tft.setCursor(40,40);
+    tft.println("by:");
+    tft.pushImage(30, 60, 250, 90, UELogoSmall);
+    tft.setCursor(20,160);
+    tft.println("RocketGeek, Kevin, and Ashton");
+    tft.setCursor(20,180);
+    tft.println("THANK YOU RED TEAM VILLAGE FOR ");
+    tft.setCursor(20,200);
+    tft.println("LETTING US HAVE SO MUCH FUN!");
+    delay(6000);
+    tft.unloadFont();
+    tft.fillScreen(TFT_BLACK);
+    RT_Menu();
 }
 
 void RT_Secret(int number){
@@ -341,6 +388,11 @@ void RT_Secret(int number){
         tft.println("flag:{FLAGNoDilophosaurusHere}");
     if(number == 3)
         tft.println("flag:{WIFIMASTER}");
+    if(number == 4){
+        tft.println("CONGRATULATIONS! You WIN!");
+        tft.setCursor(70,120);
+        tft.println("flag:{WIFIMASTER}");
+    }
 
     delay(6000);
     tft.unloadFont(); // Remove the font to recover memory used
@@ -372,17 +424,24 @@ void RT_BossQuiz(int bossNum){
     int row = 0;
     int modNumber = 26;
     int charCount = 0;
-    int answers[3] = {-1,-1,-1};
+    int answers[3] = {1,1,1};
+    int answer1 = -1;
+    int answer2 = -1;
+    int answer3 = -1;
     bool NextQuestion = false;
     int questionIndex = 1;
 
+    int QuestionOffset = 0;
+    if(bossNum == 2)
+        QuestionOffset = 12;
+    if(bossNum == 3)
+        QuestionOffset = 24;
 
     Serial.println("NOW! Lets see what you learned");
 
     //List each question
-    for(int Question = 1; Question <= 3; Question++){  
+    for(int Question = 1; Question < 4; Question++){  
         bool answered = false;
-        Serial.println("What are you doing you monstor?!");
 
         //List each answer
         for(int j = ((Question -1) * 4 + 1); j < (4 * Question + 1); j++){
@@ -391,10 +450,10 @@ void RT_BossQuiz(int bossNum){
             Serial.print(" part ");
             Serial.println(j);
             // Line Wrap
-            for(int i=0; i<  QuizQ[j].size(); i++){
-                tft.print(QuizQ[j][i]);
+            for(int i=0; i<  QuizQ[j + QuestionOffset].size(); i++){
+                tft.print(QuizQ[j + QuestionOffset][i]);
                     if(charCount == modNumber){
-                        if(QuizQ[j][i+1] != ' ' || QuizQ[j][i+2] != ' ')
+                        if(QuizQ[j + QuestionOffset][i+1] != ' ' || QuizQ[j + QuestionOffset][i+2] != ' ')
                             tft.print("-");
                         row++;
                         charCount = 0;
@@ -453,13 +512,27 @@ void RT_BossQuiz(int bossNum){
             delay(300);
         }
         
+        
+      // delay(600);
         row = 0;
         tft.setCursor(30,20);
-        answers[Question] = QM;
+        //WHY ON GODS GREEN EARTH DOES THIS MAKE THE QUESTION LOOP GO BEYOND 3?!
+        //answers[Question] = QM;
+
+        if(Question == 1 ){
+            answer1 = QM;
+        }
+        if(Question == 2 ){
+            answer2 = QM;
+        }
+        if(Question == 3 ){
+            answer3 = QM;
+        }
+
         Serial.print("You answered ");
         Serial.print(QM);
-        Serial.print(" . The correct answer was ");
-        Serial.println(getQuizAnswer(bossNum,Question));
+        //Serial.print(" . The correct answer was ");
+        //Serial.println(getQuizAnswer(bossNum,Question));
 
         if(QM == getQuizAnswer(bossNum,Question)){
             tft.fillScreen(TFT_GREEN);
@@ -473,12 +546,11 @@ void RT_BossQuiz(int bossNum){
         }
         tft.fillScreen(TFT_BLACK);
         tft.fillRectHGradient(20, 10, 235, 230, getColorSchemeOne(), getColorSchemeTwo());
-
     }
 
-    if(answers[1] == getQuizAnswer(bossNum, 1) && 
-    answers[2] == getQuizAnswer(bossNum,2) &&
-    answers[3] == getQuizAnswer(bossNum,3)){
+    if(answer1 == getQuizAnswer(bossNum, 1) && 
+    answer2 == getQuizAnswer(bossNum,2) &&
+    answer3 == getQuizAnswer(bossNum,3)){
         tft.fillScreen(TFT_GREEN);
         delay(100);
 
@@ -515,6 +587,12 @@ void RT_BossQuiz(int bossNum){
             set_Boss_status(0b101);
         else if(bossNum == 3 && get_Boss_status() == 0b011)
             set_Boss_status(0b111);
+
+        delay(6000);
+
+        if(get_Boss_status() == 0b111){
+            RT_Secret(4);
+        }
     }
     else {
         tft.fillScreen(TFT_RED);
@@ -527,6 +605,7 @@ void RT_BossQuiz(int bossNum){
         tft.setCursor(50,50);
         tft.println("One or more answers incorrect");
 
+        delay(6000);
     }
 
     tft.fillScreen(TFT_BLACK);
@@ -590,6 +669,7 @@ void RT_Convo_Text_Wrap(int s){
     tft.setCursor(125,15);
 
     if(s == -1){
+        s = 1;
         for(int i=0; i<Intro[s].size(); i++){
             tft.print(Intro[s][i]);
             if(charCount == modNumber){
@@ -615,6 +695,11 @@ void RT_Convo_Text_Wrap(int s){
             else if(charCount == (modNumber-4) && Intro[s][i+1] == ' '){
                 row++;
                 charCount = 0;
+                tft.setCursor(125,20*row +15);
+            }
+            if(Intro[s][i+1] == '/'){
+                i++;
+                row++;
                 tft.setCursor(125,20*row +15);
             }
             charCount++;
@@ -740,7 +825,7 @@ void dont(){
 
             tft.pushImage(130,90,96,77,Nah);
 
-            for(int i =0; i<100; i++){
+            for(int i =0; i<80; i++){
                 Siren();
                 set_Siren_Count(1);
                 Serial.print("Siren is ");
@@ -793,7 +878,39 @@ void Pedagogy(){
     guy.pushImage(0, 0, 30, 38, Guy_30x38);
     guy.pushSprite(x,y);
 
+    unsigned long sleepTimer = millis();
+    unsigned long currentTime = millis();
+    bool movement = true;
+    bool beepOnce = true;
+
     while(true){
+        currentTime = millis();
+        if((currentTime - sleepTimer)  >= 30000 && movement == false){
+            Serial.println("Going to sleep");
+            setLightsOut(true);
+            PowerLed_on();
+            Backlight_off();
+            setLightsOut(false);
+            powerBreathe();
+            WifiCycle();
+            if(beepOnce){
+                Success();
+                Sad();
+                beepOnce = false;
+            }
+
+            if(getA() == 0 || getB() ==0 || getUp() == 0 || getDown() == 0){
+                setLightsOut(false);
+                Backlight_on();
+                PowerLed_on();
+                beepOnce = true;
+
+            }
+        }
+        if(movement){
+            sleepTimer = millis();
+            movement = false;
+        }
 
         if(getNeedMenu()){
             setNeedMenu(false);
@@ -809,6 +926,7 @@ void Pedagogy(){
         //guy.pushToSprite(&background, x, y);    
         //background.pushSprite(0,0);
         if(getUp() == 0){
+            movement = true;
             if(y>52){
                 if(y<65 && get_Room_North(get_Room_Number()) != -1){
                     Serial.println("Moving North");
@@ -824,6 +942,10 @@ void Pedagogy(){
                 if(is_on_info(x, y) && !learned){
                     if(get_Room_Number() == 6)
                         RT_BossQuiz(1);
+                    else if(get_Room_Number() == 14)
+                        RT_BossQuiz(2);
+                    else if(get_Room_Number() == 20)
+                        RT_BossQuiz(3);
                     else
                         RT_Conversation(get_Room_Number());
                     int x = 100;
@@ -832,9 +954,9 @@ void Pedagogy(){
                     if(get_IsBossRoom(get_Room_Number()) == 0){
                         tft.pushImage(145,105,30,30,information);
                     }
-                    else{
-                        RT_BossQuiz(get_Room_Number());
-                    }
+                    //else{
+                    //    RT_BossQuiz(get_Room_Number());
+                    //}
                 }
                 if(get_IsBossRoom(get_Room_Number()) == 0){
                     tft.pushImage(145,105,30,30,information);
@@ -843,6 +965,7 @@ void Pedagogy(){
             }
         }
         else if(getRight() == 0){
+            movement = true;
             if(x<284){
                 if(x>264 && get_Room_East(get_Room_Number()) != -1){
                     Serial.println("Moving East");
@@ -857,6 +980,10 @@ void Pedagogy(){
                 if(is_on_info(x, y) && !learned){
                     if(get_Room_Number() == 6)
                         RT_BossQuiz(1);
+                    else if(get_Room_Number() == 14)
+                        RT_BossQuiz(2);
+                    else if(get_Room_Number() == 20)
+                        RT_BossQuiz(3);
                     else
                         RT_Conversation(get_Room_Number());
                     int x = 100;
@@ -873,6 +1000,7 @@ void Pedagogy(){
             }
         }
         else if(getDown() == 0){
+            movement = true;
             if(y<175){
                 if(y>160 && get_Room_South(get_Room_Number()) != -1){
                     Serial.println("Moving South");
@@ -887,6 +1015,10 @@ void Pedagogy(){
                 if(is_on_info(x, y) && !learned){
                     if(get_Room_Number() == 6)
                         RT_BossQuiz(1);
+                    else if(get_Room_Number() == 14)
+                        RT_BossQuiz(2);
+                    else if(get_Room_Number() == 20)
+                        RT_BossQuiz(3);
                     else
                         RT_Conversation(get_Room_Number());
                     int x = 100;
@@ -903,6 +1035,7 @@ void Pedagogy(){
             }
         }
         else if(getLeft() == 0){
+            movement = true;
             if(x>20){
                 if(x<40 && get_Room_West(get_Room_Number()) != -1){
                     Serial.println("Moving West");
@@ -917,6 +1050,10 @@ void Pedagogy(){
                 if(is_on_info(x, y) && !learned){
                     if(get_Room_Number() == 6)
                         RT_BossQuiz(1);
+                    else if(get_Room_Number() == 14)
+                        RT_BossQuiz(2);
+                    else if(get_Room_Number() == 20)
+                        RT_BossQuiz(3);
                     else
                         RT_Conversation(get_Room_Number());
                     int x = 100;

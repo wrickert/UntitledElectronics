@@ -61,6 +61,25 @@ void PowerLed_on(){
 unsigned long lastChange;
 int currentColor = 0;
 
+int breatheStep = 20;
+int brightness = 1;
+
+
+void powerBreathe(){
+
+        unsigned long currentTime = millis();
+        if(currentTime - startTime >= 30) {
+            analogWrite(PGpin, brightness);
+              // change the brightness for next time through the loop:
+  brightness = brightness + breatheStep;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness <= 0 || brightness >= 255) {
+    breatheStep = -breatheStep;
+  }
+        }
+}
+
 void WifiCycle(){
     if(!LightsOut){
         unsigned long currentTime = millis();

@@ -10,6 +10,23 @@ void InitalizeEEPROM(){
     preferences.begin("my-app", false);
 }
 
+void resetAllGameData(){
+    preferences.begin("my-app", false);
+	preferences.putUInt("wifi",0);
+
+
+    preferences.putUInt("wifiNum",0);
+    preferences.putUInt("StoryLoc",0);
+    preferences.putUInt("BootPress",0);
+    preferences.putUInt("SirenCount",0);
+    preferences.putUInt("RecRoom",0);
+    preferences.putUInt("BossList",0);
+
+    Serial.println("All game data reset.");
+
+
+}
+
 int get_Wifi_eeprom(){
     preferences.begin("my-app", false);
 	return preferences.getUInt("wifi",0);

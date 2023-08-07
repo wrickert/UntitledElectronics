@@ -14,3 +14,4 @@ int get_Boot_Presses();
 void set_Boot_Presses(int number);
 int get_Boss_status();
 void set_Boss_status(int number);
+void resetAllGameData();

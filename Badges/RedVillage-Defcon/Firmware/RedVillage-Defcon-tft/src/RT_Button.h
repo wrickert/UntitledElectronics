@@ -27,6 +27,7 @@ int getDown();
 int getLeft();
 int getRight();
 int getA();
+int getB();
 bool getBootSpecial();
 void setBootSpecial(bool newBoot);
 void enableBootInturrupt();

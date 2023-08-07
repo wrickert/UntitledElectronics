@@ -47,16 +47,18 @@ void setup() {
         //Welcome_Buzz();
         Buzz_Spin();
         RT_Disp_Splash();
-        
-        if(get_Story_Location() == 0){
-            RT_Conversation(0);
-            set_Story_Location(1);
-        }
-
-        if(get_Boot_Presses() >= 5)
-          dont();
 
         RT_Sprite_init();
+        
+        if(get_Story_Location() == 0){
+            RT_Conversation(-1);
+            set_Story_Location(1);
+            blackScreen();
+        }
+
+        if(get_Boot_Presses() >= 3)
+          dont();
+
         RT_Menu();
        // RT_Conversation();
         //Pedagogy();

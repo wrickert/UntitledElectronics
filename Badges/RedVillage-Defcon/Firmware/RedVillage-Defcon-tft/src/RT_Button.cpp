@@ -64,6 +64,10 @@ int getA(){
     return digitalRead(AbtnPin);
 }
 
+int getB(){
+    return digitalRead(BbtnPin);
+}
+
 int upRead(){
     return digitalRead(DNbtnPin);
 }
