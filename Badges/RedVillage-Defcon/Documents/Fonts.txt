@@ -1,0 +1,5 @@
+Fonts used in this design:
+
+Font: Silkscreen
+Author: Jason Kottke
+Url: http://www.fontsquirrel.com/fonts/silkscreen

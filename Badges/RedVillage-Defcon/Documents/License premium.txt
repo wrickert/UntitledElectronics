@@ -1,5 +1,5 @@
 IMPORTANT NOTICE: This license only applies if you downloaded this content as
-a subscribed (or "premium") user. If you are an unsubscribed user (or "free"
+a subscribed (or "premium") user.  If you are an unsubscribed user (or "free"
 user) you are bound to the license terms described in the accompanying file
 "License free.txt".
 
