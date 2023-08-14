@@ -32,3 +32,4 @@ bool getBootSpecial();
 void setBootSpecial(bool newBoot);
 void enableBootInturrupt();
 int bootButtonRead();
+void restoreInterrupts();

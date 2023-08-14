@@ -32,6 +32,7 @@
 #include "Assets/WEPBoss.h"
 #include "Assets/WPABoss.h"
 #include "Assets/UELogoSmall.h"
+#include "Assets/RedTeamVillage_smallest.h"
 //#include "Assets/Guy_smile_50x63.h"
 //#include "Assets/Guy_open_50x63.h"
 #include "Assets/NotoSansBold15.h"
@@ -230,7 +231,7 @@ int M = 0;
 
 void RT_Menu(){
 
-    tft.fillRectHGradient(20, 10, 90, 150, getColorSchemeOne(), getColorSchemeTwo());
+    tft.fillRectHGradient(20, 10, 90, 170, getColorSchemeOne(), getColorSchemeTwo());
 
     tft.loadFont(AA_FONT_SMALL);
     tft.setCursor(30,20);
@@ -241,11 +242,15 @@ void RT_Menu(){
     tft.println("Settings");
     tft.setCursor(30,110);
     tft.println("About");
+    tft.setCursor(30,140);
+    tft.println("Party");
 
         int er = 0;
         int oldEr = 0;
 
     Menu_Beep();
+
+    bool moved = false;
 
     while(encButtonRead() == 0){}
 
@@ -260,32 +265,45 @@ void RT_Menu(){
 
         er = encRead();
 
-        if(er != oldEr){
+        if(er >= 1 && !moved){
+            moved = true;
+            delay(100);
+            encReadErase();
             Serial.print("Er is: ");
             Serial.println(er);
             if(er > oldEr){
                 Serial.println("Moving down");
                 M--;
                 if(M<0 && touchRead(4) < 100000)
-                    M = 3;
+                    M = 4;
                 if(M<0 && touchRead(4) > 100000)
-                    M = 4;
-                oldEr = er;
+                    M = 5;
             }
-                oldEr = er;
-            /*
-            else if(er < oldEr){
-                M++;
-                Serial.println("Moving up");
-                Serial.println(touchRead(4));
-                if(M>3 && touchRead(4) < 100000)
-                    M = 0;
-                if(M>3 && touchRead(4) > 100000)
-                    M = 4;
-                oldEr = er;
-            }
-            */
         }
+        if(er <= -1 && !moved){
+            moved = true;
+            delay(100);
+            encReadErase();
+            Serial.println("Moving up");
+            Serial.println(touchRead(4));
+            if(er < oldEr){
+                M++;
+                if(M>4 && touchRead(4) < 100000)
+                    M = 0;
+                if(M>4 && touchRead(4) > 100000)
+                    M = 5;
+            }
+        }
+            
+        if(moved){
+            encReadErase();
+            moved = false;
+            er = 0;
+            oldEr = er;
+            delay(100);
+            restoreInterrupts();
+        }
+        
 
     }
 
@@ -314,12 +332,70 @@ void RT_Menu(){
         case 3:
             RT_About();
             break;
-        //Secret
+        //Party Mode
         case 4:
+            RT_Party();
+            break;
+        //Secret
+        case 5:
             RT_Secret(1);
             break;
 
     }
+}
+
+void RT_Party(){
+    tft.loadFont(AA_FONT_SMALL);
+    tft.fillScreen(TFT_BLACK);
+    tft.fillRectHGradient(20, 20, 270, 190, getColorSchemeOne(), getColorSchemeTwo());
+
+    tft.setCursor(30,60);
+    tft.println("Party mode is battery intensive.");
+    tft.setCursor(30,80);
+    tft.println("Press A or B to exit");
+    delay(2000);
+    
+    unsigned long currentTime = millis();
+    unsigned long startTime = millis();
+    int currentColor = 0;
+    int imgX = 0;
+    int imgY = 0;
+
+
+    while(getA() != 0 || getB() != 0){
+        WifiCycle();
+        currentTime = millis();
+
+        if(currentTime - startTime >= 1000) {
+            currentColor++;
+            startTime = currentTime;
+            if(currentColor > 5)
+                currentColor = 1;
+
+            if(currentColor == 1){
+                tft.fillScreen(TFT_RED);
+            }
+            if(currentColor == 2){
+                tft.fillScreen(TFT_GREEN);
+            }
+            if(currentColor == 3){
+                tft.fillScreen(TFT_BLUE);
+            }
+            if(currentColor == 4){
+                tft.fillScreen(TFT_ORANGE);
+            }
+            if(currentColor == 5){
+                tft.fillScreen(TFT_CYAN);
+            }
+
+            imgX = random(0,147);
+            imgY = random(0,38);
+            tft.pushImage(imgX, imgY, 171, 200, RedTeamVillage_smallest);
+
+        }
+
+    }
+    RT_Menu();
 }
 
 void RT_Settings(){
@@ -328,7 +404,9 @@ void RT_Settings(){
     tft.fillRectHGradient(20, 20, 270, 190, getColorSchemeOne(), getColorSchemeTwo());
 
     tft.setCursor(30,60);
-    tft.println("PRESS AND HOLD A FOR 5 SECONDS TO CLEAR GAME DATA");
+    tft.println("PRESS AND HOLD A FOR 5 SECONDS");
+    tft.setCursor(30,80);
+    tft.println("TO CLEAR GAME DATA");
 
     unsigned long resetGameTime = millis();
 

@@ -42,3 +42,4 @@ void drawHexagonGrid(int startX, int startY, int offsetX, int offsetY, int numCo
 void Pedagogy();
 void Draw_Room(int RoomNumber);
 void dont();
+void RT_Party();

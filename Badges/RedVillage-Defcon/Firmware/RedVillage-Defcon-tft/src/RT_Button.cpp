@@ -76,6 +76,7 @@ Encoder knob(ENupPin,ENdownPin);
 
 int encRead(){
     return knob.read();
+    noInterrupts();
 }
 
 int encReadErase(){
@@ -84,6 +85,10 @@ int encReadErase(){
 
 int encButtonRead(){
     return digitalRead(ENbtnPin);
+}
+
+void restoreInterrupts(){
+    interrupts();
 }
 
 int bootButtonRead(){
