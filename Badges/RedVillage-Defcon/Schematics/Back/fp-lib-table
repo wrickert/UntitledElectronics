@@ -1,4 +1,0 @@
-
-(fp_lib_table
-  (lib (name "GamePip-Back")(type KiCad)(uri "$(KIPRJMOD)/GamePip-Back.pretty")(options "")(descr ""))
-)

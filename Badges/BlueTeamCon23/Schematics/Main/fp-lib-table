@@ -1,0 +1,4 @@
+
+(fp_lib_table
+  (lib (name "BlueTeamCon_Main")(type KiCad)(uri "$(KIPRJMOD)/BlueTeamCon_Main.pretty")(options "")(descr ""))
+)
