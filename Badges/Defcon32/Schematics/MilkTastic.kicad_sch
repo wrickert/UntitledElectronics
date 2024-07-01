@@ -7996,7 +7996,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 57.15) (xy 31.75 59.69)
+			(xy 31.75 46.99) (xy 31.75 49.53)
 		)
 		(stroke
 			(width 0)
@@ -11582,76 +11582,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Battery")
-		(at 31.75 52.07 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "31d577a7-134e-4ef7-b08f-c312fcb67118")
-		(property "Reference" "BT2"
-			(at 35.56 50.2284 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Battery"
-			(at 35.56 52.7684 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "UE-Battery:AA_TH"
-			(at 31.75 50.546 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 31.75 50.546 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Multiple-cell battery"
-			(at 31.75 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "589d24cb-5d7f-4de4-9988-bf3f33e4d372")
-		)
-		(pin "2"
-			(uuid "b8b7b1cf-f46c-4f51-8d17-caaf75095851")
-		)
-		(instances
-			(project "MilkTastic"
-				(path "/625bbc85-a8f8-46d4-9338-e60d5e5e321d"
-					(reference "BT2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VSS")
 		(at 17.78 189.23 0)
 		(unit 1)
@@ -12219,7 +12149,7 @@
 				)
 			)
 		)
-		(property "Footprint" "UL_LED:XL-3227RGB_LED"
+		(property "Footprint" "UE_LED:XL-3227RGB_LED"
 			(at 204.47 132.08 0)
 			(effects
 				(font
@@ -13038,7 +12968,7 @@
 	)
 	(symbol
 		(lib_id "power:VSS")
-		(at 31.75 59.69 180)
+		(at 31.75 49.53 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13047,7 +12977,7 @@
 		(fields_autoplaced yes)
 		(uuid "85a53604-e7c7-4a73-ad9a-8207f3f80b23")
 		(property "Reference" "#PWR01"
-			(at 31.75 55.88 0)
+			(at 31.75 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13056,7 +12986,7 @@
 			)
 		)
 		(property "Value" "VSS"
-			(at 31.75 64.77 0)
+			(at 31.75 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13064,7 +12994,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 31.75 59.69 0)
+			(at 31.75 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13073,7 +13003,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 59.69 0)
+			(at 31.75 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13082,7 +13012,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VSS\""
-			(at 31.75 59.69 0)
+			(at 31.75 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14322,7 +14252,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UE-Battery:AA_TH"
+		(property "Footprint" "UE-Battery:AAA_TH_UM-4"
 			(at 31.75 40.386 90)
 			(effects
 				(font
@@ -15997,7 +15927,7 @@
 				)
 			)
 		)
-		(property "Footprint" "UL_LED:XL-3227RGB_LED"
+		(property "Footprint" "UE_LED:XL-3227RGB_LED"
 			(at 255.27 132.08 0)
 			(effects
 				(font
