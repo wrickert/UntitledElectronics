@@ -1,4 +1,4 @@
-24150173531757535
+24179796438101647
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96796,6 +96796,13 @@ FUET-9032-Buzzer
 2
 2
 UE-Connector
+Banana24_245_1
+
+
+0
+5
+1
+UE-Connector
 Omron_XF2M-4015-1A_1x40-1MP_P0.5mm_Horizontal
 Omron FPC connector, 40 top-side contacts, 0.5mm pitch, SMT, https://omronfs.omron.com/en_US/ecb/products/pdf/en-xf2m.pdf
 omron fpc xf2m
@@ -96809,6 +96816,13 @@ UELogoVsmall
 0
 0
 0
+UE_Buttons
+8CapDemo
+
+
+0
+8
+8
 UE_Buttons
 Arik
 Converted using: scripting
@@ -96956,6 +96970,13 @@ MIlkV-Duo
 0
 47
 47
+UE_Module
+PMW3389
+
+
+0
+16
+16
 UE_Module
 RAK4630
 
@@ -97768,3 +97789,108 @@ Varistor VF
 0
 2
 2
+cafebabe
+Cafebabe Backplate
+
+
+0
+0
+0
+cafebabe
+Cafebabe silks
+
+
+0
+0
+0
+cafebabe
+Cafebabe silkscreen
+
+
+0
+0
+0
+cafebabe
+CritForge
+
+
+0
+0
+0
+cafebabe
+EC11L1524E03_Rotary_Encoder
+
+
+0
+7
+5
+cafebabe
+Gazzew
+
+
+0
+0
+0
+cafebabe
+JustChip
+
+
+0
+0
+0
+cafebabe
+Keystone_1012_2AA_SMD_UE
+
+
+0
+4
+4
+cafebabe
+SK6812-E_Reverse
+
+
+0
+4
+4
+cafebabe
+SMD Spacer M2.5
+
+
+0
+1
+1
+cafebabe
+SOURCE FILE
+
+
+0
+0
+0
+cafebabe
+TF-104_SDCard
+
+
+0
+10
+8
+cafebabe
+TwitterSmaller
+
+
+0
+0
+0
+cafebabe
+UELogoAbove
+
+
+0
+0
+0
+cafebabe
+UELogoSmall
+
+
+0
+0
+0
