@@ -1,0 +1,4 @@
+
+(fp_lib_table
+  (lib (name "Master_Sword_(Ocarina_of_Time)")(type KiCad)(uri "$(KIPRJMOD)/Master_Sword_(Ocarina_of_Time).pretty")(options "")(descr ""))
+)

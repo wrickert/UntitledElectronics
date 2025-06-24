@@ -1,0 +1,57 @@
+{
+   "layout": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2,
+      "hspace": "1mm",
+      "vspace": "1mm",
+      //"rotation": "-16deg"
+   },
+
+   "tabs": {
+      "type": "fixed",
+      "width": "3mm",
+      "voffset": "-3mm",
+      "vcount": 1
+   },
+
+   "cuts": {
+      "type": "mousebites",
+      "drill": "0.5mm",
+      "spacing": "1mm",
+      "offset": "0.2mm",
+      "prolong": "0.5mm"
+   },
+
+   "framing": {
+      "type": "tightframe",
+      "width": "5mm",
+      "space": "2mm",
+      "cuts": "both"
+   },
+
+   "fiducials": {
+      "type": "4fid",
+      "hoffset": "5mm",
+      "voffset": "2.5mm",
+      "coppersize": "2mm",
+      "opening": "1mm"
+   },
+
+   "tooling": {
+      "type": "4hole",
+      "hoffset": "2.5mm",
+      "voffset": "2.5mm",
+      "size": "1.5mm"
+   },
+
+   "text": {
+      "type": "simple",
+      "text": "JLCJLCJLCJLC",
+      "anchor": "mt",
+      "voffest": "2.5mm",
+      "hjustify": "center",
+      "vjustify": "center"
+   }
+
+}

@@ -1,0 +1,4 @@
+
+(fp_lib_table
+  (lib (name "KokiriEmerald")(type KiCad)(uri "$(KIPRJMOD)/KokiriEmerald.pretty")(options "")(descr ""))
+)

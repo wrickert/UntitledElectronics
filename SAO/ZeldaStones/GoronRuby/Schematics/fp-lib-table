@@ -1,0 +1,4 @@
+
+(fp_lib_table
+  (lib (name "Goron's_Ruby")(type KiCad)(uri "$(KIPRJMOD)/Goron's_Ruby.pretty")(options "")(descr ""))
+)
