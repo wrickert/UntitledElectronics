@@ -3,7 +3,7 @@
 [ -d "panel" ] || mkdir -p "panel"
 kikit panelize \
    --layout 'grid; rows: 5; cols: 5; space: 2mm' \
-   --tabs 'fixed; width: 3mm; vcount: 2' \
+   --tabs 'annotation' \
    --cuts 'mousebites; drill: 0.5mm; spacing: 1mm; offset: 0.2mm; prolong: 0.5mm' \
    --framing 'frame; width: 5mm; space: 3mm; cuts: h' \
    --tooling '4hole; hoffset: 2.5mm; voffset: 2.5mm; size: 1.5mm' \
