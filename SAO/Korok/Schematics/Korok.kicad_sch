@@ -3678,7 +3678,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UE_Buzzer:Dragonstate HDR-120632ZA-3P7"
+		(property "Footprint" "UE_Buzzer:Fuet-1230"
 			(at 195.58 105.41 0)
 			(effects
 				(font
