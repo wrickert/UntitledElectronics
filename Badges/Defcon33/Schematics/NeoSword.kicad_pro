@@ -552,7 +552,7 @@
       "plot": "Gerbers",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "../CAD/NeoSword1.step",
+      "step": "",
       "svg": "",
       "vrml": ""
     },
