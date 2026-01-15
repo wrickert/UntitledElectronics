@@ -74,6 +74,55 @@ def aw20x_Off():
     for i in range(0x24):
         aw_write(i, 0x00)
 
+
+#Looks like order is Blue, Green, Red
+def aw20x_blue():
+    aw20x_Off()
+    time.sleep(0.002)
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    for i in range(0x00, 0x24, 3):
+        aw_write(i, 0xFF)
+
+#Looks like order is Blue, Green, Red
+def aw20x_green():
+    aw20x_Off()
+    time.sleep(0.002)
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    for i in range(0x02, 0x24, 3):
+        aw_write(i, 0xFF)
+
+#Looks like order is Blue, Green, Red
+def aw20x_red():
+    aw20x_Off()
+    time.sleep(0.002)
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    for i in range(0x03, 0x24, 3):
+        aw_write(i, 0xFF)
+
+
+
+
 def playAudio(num):
     print("Playing Mombo number " + str(num))
     if num == 1:
