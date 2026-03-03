@@ -1,0 +1,636 @@
+# main.py
+
+from machine import I2C, Pin, I2S
+from lis2hh12 import LIS2HH12
+import time
+import array
+import ustruct
+import math
+import random
+import neopixel
+
+# I2S Config (update id and pins if needed for your board)
+i2s = I2S(
+    0,                          # I2S peripheral id (try 0 or 1)
+    sck=Pin(48),                # Bit clock (BCLK)
+    ws=Pin(45),                 # Word select (LRCLK)
+    sd=Pin(47),                 # Serial data (DIN)
+    mode=I2S.TX,
+    bits=16,
+    format=I2S.MONO,            # or I2S.STEREO if needed
+    rate=8000, #22050,smaller file size       Audio sample rate
+    ibuf=20000                  # Internal buffer length
+)
+
+# Setup I2C
+i2c = I2C(0, scl=Pin(10), sda=Pin(9), freq=100000)
+AW_ADDR = 0x3A
+
+# Setup Pins
+gpio17 = Pin(17, Pin.OUT)
+lights = Pin(12, Pin.IN, Pin.PULL_UP)
+audioEN = Pin(21, Pin.OUT)
+np = neopixel.NeoPixel(Pin(8),3)
+
+BTN_PIN = 12
+btn = Pin(BTN_PIN, Pin.IN, Pin.PULL_UP)
+
+SOUND_BTN_PIN = 11
+sound_btn = Pin(SOUND_BTN_PIN, Pin.IN, Pin.PULL_UP)
+
+
+LONG_PRESS_MS = 500
+
+
+
+# Config
+RAINBOW_COLORS = [
+    (255, 0, 0),      # 1: Red
+    (255, 80, 0),     # 2: Orange
+    (255, 255, 0),    # 3: Yellow
+    (0, 255, 0),      # 4: Green
+    (0, 0, 255),      # 5: Blue
+    (75, 0, 130),     # 6: Indigo
+    (148, 0, 211),    # 7: Violet
+]
+
+brightness_levels = [0.3, 0.6, 1.0]
+brightness_index = 2
+
+
+# Breath shape
+BREATHE_STEPS = 50
+#MIN_BRIGHT = 0.1
+#MAX_BRIGHT = 1.0
+PAUSE_BETWEEN_COLORS = 0.1  # seconds
+
+# Precompute fade curve (in/out)
+#reathe_curve = [
+#    MIN_BRIGHT + (MAX_BRIGHT - MIN_BRIGHT) * (math.sin(math.pi * i / BREATHE_STEPS) ** 2)
+#    for i in range(BREATHE_STEPS)
+#] + [
+#    MIN_BRIGHT + (MAX_BRIGHT - MIN_BRIGHT) * (math.sin(math.pi * i / BREATHE_STEPS) ** 2)
+#    for i in reversed(range(BREATHE_STEPS))
+#]
+
+def build_breathe_curve():
+    min_bright = 0.1
+    max_bright = brightness_levels[brightness_index]
+    curve = [
+        min_bright + (max_bright - min_bright) * (math.sin(math.pi * i / BREATHE_STEPS) ** 2)
+        for i in range(BREATHE_STEPS)
+    ] + [
+        min_bright + (max_bright - min_bright) * (math.sin(math.pi * i / BREATHE_STEPS) ** 2)
+        for i in reversed(range(BREATHE_STEPS))
+    ]
+    return curve
+
+breathe_curve = build_breathe_curve()
+
+
+# State
+_breathing_color = 1
+_breathing_step = 0
+_breathing_last_switch = time.ticks_ms()
+_breathing_pause = False
+
+button_state = 1  # last read value
+button_down_time = None
+last_press_handled = False
+brightness_levels = [0.3, 0.6, 1.0]
+brightness_index = 2
+color_index = 8  # 1-7 (rainbow), 8 = rainbow breathe
+
+
+audio_playing = False
+audio_file = None
+audio_queue = []
+
+sound_enabled = True
+
+# At the top, add:
+sound_btn_state = 1
+sound_btn_down_time = None
+sound_last_press_handled = False
+SOUND_TOGGLE_DEBOUNCE_MS = 200  # Avoid double toggling
+
+# Sensitivity threshold (tweak this!)
+SWING_THRESHOLD = 19  # In g's. Try 2-4, adjust as needed
+
+# --- Basic read/write helpers for the aw20072 ---
+def aw_write(reg, data):
+    i2c.writeto_mem(AW_ADDR, reg, bytes([data]))
+
+def aw_read(reg):
+    return i2c.readfrom_mem(AW_ADDR, reg, 1)[0]
+
+acc = LIS2HH12(i2c)
+
+
+def aw20x_init():
+    # Page 0
+    aw_write(0xF0, 0xC0)
+    aw_write(0x02, 0x01)  # software reset
+    time.sleep(0.002)
+    aw_write(0x03, 0x18)  # Imax, ALLON = 0
+    aw_write(0x80, 0xB2)  # SIZE config
+    aw_write(0x01, 0x00)  # enter active mode
+
+def aw20x_MaxOn():
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    for i in range(0x24):
+        aw_write(i, 0xFF)
+
+def aw20x_Off():
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    for i in range(0x24):
+        aw_write(i, 0x00)
+
+
+#Looks like order is Blue, Green, Red
+def aw20x_blue(brt):
+
+    time.sleep(0.002)
+
+    #triLight(0,0,brt)
+
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    aw_write(8,brt)
+    aw_write(20,brt)
+    aw_write(32,brt)
+    aw_write(30,brt)
+    aw_write(6,brt)
+    aw_write(18,brt)
+    aw_write(27,brt)
+    aw_write(15,brt)
+    aw_write(3,brt)
+    aw_write(0,brt)
+    aw_write(12,brt)
+    aw_write(24,brt)
+
+
+#Looks like order is Blue, Green, Red
+def aw20x_green(brt):
+
+    time.sleep(0.002)
+
+    #triLight(0,brt,0)
+
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    aw_write(10,brt)
+    aw_write(22,brt)
+    aw_write(34,brt)
+    aw_write(33,brt)
+    aw_write(9,brt)
+    aw_write(21,brt)
+    aw_write(28,brt)
+    aw_write(16,brt)
+    aw_write(4,brt)
+    aw_write(1,brt)
+    aw_write(13,brt)
+    aw_write(25,brt)
+
+
+#Looks like order is Blue, Green, Red
+def aw20x_red(brt):
+
+    time.sleep(0.002)
+
+    #triLight(brt,0,0)
+
+    # Page 1 - set all color values to 0x3F
+    aw_write(0xF0, 0xC1)
+    for i in range(0x24):
+        aw_write(i, 0x3F)
+
+    # Page 2 - brightness registers (0xFF full)
+    aw_write(0xF0, 0xC2)
+    aw_write(11,brt)
+    aw_write(23,brt)
+    aw_write(35,brt)
+    aw_write(31,brt)
+    aw_write(7,brt)
+    aw_write(19,brt)
+    aw_write(29,brt)
+    aw_write(17,brt)
+    aw_write(5,brt)
+    aw_write(2,brt)
+    aw_write(14,brt)
+    aw_write(26,brt)
+
+def aw20x_single(led_index, brightness):
+    time.sleep(0.002)
+
+    aw_write(0xF0, 0xC2)
+
+    for i in range(36):
+        if i == led_index:
+            aw_write(i,brightness)
+
+def multicolor(red,green,blue):
+    time.sleep(0.002)
+
+    aw20x_red(red)
+    aw20x_green(green)
+    aw20x_blue(blue)
+
+# Uses int for color and cent is a percentage
+def rainbow(color, cent):
+    val = int(255 * cent)
+    #red
+    if color == 1:
+        triLight(val,0,0)
+        aw20x_red(val)
+    #orange
+    if color == 2:
+        triLight(int(255*cent),int(80*cent),0)
+        aw20x_red(val)
+        aw20x_green(int(80*cent))
+        aw20x_blue(0)
+    #yellow
+    if color == 3:
+        triLight(int(255*cent),int(255*cent),0)
+        aw20x_red(val)
+        aw20x_green(val)
+        aw20x_blue(0)
+    #green
+    if color == 4:
+        triLight(0,val,0)
+        aw20x_red(0)
+        aw20x_green(int(80*cent))
+        aw20x_blue(0)
+    #blue
+    if color == 5:
+        triLight(0,0,val)
+        aw20x_red(0)
+        aw20x_green(0)
+        aw20x_blue(val)
+    #indigo
+    if color == 6:
+        triLight(int(75*cent),0,int(130*cent))
+        aw20x_red(int(75*cent))
+        aw20x_green(0)
+        aw20x_blue(int(130*cent))
+    #violet
+    if color == 7:
+        triLight(int(148*cent),0,int(211*cent))
+        aw20x_red(int(148*cent))
+        aw20x_green(0)
+        aw20x_blue(int(211*cent))
+    #off
+    if color == 9:
+        triLight(0,0,0)
+        aw20x_red(0)
+        aw20x_green(0)
+        aw20x_blue(0)
+
+
+def triLight(red,green,blue):
+    np[0] = (red,green,blue)
+    np[1] = (red,green,blue)
+    np[2] = (red,green,blue)
+    np.write()
+
+
+def playAudio(num):
+    print("Playing Mombo number " + str(num))
+    if num == 1:
+        play = "tada.wav"
+    elif num == 2:
+        play = "Swing1.wav"
+    elif num == 3:
+        play = "Swing2.wav"
+    elif num == 4:
+        play = "Swing3.wav"
+    elif num == 5:
+        play = "listen.wav"
+
+    with open(play, "rb") as f:
+        f.read(44)  # Skip header
+        while True:
+            data = f.read(1024)
+            if not data:
+                break
+            i2s.write(data)
+
+def update_breathing_rainbow():
+    global _breathing_color, _breathing_step, _breathing_last_switch, _breathing_pause
+
+    now = time.ticks_ms()
+
+    if _breathing_pause:
+        # Check if pause between colors is over
+        if time.ticks_diff(now, _breathing_last_switch) > int(PAUSE_BETWEEN_COLORS * 1000):
+            _breathing_pause = False
+            _breathing_last_switch = now
+        else:
+            return  # Still pausing; do nothing
+
+    # Do one breath step
+    percent = breathe_curve[_breathing_step]
+    #rainbow(_breathing_color, percent)
+    #rainbow(color_index, brightness_levels[brightness_index])
+    rainbow(_breathing_color, breathe_curve[_breathing_step])
+
+
+    np.write()  # If needed
+
+    # Advance step
+    _breathing_step += 1
+    if _breathing_step >= len(breathe_curve):
+        _breathing_step = 0
+        _breathing_color += 1
+        if _breathing_color > len(RAINBOW_COLORS):
+            _breathing_color = 1
+        _breathing_pause = True
+        _breathing_last_switch = now
+
+def start_audio(num):
+    """Queues up the sound; will play if not already playing."""
+    global audio_queue
+    if not sound_enabled:
+        print("Sound is disabled!")
+        return
+    # Prevent duplicate requests for the same sound
+    if audio_queue and audio_queue[-1] == num:
+        print("Audio already queued, skipping duplicate")
+        return
+    audio_queue.append(num)
+
+def update_audio():
+    """Call this every loop to advance audio playback."""
+    global audio_playing, audio_file, audio_queue
+
+    if not audio_playing:
+        if not audio_queue:
+            return  # Nothing to do
+
+        # Start playing next queued audio
+        num = audio_queue.pop(0)
+
+        # Select filename
+        if num == 1:
+            play = "tada.wav"
+        elif num == 2:
+            play = "Swing1.wav"
+        elif num == 3:
+            play = "Swing2.wav"
+        elif num == 4:
+            play = "Swing3.wav"
+        elif num == 5:
+            play = "listen.wav"
+        else:
+            return  # Invalid number
+
+        audio_file = open(play, "rb")
+        audio_file.read(44)  # Skip header
+        audio_playing = True
+
+    # Play next chunk
+    if audio_file:
+        data = audio_file.read(1024)
+        if data:
+            i2s.write(data)
+        else:
+            audio_file.close()
+            audio_file = None
+            audio_playing = False
+
+#def handle_short_press():
+#    global color_index
+#    color_index += 1
+#    if color_index > 8:
+#        color_index = 1
+#   print("Short press! New color:", color_index)
+#    if color_index < 8:
+#        # Set solid color (use your existing function)
+#       rainbow(color_index, brightness_levels[brightness_index])
+#        np.write()
+#    else:
+#        # Activate rainbow breathe (reset non-blocking state as needed)
+#        reset_breathing_rainbow()  # You'll want to implement this
+
+#def handle_long_press():
+#    global brightness_index
+#    brightness_index += 1
+#    if brightness_index > 2:
+#        brightness_index = 0
+#    print("Long press! New brightness:", brightness_levels[brightness_index])
+#    # Apply new brightness to current mode
+#    if color_index < 8:
+#        rainbow(color_index, brightness_levels[brightness_index])
+#        np.write()
+#    else:
+#        reset_breathing_rainbow()  # Will pick up new brightness
+
+def handle_short_press():
+    global color_index
+    prev_index = color_index
+    color_index += 1
+    if color_index > 9:
+        color_index = 1
+    print("Short press! New color:", color_index)
+    #if color_index < 8:
+    #    rainbow(color_index, brightness_levels[brightness_index])
+    #    #rainbow(_breathing_color, breathe_curve[_breathing_step])
+
+    #    np.write()
+    #else:
+    #    reset_breathing_rainbow()
+    if color_index < 8:
+        rainbow(color_index, brightness_levels[brightness_index])
+        np.write()
+    elif color_index == 8:
+        reset_breathing_rainbow()
+    elif color_index == 9:
+        rainbow(9, 0)
+        np.write()
+
+
+def handle_long_press():
+    global brightness_index, breathe_curve
+    brightness_index += 1
+    if brightness_index > 2:
+        brightness_index = 0
+    print("Long press! New brightness:", brightness_levels[brightness_index])
+    breathe_curve = build_breathe_curve()  # <-- Rebuild curve for new brightness
+    # Apply new brightness to current mode
+    if color_index < 8:
+        rainbow(color_index, brightness_levels[brightness_index])
+        #rainbow(_breathing_color, breathe_curve[_breathing_step])
+
+        np.write()
+    else:
+        reset_breathing_rainbow()  # Will pick up new brightness
+
+
+#def reset_breathing_rainbow():
+#    # Reset your non-blocking breathing rainbow state machine here,
+#    # so it restarts with the new brightness level if needed
+#    global _breathing_step, _breathing_color, _breathing_pause
+#    _breathing_step = 0
+#    _breathing_color = 1
+#    _breathing_pause = False
+#   # You may also want to update min/max brightness if you made them globals
+
+def reset_breathing_rainbow():
+    global _breathing_step, _breathing_color, _breathing_pause, breathe_curve
+    _breathing_step = 0
+    _breathing_color = 1
+    _breathing_pause = False
+    breathe_curve = build_breathe_curve()  # Make sure it picks up brightness!
+
+
+def poll_button():
+    global button_state, button_down_time, last_press_handled
+
+    val = btn.value()
+    now = time.ticks_ms()
+
+    if val == 0 and button_state == 1:  # Button pressed
+        button_down_time = now
+        last_press_handled = False
+
+    elif val == 1 and button_state == 0:  # Button released
+        if button_down_time is not None:
+            held_ms = time.ticks_diff(now, button_down_time)
+            if not last_press_handled:
+                if held_ms < LONG_PRESS_MS:
+                    handle_short_press()
+                else:
+                    handle_long_press()
+            button_down_time = None
+
+    elif val == 0 and button_state == 0 and button_down_time is not None:
+        # Still being held, check for long press
+        held_ms = time.ticks_diff(now, button_down_time)
+        if not last_press_handled and held_ms >= LONG_PRESS_MS:
+            handle_long_press()
+            last_press_handled = True
+
+    button_state = val
+
+
+def poll_sound_button():
+    global sound_btn_state, sound_btn_down_time, sound_last_press_handled, sound_enabled
+
+    val = sound_btn.value()
+    now = time.ticks_ms()
+
+    if val == 0 and sound_btn_state == 1:  # Button pressed
+        sound_btn_down_time = now
+        sound_last_press_handled = False
+
+
+    elif val == 1 and sound_btn_state == 0:  # Button released
+        if sound_btn_down_time is not None:
+            held_ms = time.ticks_diff(now, sound_btn_down_time)
+            if not sound_last_press_handled and held_ms > SOUND_TOGGLE_DEBOUNCE_MS:
+                sound_enabled = not sound_enabled
+                print("Sound is now", "ENABLED" if sound_enabled else "DISABLED")
+                if sound_enabled:
+                    # Play boop only if enabling sound!
+                    if not audio_playing:
+                        #start_audio(5)  # We'll map 6 to "boop.wav" below
+                        playAudio(5)
+                    #time.sleep(1)
+                if not sound_enabled:
+                    triLight(80, 0, 0)  # For example, quick red flash
+                    np.write()
+                    time.sleep(0.5)
+                    triLight(0,0,0)
+                sound_last_press_handled = True
+            sound_btn_down_time = None
+
+    sound_btn_state = val
+
+def main():
+    audioEN.on()
+    gpio17.on() 
+    time.sleep(0.01)
+
+
+    #playAudio(5)
+
+    start_audio(5)
+
+  
+    lights_state = 0
+    # Your main code here
+    print("Hello, MicroPython!")
+    print("The main loop is running, press ctrl+c to drop into REPL")
+    aw20x_init()
+
+    aw20x_Off()
+
+
+
+    while True:
+        poll_button()
+        poll_sound_button()
+        update_audio()
+        if color_index == 8:
+            update_breathing_rainbow()
+
+        #if not lights.value():  # Button pressed (active LOW)
+        #    lights_state = not lights_state
+        #    if lights_state:
+        #        aw20x_MaxOn()
+        #    else:
+        #        aw20x_Off()
+        ## Debounce: wait for button release
+        #    while not lights.value():
+        #        time.sleep(0.01)
+        #time.sleep(0.01)
+
+        x = acc.acceleration[0]
+        y = acc.acceleration[1]
+        z = acc.acceleration[2]
+
+        # Calculate magnitude of acceleration vector
+        magnitude = math.sqrt(x*x + y*y + z*z)
+
+        #print("Magnitude is " + str(magnitude))
+
+        if magnitude > SWING_THRESHOLD:
+            print("Found Swing")
+            #playAudio(random.randint(2,3))
+            #time.sleep(0.5)
+            if sound_enabled:
+                if not audio_playing:
+                    #start_audio(5)
+                    playAudio(5)
+
+        time.sleep(0.01)
+
+
+
+if __name__ == "__main__":
+    main()
+
