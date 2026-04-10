@@ -6974,6 +6974,16 @@
 		)
 		(uuid "3a92be04-4aff-47db-9c23-f0b817d56a0c")
 	)
+	(text "C11/12 are optional\n"
+		(exclude_from_sim no)
+		(at 73.914 169.164 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "3c8cf3db-5bcb-4a91-8993-a0d70ae65adc")
+	)
 	(text "EMC Filter"
 		(exclude_from_sim no)
 		(at 32.766 138.43 0)
@@ -13701,7 +13711,7 @@
 				)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "1uF"
 			(at 44.45 162.814 90)
 			(effects
 				(font
@@ -15126,7 +15136,7 @@
 				)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "1uF"
 			(at 44.45 144.78 90)
 			(effects
 				(font
