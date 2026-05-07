@@ -1,0 +1,574 @@
+
+sk6812_ch585.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <InterruptVector>:
+	void InterruptVector()         __attribute__((naked)) __attribute((section(".init"))) __attribute((weak,alias("InterruptVectorDefault"))) __attribute((naked));
+	void InterruptVectorDefault()  __attribute__((naked)) __attribute((section(".init"))) __attribute((naked));
+	void InterruptVectorDefault( void )
+	{
+		#if !defined(FUNCONF_TINYVECTOR) || !FUNCONF_TINYVECTOR
+			asm volatile( DEFAULT_INTERRUPT_VECTOR_CONTENTS );
+   0:	24c0006f          	j	24c <handle_reset>
+   4:	00000000          	.word	0x00000000
+   8:	000002ea          	.word	0x000002ea
+   c:	000002ea          	.word	0x000002ea
+  10:	f3f9bda9          	.word	0xf3f9bda9
+  14:	000002ea          	.word	0x000002ea
+	...
+  20:	000002ea          	.word	0x000002ea
+  24:	000002ea          	.word	0x000002ea
+	...
+  30:	000002ea          	.word	0x000002ea
+  34:	00000000          	.word	0x00000000
+  38:	000002ea          	.word	0x000002ea
+  3c:	00000000          	.word	0x00000000
+  40:	000002ea          	.word	0x000002ea
+  44:	000002ea          	.word	0x000002ea
+  48:	000002ea          	.word	0x000002ea
+  4c:	000003d2          	.word	0x000003d2
+  50:	000002ea          	.word	0x000002ea
+  54:	000002ea          	.word	0x000002ea
+  58:	000002ea          	.word	0x000002ea
+  5c:	00000000          	.word	0x00000000
+  60:	000002ea          	.word	0x000002ea
+  64:	000002ea          	.word	0x000002ea
+  68:	000002ea          	.word	0x000002ea
+  6c:	000002ea          	.word	0x000002ea
+  70:	000002ea          	.word	0x000002ea
+  74:	000002ea          	.word	0x000002ea
+  78:	000002ea          	.word	0x000002ea
+  7c:	000002ea          	.word	0x000002ea
+  80:	000002ea          	.word	0x000002ea
+  84:	000002ea          	.word	0x000002ea
+  88:	000002ea          	.word	0x000002ea
+  8c:	000002ea          	.word	0x000002ea
+  90:	000002ea          	.word	0x000002ea
+  94:	000002ea          	.word	0x000002ea
+  98:	000002ea          	.word	0x000002ea
+  9c:	000002ea          	.word	0x000002ea
+
+Disassembly of section .text:
+
+000000a0 <WS2812FillBuffSec.constprop.0>:
+		0b1110111010001000, 0b1110111010001110, 0b1110111011101000, 0b1110111011101110, };
+#endif
+
+	int i;
+	uint16_t * end = ptr + numhalfwords;
+	int ledcount = WS2812LEDs;
+  a0:	c081af03          	lw	t5,-1016(gp) # 20000004 <WS2812LEDs>
+	int place = WS2812LEDPlace;
+  a4:	c041a703          	lw	a4,-1020(gp) # 20000000 <WS2812LEDPlace>
+		ptr += 8;
+		place++;
+	}
+
+#else
+	while( place < 0 && ptr != end )
+  a8:	c1418793          	addi	a5,gp,-1004 # 20000010 <WS2812dmabuff>
+  ac:	00870693          	addi	a3,a4,8
+  b0:	06074a63          	bltz	a4,124 <WS2812FillBuffSec.constprop.0+0x84>
+
+static uint32_t current_color;
+
+uint32_t WS2812BLEDCallback(int ledno)
+{
+	return current_color;
+  b4:	c101a683          	lw	a3,-1008(gp) # 2000000c <current_color>
+		ptr[2] = bitquartets[(ledval24bit>>4)&0xf];
+		ptr[3] = bitquartets[(ledval24bit>>0)&0xf];
+		ptr[4] = bitquartets[(ledval24bit>>20)&0xf];
+		ptr[5] = bitquartets[(ledval24bit>>16)&0xf];
+#else
+		ptr[0] = bitquartets[(ledval24bit>>20)&0xf];
+  b8:	43800613          	li	a2,1080
+  bc:	0136d593          	srli	a1,a3,0x13
+		ptr[1] = bitquartets[(ledval24bit>>16)&0xf];
+  c0:	00f6d813          	srli	a6,a3,0xf
+		ptr[2] = bitquartets[(ledval24bit>>12)&0xf];
+  c4:	00b6d893          	srli	a7,a3,0xb
+		ptr[3] = bitquartets[(ledval24bit>>8)&0xf];
+  c8:	0076d313          	srli	t1,a3,0x7
+		ptr[4] = bitquartets[(ledval24bit>>4)&0xf];
+		ptr[5] = bitquartets[(ledval24bit>>0)&0xf];
+  cc:	00f6ff93          	andi	t6,a3,15
+		ptr[4] = bitquartets[(ledval24bit>>4)&0xf];
+  d0:	828d                	srli	a3,a3,0x3
+		ptr[0] = bitquartets[(ledval24bit>>20)&0xf];
+  d2:	89f9                	andi	a1,a1,30
+		ptr[1] = bitquartets[(ledval24bit>>16)&0xf];
+  d4:	01e87813          	andi	a6,a6,30
+		ptr[2] = bitquartets[(ledval24bit>>12)&0xf];
+  d8:	01e8f893          	andi	a7,a7,30
+		ptr[3] = bitquartets[(ledval24bit>>8)&0xf];
+  dc:	01e37313          	andi	t1,t1,30
+		ptr[4] = bitquartets[(ledval24bit>>4)&0xf];
+  e0:	8af9                	andi	a3,a3,30
+		ptr[0] = bitquartets[(ledval24bit>>20)&0xf];
+  e2:	95b2                	add	a1,a1,a2
+		ptr[1] = bitquartets[(ledval24bit>>16)&0xf];
+  e4:	9832                	add	a6,a6,a2
+		ptr[2] = bitquartets[(ledval24bit>>12)&0xf];
+  e6:	98b2                	add	a7,a7,a2
+		ptr[3] = bitquartets[(ledval24bit>>8)&0xf];
+  e8:	9332                	add	t1,t1,a2
+		ptr[4] = bitquartets[(ledval24bit>>4)&0xf];
+  ea:	96b2                	add	a3,a3,a2
+	while( ptr != end )
+  ec:	c7418e13          	addi	t3,gp,-908 # 20000070 <_ebss>
+  f0:	03c78763          	beq	a5,t3,11e <WS2812FillBuffSec.constprop.0+0x7e>
+		if( place >= ledcount )
+  f4:	05e74963          	blt	a4,t5,146 <WS2812FillBuffSec.constprop.0+0xa6>
+				(*ptr++) = 0;//0xffff;
+  f8:	0789                	addi	a5,a5,2
+  fa:	fe079f23          	sh	zero,-2(a5)
+			while( ptr != end )
+  fe:	ffc79de3          	bne	a5,t3,f8 <WS2812FillBuffSec.constprop.0+0x58>
+			if( tce )
+ 102:	cd11                	beqz	a0,11e <WS2812FillBuffSec.constprop.0+0x7e>
+				if( place == ledcount )
+ 104:	00ef1c63          	bne	t5,a4,11c <WS2812FillBuffSec.constprop.0+0x7c>
+					R8_SPI0_INTER_EN &= ~RB_SPI_IE_DMA_END;  // Disable DMA end interrupt
+ 108:	400047b7          	lui	a5,0x40004
+ 10c:	0027c683          	lbu	a3,2(a5) # 40004002 <_eusrstack+0x1ffe4002>
+ 110:	0f76f693          	andi	a3,a3,247
+ 114:	00d78123          	sb	a3,2(a5)
+					WS2812BLEDInUse = 0;
+ 118:	c001a623          	sw	zero,-1012(gp) # 20000008 <WS2812BLEDInUse>
+				place++;
+ 11c:	0705                	addi	a4,a4,1
+		ptr += 6;
+		i += 6;
+#endif
+
+	}
+	WS2812LEDPlace = place;
+ 11e:	c0e1a223          	sw	a4,-1020(gp) # 20000000 <WS2812LEDPlace>
+}
+ 122:	8082                	ret
+	while( place < 0 && ptr != end )
+ 124:	f8d708e3          	beq	a4,a3,b4 <WS2812FillBuffSec.constprop.0+0x14>
+		(*ptr++) = 0;
+ 128:	00079023          	sh	zero,0(a5)
+		(*ptr++) = 0;
+ 12c:	00079123          	sh	zero,2(a5)
+		(*ptr++) = 0;
+ 130:	00079223          	sh	zero,4(a5)
+		(*ptr++) = 0;
+ 134:	00079323          	sh	zero,6(a5)
+		(*ptr++) = 0;
+ 138:	00079423          	sh	zero,8(a5)
+		place++;
+ 13c:	0705                	addi	a4,a4,1
+		(*ptr++) = 0;
+ 13e:	07b1                	addi	a5,a5,12
+ 140:	fe079f23          	sh	zero,-2(a5)
+ 144:	b7b5                	j	b0 <WS2812FillBuffSec.constprop.0+0x10>
+		ptr[0] = bitquartets[(ledval24bit>>20)&0xf];
+ 146:	0005de03          	lhu	t3,0(a1)
+		uint32_t ledval24bit = WS2812BLEDCallback( place++ );
+ 14a:	0705                	addi	a4,a4,1
+		ptr += 6;
+ 14c:	07b1                	addi	a5,a5,12
+		ptr[0] = bitquartets[(ledval24bit>>20)&0xf];
+ 14e:	ffc79a23          	sh	t3,-12(a5)
+		ptr[1] = bitquartets[(ledval24bit>>16)&0xf];
+ 152:	00085e03          	lhu	t3,0(a6)
+ 156:	ffc79b23          	sh	t3,-10(a5)
+		ptr[2] = bitquartets[(ledval24bit>>12)&0xf];
+ 15a:	0008de03          	lhu	t3,0(a7)
+ 15e:	ffc79c23          	sh	t3,-8(a5)
+		ptr[3] = bitquartets[(ledval24bit>>8)&0xf];
+ 162:	00035e03          	lhu	t3,0(t1)
+ 166:	ffc79d23          	sh	t3,-6(a5)
+		ptr[4] = bitquartets[(ledval24bit>>4)&0xf];
+ 16a:	0006de03          	lhu	t3,0(a3)
+ 16e:	ffc79e23          	sh	t3,-4(a5)
+		ptr[5] = bitquartets[(ledval24bit>>0)&0xf];
+ 172:	001f9e13          	slli	t3,t6,0x1
+ 176:	9e32                	add	t3,t3,a2
+ 178:	000e5e03          	lhu	t3,0(t3)
+ 17c:	ffc79f23          	sh	t3,-2(a5)
+ 180:	b7b5                	j	ec <WS2812FillBuffSec.constprop.0+0x4c>
+
+00000182 <show_color>:
+}
+
+static void show_color(uint32_t color)
+{
+ 182:	1101                	addi	sp,sp,-32
+ 184:	ce06                	sw	ra,28(sp)
+ 186:	cc22                	sw	s0,24(sp)
+ 188:	ca26                	sw	s1,20(sp)
+ 18a:	c84a                	sw	s2,16(sp)
+ 18c:	c64e                	sw	s3,12(sp)
+	current_color = color;
+ 18e:	c0a1a823          	sw	a0,-1008(gp) # 2000000c <current_color>
+}
+
+// Disable Global Interrupt
+RV_STATIC_INLINE void __disable_irq()
+{
+	uint32_t result; __ASM volatile( ADD_ARCH_ZICSR "csrr %0," "mstatus": "=r"(result) );
+ 192:	300027f3          	csrr	a5,mstatus
+	result &= ~0x88; __ASM volatile( ADD_ARCH_ZICSR "csrw mstatus, %0" : : "r" (result) );
+ 196:	f777f793          	andi	a5,a5,-137
+ 19a:	30079073          	csrw	mstatus,a5
+
+void WS2812BDMAStart( int leds )
+{
+	// Enter critical section.
+	__disable_irq();
+	WS2812BLEDInUse = 1;
+ 19e:	4705                	li	a4,1
+#ifdef CH5xx
+	R8_SPI0_INTER_EN &= ~RB_SPI_IE_DMA_END;
+ 1a0:	400044b7          	lui	s1,0x40004
+	WS2812BLEDInUse = 1;
+ 1a4:	c0e1a623          	sw	a4,-1012(gp) # 20000008 <WS2812BLEDInUse>
+	R8_SPI0_INTER_EN &= ~RB_SPI_IE_DMA_END;
+ 1a8:	0024c783          	lbu	a5,2(s1) # 40004002 <_eusrstack+0x1ffe4002>
+	R8_SPI0_CTRL_CFG &= ~RB_SPI_DMA_ENABLE;
+ 1ac:	40004437          	lui	s0,0x40004
+ 1b0:	943a                	add	s0,s0,a4
+	R8_SPI0_INTER_EN &= ~RB_SPI_IE_DMA_END;
+ 1b2:	0f77f793          	andi	a5,a5,247
+ 1b6:	00f48123          	sb	a5,2(s1)
+	R8_SPI0_CTRL_CFG &= ~RB_SPI_DMA_ENABLE;
+ 1ba:	00044783          	lbu	a5,0(s0) # 40004000 <_eusrstack+0x1ffe4000>
+	R16_SPI0_TOTAL_CNT = 0;
+ 1be:	40004937          	lui	s2,0x40004
+ 1c2:	0931                	addi	s2,s2,12 # 4000400c <_eusrstack+0x1ffe400c>
+	R8_SPI0_CTRL_CFG &= ~RB_SPI_DMA_ENABLE;
+ 1c4:	0fe7f793          	andi	a5,a5,254
+ 1c8:	00f40023          	sb	a5,0(s0)
+	R8_SPI0_INTER_EN &= ~RB_SPI_IE_DMA_END;
+ 1cc:	0489                	addi	s1,s1,2
+	R16_SPI0_TOTAL_CNT = 0;
+ 1ce:	00091023          	sh	zero,0(s2)
+	uint32_t result; __ASM volatile( ADD_ARCH_ZICSR "csrr %0," "mstatus": "=r"(result) );
+ 1d2:	300027f3          	csrr	a5,mstatus
+	result |= 0x88;  __ASM volatile( ADD_ARCH_ZICSR "csrw mstatus, %0" : : "r" (result) );
+ 1d6:	0887e793          	ori	a5,a5,136
+ 1da:	30079073          	csrw	mstatus,a5
+	DMA1_Channel3->CFGR &= ~DMA_Mode_Circular;
+	DMA1_Channel3->CNTR  = 0;
+	DMA1_Channel3->MADDR = (uint32_t)WS2812dmabuff;
+#endif
+  __enable_irq();
+	WS2812LEDs = leds;
+ 1de:	c0e1a423          	sw	a4,-1016(gp) # 20000004 <WS2812LEDs>
+	WS2812LEDPlace = -WS2812B_RESET_PERIOD;
+	
+
+#ifdef CH5xx
+	WS2812FillBuffSec( WS2812dmabuff, DMA_BUFFER_LEN, 0 );
+ 1e2:	4501                	li	a0,0
+	WS2812LEDPlace = -WS2812B_RESET_PERIOD;
+ 1e4:	5779                	li	a4,-2
+ 1e6:	c0e1a223          	sw	a4,-1020(gp) # 20000000 <WS2812LEDPlace>
+	WS2812FillBuffSec( WS2812dmabuff, DMA_BUFFER_LEN, 0 );
+ 1ea:	3d5d                	jal	a0 <WS2812FillBuffSec.constprop.0>
+	R16_SPI0_TOTAL_CNT = DMA_BUFFER_LEN * 2;
+ 1ec:	06000793          	li	a5,96
+ 1f0:	00f91023          	sh	a5,0(s2)
+	R16_SPI0_DMA_BEG = (uint32_t)WS2812dmabuff;
+ 1f4:	c1418793          	addi	a5,gp,-1004 # 20000010 <WS2812dmabuff>
+ 1f8:	07c2                	slli	a5,a5,0x10
+ 1fa:	40004737          	lui	a4,0x40004
+ 1fe:	83c1                	srli	a5,a5,0x10
+ 200:	00f71c23          	sh	a5,24(a4) # 40004018 <_eusrstack+0x1ffe4018>
+	R8_SPI0_INT_FLAG = RB_SPI_IF_CNT_END | RB_SPI_IF_DMA_END;
+ 204:	87ba                	mv	a5,a4
+ 206:	4725                	li	a4,9
+ 208:	00e78323          	sb	a4,6(a5)
+	R8_SPI0_INTER_EN = RB_SPI_IE_DMA_END;
+ 20c:	47a1                	li	a5,8
+ 20e:	00f48023          	sb	a5,0(s1)
+	R8_SPI0_CTRL_CFG |= RB_SPI_DMA_ENABLE;
+ 212:	00044783          	lbu	a5,0(s0)
+ 216:	0017e793          	ori	a5,a5,1
+ 21a:	00f40023          	sb	a5,0(s0)
+	WS2812BDMAStart(NR_LEDS);
+	while (WS2812BLEDInUse);
+ 21e:	c0c1a783          	lw	a5,-1012(gp) # 20000008 <WS2812BLEDInUse>
+ 222:	fff5                	bnez	a5,21e <show_color+0x9c>
+}
+ 224:	40f2                	lw	ra,28(sp)
+ 226:	4462                	lw	s0,24(sp)
+ 228:	44d2                	lw	s1,20(sp)
+ 22a:	4942                	lw	s2,16(sp)
+ 22c:	49b2                	lw	s3,12(sp)
+ 22e:	6105                	addi	sp,sp,32
+ 230:	8082                	ret
+
+00000232 <DelaySysTick.constprop.0>:
+	while( ((int32_t)( SysTick->CNT - targend )) < 0 );
+#elif defined(CH32V20x) || defined(CH32V30x) || defined(CH32X03x) || defined(CH32L103) || defined(CH582_CH583) || defined(CH591_CH592) || defined(CH32H41x)
+	uint64_t targend = SysTick->CNT + n;
+	while( ((int64_t)( SysTick->CNT - targend )) < 0 );
+#elif defined(CH32V10x) || defined(CH570_CH572) || defined(CH584_CH585)
+	uint32_t targend = SysTick->CNTL + n;
+ 232:	e000f6b7          	lui	a3,0xe000f
+ 236:	4698                	lw	a4,8(a3)
+ 238:	003b87b7          	lui	a5,0x3b8
+ 23c:	26078793          	addi	a5,a5,608 # 3b8260 <sk6812_ch585.c.31ad3741+0x3b654f>
+ 240:	973e                	add	a4,a4,a5
+	while( ((int32_t)( SysTick->CNTL - targend )) < 0 );
+ 242:	469c                	lw	a5,8(a3)
+ 244:	8f99                	sub	a5,a5,a4
+ 246:	fe07cee3          	bltz	a5,242 <DelaySysTick.constprop.0+0x10>
+	uint64_t targend = SysTick->CNT - n;
+	while( ((int64_t)( SysTick->CNT - targend )) > 0 );
+#else
+	#error DelaySysTick not defined.
+#endif
+}
+ 24a:	8082                	ret
+
+0000024c <handle_reset>:
+	asm volatile( "\n\
+ 24c:	20000197          	auipc	gp,0x20000
+ 250:	1b018193          	addi	gp,gp,432 # 200003fc <__global_pointer$>
+ 254:	20020117          	auipc	sp,0x20020
+ 258:	dac10113          	addi	sp,sp,-596 # 20020000 <_eusrstack>
+	asm volatile(
+ 25c:	c0418513          	addi	a0,gp,-1020 # 20000000 <WS2812LEDPlace>
+ 260:	c7418593          	addi	a1,gp,-908 # 20000070 <_ebss>
+ 264:	00b57763          	bgeu	a0,a1,272 <handle_reset+0x26>
+ 268:	00052023          	sw	zero,0(a0)
+ 26c:	0511                	addi	a0,a0,4
+ 26e:	feb56de3          	bltu	a0,a1,268 <handle_reset+0x1c>
+ 272:	0a000513          	li	a0,160
+ 276:	c0418593          	addi	a1,gp,-1020 # 20000000 <WS2812LEDPlace>
+ 27a:	c0418613          	addi	a2,gp,-1020 # 20000000 <WS2812LEDPlace>
+ 27e:	00c5fa63          	bgeu	a1,a2,292 <handle_reset+0x46>
+ 282:	00052283          	lw	t0,0(a0)
+ 286:	0055a023          	sw	t0,0(a1)
+ 28a:	0511                	addi	a0,a0,4
+ 28c:	0591                	addi	a1,a1,4
+ 28e:	fec5eae3          	bltu	a1,a2,282 <handle_reset+0x36>
+ 292:	45800513          	li	a0,1112
+ 296:	c0418593          	addi	a1,gp,-1020 # 20000000 <WS2812LEDPlace>
+ 29a:	c0418613          	addi	a2,gp,-1020 # 20000000 <WS2812LEDPlace>
+ 29e:	00c58a63          	beq	a1,a2,2b2 <handle_reset+0x66>
+ 2a2:	00052283          	lw	t0,0(a0)
+ 2a6:	0055a023          	sw	t0,0(a1)
+ 2aa:	0511                	addi	a0,a0,4
+ 2ac:	0591                	addi	a1,a1,4
+ 2ae:	fec5eae3          	bltu	a1,a2,2a2 <handle_reset+0x56>
+	asm volatile(
+ 2b2:	00000793          	li	a5,0
+ 2b6:	42fd                	li	t0,31
+ 2b8:	bc029073          	csrw	0xbc0,t0
+ 2bc:	6289                	lui	t0,0x2
+ 2be:	88828293          	addi	t0,t0,-1912 # 1888 <ch32fun.c.941a65a5+0x8ed>
+ 2c2:	3002a073          	csrs	mstatus,t0
+ 2c6:	00000297          	auipc	t0,0x0
+ 2ca:	d3a28293          	addi	t0,t0,-710 # 0 <InterruptVector>
+ 2ce:	0032e293          	ori	t0,t0,3
+ 2d2:	30529073          	csrw	mtvec,t0
+	SysTick->CTLR = 1;
+ 2d6:	e000f7b7          	lui	a5,0xe000f
+ 2da:	4705                	li	a4,1
+ 2dc:	c398                	sw	a4,0(a5)
+	asm volatile(
+ 2de:	34c00793          	li	a5,844
+ 2e2:	34179073          	csrw	mepc,a5
+ 2e6:	30200073          	mret
+
+000002ea <ADC1_2_IRQHandler>:
+	asm volatile( "1: j 1b" );
+ 2ea:	a001                	j	2ea <ADC1_2_IRQHandler>
+
+000002ec <SystemInit>:
+					R8_FLASH_CFG = 0x07;
+				);
+			}
+			else if( (sc&0x1F) < 10 ) // HSI/HSE+PLL>=39MHz
+			{
+				SYS_SAFE_ACCESS(
+ 2ec:	400017b7          	lui	a5,0x40001
+ 2f0:	04078793          	addi	a5,a5,64 # 40001040 <_eusrstack+0x1ffe1040>
+ 2f4:	05700593          	li	a1,87
+ 2f8:	00b78023          	sb	a1,0(a5)
+ 2fc:	fa800613          	li	a2,-88
+ 300:	00c78023          	sb	a2,0(a5)
+ 304:	0001                	nop
+ 306:	0001                	nop
+ 308:	40002737          	lui	a4,0x40002
+ 30c:	80574683          	lbu	a3,-2043(a4) # 40001805 <_eusrstack+0x1ffe1805>
+ 310:	0ef6f693          	andi	a3,a3,239
+ 314:	80d702a3          	sb	a3,-2043(a4)
+ 318:	40002737          	lui	a4,0x40002
+ 31c:	4685                	li	a3,1
+ 31e:	80d703a3          	sb	a3,-2041(a4) # 40001807 <_eusrstack+0x1ffe1807>
+ 322:	00078023          	sb	zero,0(a5)
+ 326:	0001                	nop
+ 328:	0001                	nop
+						R8_FLASH_CFG = 0x57;
+					);
+				}
+		}
+#endif
+		SYS_SAFE_ACCESS(
+ 32a:	00b78023          	sb	a1,0(a5)
+ 32e:	00c78023          	sb	a2,0(a5)
+ 332:	0001                	nop
+ 334:	0001                	nop
+ 336:	40001737          	lui	a4,0x40001
+ 33a:	14500693          	li	a3,325
+ 33e:	00d71423          	sh	a3,8(a4) # 40001008 <_eusrstack+0x1ffe1008>
+ 342:	00078023          	sb	zero,0(a5)
+ 346:	0001                	nop
+ 348:	0001                	nop
+	SetupDebugPrintf();
+#endif
+#if defined(FUNCONF_SUPPORT_CONSTRUCTORS) && FUNCONF_SUPPORT_CONSTRUCTORS
+	CallConstructors();
+#endif
+}
+ 34a:	8082                	ret
+
+0000034c <main>:
+
+int main()
+{
+ 34c:	1141                	addi	sp,sp,-16
+ 34e:	c606                	sw	ra,12(sp)
+	SystemInit();
+ 350:	3f71                	jal	2ec <SystemInit>
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) |= (pin & ~PB);
+		*(&R32_PA_PU + OFFSET_FOR_GPIOB(pin))     &= ~(pin & ~PB);
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    &= ~(pin & ~PB);
+		break;
+	case GPIO_ModeOut_PP_5mA:
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) &= ~(pin & ~PB);
+ 352:	400017b7          	lui	a5,0x40001
+ 356:	0b478793          	addi	a5,a5,180 # 400010b4 <_eusrstack+0x1ffe10b4>
+ 35a:	4398                	lw	a4,0(a5)
+ 35c:	76f1                	lui	a3,0xffffc
+ 35e:	16fd                	addi	a3,a3,-1 # ffffbfff <_eusrstack+0xdffdbfff>
+ 360:	8f75                	and	a4,a4,a3
+ 362:	c398                	sw	a4,0(a5)
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    |= (pin & ~PB);
+ 364:	400017b7          	lui	a5,0x40001
+ 368:	0a078793          	addi	a5,a5,160 # 400010a0 <_eusrstack+0x1ffe10a0>
+ 36c:	4398                	lw	a4,0(a5)
+ 36e:	6691                	lui	a3,0x4
+ 370:	8f55                	or	a4,a4,a3
+ 372:	c398                	sw	a4,0(a5)
+void WS2812BDMAInit( )
+{
+	// Enable DMA + Peripherals
+#ifdef CH5xx
+	funPinMode( bMOSI, GPIO_CFGLR_OUT_2Mhz_PP );
+	R8_SPI0_CLOCK_DIV = FUNCONF_SYSTEM_CORE_CLOCK / 3000000; // div = Fsys/3MHz
+ 374:	46d1                	li	a3,20
+ 376:	400047b7          	lui	a5,0x40004
+ 37a:	00d781a3          	sb	a3,3(a5) # 40004003 <_eusrstack+0x1ffe4003>
+	R8_SPI0_CTRL_MOD = RB_SPI_ALL_CLEAR;
+ 37e:	4709                	li	a4,2
+ 380:	00e78023          	sb	a4,0(a5)
+	R8_SPI0_CTRL_MOD = RB_SPI_MOSI_OE | RB_SPI_2WIRE_MOD;
+ 384:	04400713          	li	a4,68
+ 388:	00e78023          	sb	a4,0(a5)
+	R16_SPI0_DMA_END = ( (uint32_t)WS2812dmabuff + (DMA_BUFFER_LEN * 2) );
+ 38c:	c7418793          	addi	a5,gp,-908 # 20000070 <_ebss>
+ 390:	07c2                	slli	a5,a5,0x10
+ 392:	40004737          	lui	a4,0x40004
+ 396:	83c1                	srli	a5,a5,0x10
+ 398:	00f71e23          	sh	a5,28(a4) # 4000401c <_eusrstack+0x1ffe401c>
+	R8_SPI0_CTRL_CFG |= RB_SPI_BIT_ORDER;
+ 39c:	87ba                	mv	a5,a4
+ 39e:	00174703          	lbu	a4,1(a4)
+ 3a2:	02076713          	ori	a4,a4,32
+ 3a6:	00e780a3          	sb	a4,1(a5)
+	NVIC->IENR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 3aa:	e000e7b7          	lui	a5,0xe000e
+ 3ae:	00080737          	lui	a4,0x80
+ 3b2:	10e7a023          	sw	a4,256(a5) # e000e100 <_eusrstack+0xbffee100>
+	WS2812BDMAInit();
+
+	while (1)
+	{
+		show_color(COLOR(255, 0, 0));
+ 3b6:	6541                	lui	a0,0x10
+ 3b8:	f0050513          	addi	a0,a0,-256 # ff00 <sk6812_ch585.c.31ad3741+0xe1ef>
+ 3bc:	33d9                	jal	182 <show_color>
+		Delay_Ms(500);
+ 3be:	3d95                	jal	232 <DelaySysTick.constprop.0>
+
+		show_color(COLOR(0, 255, 0));
+ 3c0:	00ff0537          	lui	a0,0xff0
+ 3c4:	3b7d                	jal	182 <show_color>
+		Delay_Ms(500);
+ 3c6:	35b5                	jal	232 <DelaySysTick.constprop.0>
+
+		show_color(COLOR(0, 0, 255));
+ 3c8:	0ff00513          	li	a0,255
+ 3cc:	3b5d                	jal	182 <show_color>
+		Delay_Ms(500);
+ 3ce:	3595                	jal	232 <DelaySysTick.constprop.0>
+	while (1)
+ 3d0:	b7dd                	j	3b6 <main+0x6a>
+
+000003d2 <SPI0_IRQHandler>:
+{
+ 3d2:	7139                	addi	sp,sp,-64
+ 3d4:	cc3e                	sw	a5,24(sp)
+ 3d6:	de06                	sw	ra,60(sp)
+ 3d8:	dc16                	sw	t0,56(sp)
+ 3da:	da1a                	sw	t1,52(sp)
+ 3dc:	d81e                	sw	t2,48(sp)
+ 3de:	d62a                	sw	a0,44(sp)
+ 3e0:	d42e                	sw	a1,40(sp)
+ 3e2:	d232                	sw	a2,36(sp)
+ 3e4:	d036                	sw	a3,32(sp)
+ 3e6:	ce3a                	sw	a4,28(sp)
+ 3e8:	ca42                	sw	a6,20(sp)
+ 3ea:	c846                	sw	a7,16(sp)
+ 3ec:	c672                	sw	t3,12(sp)
+ 3ee:	c476                	sw	t4,8(sp)
+ 3f0:	c27a                	sw	t5,4(sp)
+ 3f2:	c07e                	sw	t6,0(sp)
+	uint8_t intf = R8_SPI0_INT_FLAG;
+ 3f4:	400047b7          	lui	a5,0x40004
+ 3f8:	0067c783          	lbu	a5,6(a5) # 40004006 <_eusrstack+0x1ffe4006>
+	if( (intf & RB_SPI_IF_DMA_END) )
+ 3fc:	8ba1                	andi	a5,a5,8
+ 3fe:	cb89                	beqz	a5,410 <SPI0_IRQHandler+0x3e>
+		WS2812FillBuffSec( WS2812dmabuff, DMA_BUFFER_LEN, 1 );
+ 400:	4505                	li	a0,1
+ 402:	3979                	jal	a0 <WS2812FillBuffSec.constprop.0>
+		R16_SPI0_TOTAL_CNT = DMA_BUFFER_LEN * 2;
+ 404:	400047b7          	lui	a5,0x40004
+ 408:	06000713          	li	a4,96
+ 40c:	00e79623          	sh	a4,12(a5) # 4000400c <_eusrstack+0x1ffe400c>
+}
+ 410:	50f2                	lw	ra,60(sp)
+ 412:	52e2                	lw	t0,56(sp)
+ 414:	5352                	lw	t1,52(sp)
+ 416:	53c2                	lw	t2,48(sp)
+ 418:	5532                	lw	a0,44(sp)
+ 41a:	55a2                	lw	a1,40(sp)
+ 41c:	5612                	lw	a2,36(sp)
+ 41e:	5682                	lw	a3,32(sp)
+ 420:	4772                	lw	a4,28(sp)
+ 422:	47e2                	lw	a5,24(sp)
+ 424:	4852                	lw	a6,20(sp)
+ 426:	48c2                	lw	a7,16(sp)
+ 428:	4e32                	lw	t3,12(sp)
+ 42a:	4ea2                	lw	t4,8(sp)
+ 42c:	4f12                	lw	t5,4(sp)
+ 42e:	4f82                	lw	t6,0(sp)
+ 430:	6121                	addi	sp,sp,64
+ 432:	30200073          	mret
+	...
+
+00000438 <bitquartets.0>:
+ 438:	71111111 77111711 71711171 77711771     ...q...wq.qqq.qw
+ 448:	71171117 77171717 71771177 77771777     ...q...ww.wqw.ww
