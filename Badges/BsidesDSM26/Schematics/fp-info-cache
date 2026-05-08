@@ -1,4 +1,4 @@
-26871840356932413
+26873664726065639
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -105273,6 +105273,13 @@ CR2032-P28
 4
 2
 UE_Battery
+Keystone5220_AA
+
+
+0
+2
+2
+UE_Battery
 Keystone_1012_2AA_SMD_UE
 
 
@@ -105385,6 +105392,13 @@ TF Push_ShouHan
 13
 9
 UE_Connector
+91908-291512_SAS_Conn
+
+
+0
+31
+29
+UE_Connector
 22275951
 2227595-1-5
 Connector
@@ -105482,13 +105496,6 @@ TE_2227595-1
 0
 36
 36
-UE_Connector
-Untitled
-
-
-0
-0
-0
 UE_Connector
 alim_SATA
 
