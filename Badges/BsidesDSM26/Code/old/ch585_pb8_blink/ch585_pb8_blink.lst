@@ -1,0 +1,246 @@
+
+ch585_pb8_blink.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <InterruptVector>:
+	void InterruptVector()         __attribute__((naked)) __attribute((section(".init"))) __attribute((weak,alias("InterruptVectorDefault"))) __attribute((naked));
+	void InterruptVectorDefault()  __attribute__((naked)) __attribute((section(".init"))) __attribute((naked));
+	void InterruptVectorDefault( void )
+	{
+		#if !defined(FUNCONF_TINYVECTOR) || !FUNCONF_TINYVECTOR
+			asm volatile( DEFAULT_INTERRUPT_VECTOR_CONTENTS );
+   0:	0a00006f          	j	a0 <_einit>
+   4:	00000000          	.word	0x00000000
+   8:	0000013e          	.word	0x0000013e
+   c:	0000013e          	.word	0x0000013e
+  10:	f3f9bda9          	.word	0xf3f9bda9
+  14:	0000013e          	.word	0x0000013e
+	...
+  20:	0000013e          	.word	0x0000013e
+  24:	0000013e          	.word	0x0000013e
+	...
+  30:	0000013e          	.word	0x0000013e
+  34:	00000000          	.word	0x00000000
+  38:	0000013e          	.word	0x0000013e
+  3c:	00000000          	.word	0x00000000
+  40:	0000013e          	.word	0x0000013e
+  44:	0000013e          	.word	0x0000013e
+  48:	0000013e          	.word	0x0000013e
+  4c:	0000013e          	.word	0x0000013e
+  50:	0000013e          	.word	0x0000013e
+  54:	0000013e          	.word	0x0000013e
+  58:	0000013e          	.word	0x0000013e
+  5c:	00000000          	.word	0x00000000
+  60:	0000013e          	.word	0x0000013e
+  64:	0000013e          	.word	0x0000013e
+  68:	0000013e          	.word	0x0000013e
+  6c:	0000013e          	.word	0x0000013e
+  70:	0000013e          	.word	0x0000013e
+  74:	0000013e          	.word	0x0000013e
+  78:	0000013e          	.word	0x0000013e
+  7c:	0000013e          	.word	0x0000013e
+  80:	0000013e          	.word	0x0000013e
+  84:	0000013e          	.word	0x0000013e
+  88:	0000013e          	.word	0x0000013e
+  8c:	0000013e          	.word	0x0000013e
+  90:	0000013e          	.word	0x0000013e
+  94:	0000013e          	.word	0x0000013e
+  98:	0000013e          	.word	0x0000013e
+  9c:	0000013e          	.word	0x0000013e
+
+Disassembly of section .text:
+
+000000a0 <handle_reset>:
+
+#elif defined(CH32V10x) || defined(CH32V20x) || defined(CH32V30x) || defined(CH32L103) ||  defined(CH5xx)
+
+void handle_reset( void )
+{
+	asm volatile( "\n\
+  a0:	20000197          	auipc	gp,0x20000
+  a4:	35c18193          	addi	gp,gp,860 # 200003fc <__global_pointer$>
+  a8:	20020117          	auipc	sp,0x20020
+  ac:	f5810113          	addi	sp,sp,-168 # 20020000 <_eusrstack>
+#endif
+			);
+
+	// Careful: Use registers to prevent overwriting of self-data.
+	// This clears out BSS.
+	asm volatile(
+  b0:	c0418513          	addi	a0,gp,-1020 # 20000000 <_data_vma>
+  b4:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+  b8:	00b57763          	bgeu	a0,a1,c6 <handle_reset+0x26>
+  bc:	00052023          	sw	zero,0(a0)
+  c0:	0511                	addi	a0,a0,4
+  c2:	feb56de3          	bltu	a0,a1,bc <handle_reset+0x1c>
+  c6:	0a000513          	li	a0,160
+  ca:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+  ce:	c0418613          	addi	a2,gp,-1020 # 20000000 <_data_vma>
+  d2:	00c5fa63          	bgeu	a1,a2,e6 <handle_reset+0x46>
+  d6:	00052283          	lw	t0,0(a0)
+  da:	0055a023          	sw	t0,0(a1)
+  de:	0511                	addi	a0,a0,4
+  e0:	0591                	addi	a1,a1,4
+  e2:	fec5eae3          	bltu	a1,a2,d6 <handle_reset+0x36>
+  e6:	20800513          	li	a0,520
+  ea:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+  ee:	c0418613          	addi	a2,gp,-1020 # 20000000 <_data_vma>
+  f2:	00c58a63          	beq	a1,a2,106 <handle_reset+0x66>
+  f6:	00052283          	lw	t0,0(a0)
+  fa:	0055a023          	sw	t0,0(a1)
+  fe:	0511                	addi	a0,a0,4
+ 100:	0591                	addi	a1,a1,4
+ 102:	fec5eae3          	bltu	a1,a2,f6 <handle_reset+0x56>
+#endif
+: "a0", "a1", "a2", "a3", "memory"
+);
+
+	// Setup the interrupt vector, processor status and INTSYSCR.
+	asm volatile(
+ 106:	00000793          	li	a5,0
+ 10a:	42fd                	li	t0,31
+ 10c:	bc029073          	csrw	0xbc0,t0
+ 110:	6289                	lui	t0,0x2
+ 112:	88828293          	addi	t0,t0,-1912 # 1888 <ch32fun.c.06854688+0xb40>
+ 116:	3002a073          	csrs	mstatus,t0
+ 11a:	00000297          	auipc	t0,0x0
+ 11e:	ee628293          	addi	t0,t0,-282 # 0 <InterruptVector>
+ 122:	0032e293          	ori	t0,t0,3
+ 126:	30529073          	csrw	mtvec,t0
+	);
+
+#if defined( FUNCONF_SYSTICK_USE_HCLK ) && FUNCONF_SYSTICK_USE_HCLK && !defined(CH32V10x)
+	SysTick->CTLR = 5;
+#else
+	SysTick->CTLR = 1;
+ 12a:	e000f7b7          	lui	a5,0xe000f
+ 12e:	4705                	li	a4,1
+ 130:	c398                	sw	a4,0(a5)
+#endif
+
+	// set mepc to be main as the root app.
+	asm volatile(
+ 132:	1a000793          	li	a5,416
+ 136:	34179073          	csrw	mepc,a5
+ 13a:	30200073          	mret
+
+0000013e <ADC1_2_IRQHandler>:
+	asm volatile( "1: j 1b" );
+ 13e:	a001                	j	13e <ADC1_2_IRQHandler>
+
+00000140 <SystemInit>:
+					R8_FLASH_CFG = 0x07;
+				);
+			}
+			else if( (sc&0x1F) < 10 ) // HSI/HSE+PLL>=39MHz
+			{
+				SYS_SAFE_ACCESS(
+ 140:	400017b7          	lui	a5,0x40001
+ 144:	04078793          	addi	a5,a5,64 # 40001040 <_eusrstack+0x1ffe1040>
+ 148:	05700593          	li	a1,87
+ 14c:	00b78023          	sb	a1,0(a5)
+ 150:	fa800613          	li	a2,-88
+ 154:	00c78023          	sb	a2,0(a5)
+ 158:	0001                	nop
+ 15a:	0001                	nop
+ 15c:	40002737          	lui	a4,0x40002
+ 160:	80574683          	lbu	a3,-2043(a4) # 40001805 <_eusrstack+0x1ffe1805>
+ 164:	0ef6f693          	andi	a3,a3,239
+ 168:	80d702a3          	sb	a3,-2043(a4)
+ 16c:	40002737          	lui	a4,0x40002
+ 170:	4685                	li	a3,1
+ 172:	80d703a3          	sb	a3,-2041(a4) # 40001807 <_eusrstack+0x1ffe1807>
+ 176:	00078023          	sb	zero,0(a5)
+ 17a:	0001                	nop
+ 17c:	0001                	nop
+						R8_FLASH_CFG = 0x57;
+					);
+				}
+		}
+#endif
+		SYS_SAFE_ACCESS(
+ 17e:	00b78023          	sb	a1,0(a5)
+ 182:	00c78023          	sb	a2,0(a5)
+ 186:	0001                	nop
+ 188:	0001                	nop
+ 18a:	40001737          	lui	a4,0x40001
+ 18e:	14500693          	li	a3,325
+ 192:	00d71423          	sh	a3,8(a4) # 40001008 <_eusrstack+0x1ffe1008>
+ 196:	00078023          	sb	zero,0(a5)
+ 19a:	0001                	nop
+ 19c:	0001                	nop
+	SetupDebugPrintf();
+#endif
+#if defined(FUNCONF_SUPPORT_CONSTRUCTORS) && FUNCONF_SUPPORT_CONSTRUCTORS
+	CallConstructors();
+#endif
+}
+ 19e:	8082                	ret
+
+000001a0 <main>:
+
+// Simple sanity-test firmware for the WCH CH585 eval board:
+// toggle PB8 at ~2Hz so we can confirm user code is running.
+
+int main( void )
+{
+ 1a0:	1141                	addi	sp,sp,-16
+ 1a2:	c606                	sw	ra,12(sp)
+	SystemInit();
+ 1a4:	3f71                	jal	140 <SystemInit>
+	case GPIO_ModeOut_PP_5mA:
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) &= ~(pin & ~PB);
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    |= (pin & ~PB);
+		break;
+	case GPIO_ModeOut_PP_20mA:
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) |= (pin & ~PB);
+ 1a6:	400017b7          	lui	a5,0x40001
+ 1aa:	0d478793          	addi	a5,a5,212 # 400010d4 <_eusrstack+0x1ffe10d4>
+ 1ae:	4398                	lw	a4,0(a5)
+
+	funPinMode( PB8, GPIO_ModeOut_PP_20mA );
+
+	while( 1 )
+	{
+		funDigitalWrite( PB8, FUN_HIGH );
+ 1b0:	400016b7          	lui	a3,0x40001
+		Delay_Ms(250);
+		funDigitalWrite( PB8, FUN_LOW );
+ 1b4:	40001637          	lui	a2,0x40001
+ 1b8:	10076713          	ori	a4,a4,256
+ 1bc:	c398                	sw	a4,0(a5)
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    |= (pin & ~PB);
+ 1be:	400017b7          	lui	a5,0x40001
+ 1c2:	0c078793          	addi	a5,a5,192 # 400010c0 <_eusrstack+0x1ffe10c0>
+ 1c6:	4398                	lw	a4,0(a5)
+		funDigitalWrite( PB8, FUN_HIGH );
+ 1c8:	0d868693          	addi	a3,a3,216 # 400010d8 <_eusrstack+0x1ffe10d8>
+ 1cc:	10000813          	li	a6,256
+ 1d0:	10076713          	ori	a4,a4,256
+ 1d4:	c398                	sw	a4,0(a5)
+	uint32_t targend = SysTick->CNTL + n;
+ 1d6:	001dc737          	lui	a4,0x1dc
+ 1da:	e000f7b7          	lui	a5,0xe000f
+ 1de:	13070713          	addi	a4,a4,304 # 1dc130 <ch585_pb8_blink.c.909857ce+0x1da672>
+		funDigitalWrite( PB8, FUN_LOW );
+ 1e2:	0cc60613          	addi	a2,a2,204 # 400010cc <_eusrstack+0x1ffe10cc>
+		funDigitalWrite( PB8, FUN_HIGH );
+ 1e6:	0106a023          	sw	a6,0(a3)
+ 1ea:	4788                	lw	a0,8(a5)
+ 1ec:	953a                	add	a0,a0,a4
+	while( ((int32_t)( SysTick->CNTL - targend )) < 0 );
+ 1ee:	478c                	lw	a1,8(a5)
+ 1f0:	8d89                	sub	a1,a1,a0
+ 1f2:	fe05cee3          	bltz	a1,1ee <main+0x4e>
+		funDigitalWrite( PB8, FUN_LOW );
+ 1f6:	01062023          	sw	a6,0(a2)
+	uint32_t targend = SysTick->CNTL + n;
+ 1fa:	4788                	lw	a0,8(a5)
+ 1fc:	953a                	add	a0,a0,a4
+	while( ((int32_t)( SysTick->CNTL - targend )) < 0 );
+ 1fe:	478c                	lw	a1,8(a5)
+ 200:	8d89                	sub	a1,a1,a0
+ 202:	fe05cee3          	bltz	a1,1fe <main+0x5e>
+ 206:	b7c5                	j	1e6 <main+0x46>

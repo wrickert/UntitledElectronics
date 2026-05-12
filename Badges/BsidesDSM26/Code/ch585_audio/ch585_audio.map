@@ -1,0 +1,446 @@
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .data          0x00000000        0x0 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .bss           0x00000000        0x0 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.mini_pad
+                0x00000000       0x88 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text._puts    0x00000000       0x42 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.mini_itoa.part.0
+                0x00000000       0x90 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.__puts_uart
+                0x00000000       0x20 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strlen   0x00000000       0x12 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.mini_vpprintf
+                0x00000000      0x1da /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.printf   0x00000000       0x30 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.vprintf  0x00000000       0x16 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.mini_vsnprintf
+                0x00000000       0x3a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.snprintf
+                0x00000000       0x20 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.sprintf  0x00000000       0x2a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.memset   0x00000000       0x12 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strcpy   0x00000000       0x14 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strncpy  0x00000000       0x1c /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strcmp   0x00000000       0x1a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strncmp  0x00000000       0x2e /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strchr   0x00000000       0x16 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strrchr  0x00000000       0x3c /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.memcpy   0x00000000       0x1c /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.memcmp   0x00000000       0x20 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.memmove  0x00000000       0x5e /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.memchr   0x00000000       0x1a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strnlen  0x00000000       0x2a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.twoway_strstr
+                0x00000000      0x258 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.strstr   0x00000000      0x12a /tmp/cclMdpnH.ltrans0.ltrans.o
+ .rodata.puts.str1.4
+                0x00000000        0x2 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.puts     0x00000000       0x40 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.setjmp   0x00000000       0x38 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.longjmp  0x00000000       0x3c /tmp/cclMdpnH.ltrans0.ltrans.o
+ .comment       0x00000000       0x24 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .comment       0x00000000       0x24 /tmp/ccWC1fOy.debug.temp.o
+ .comment       0x00000000       0x24 /tmp/ccFAM73r.debug.temp.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x00000000         0x00070000         xr
+RAM              0x20000000         0x00020000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /tmp/cch50mJX.o
+LOAD /tmp/cclMdpnH.ltrans0.ltrans.o
+LOAD /tmp/ccWC1fOy.debug.temp.o
+LOAD /tmp/ccFAM73r.debug.temp.o
+LOAD /tmp/ccTim3Xu.o
+LOAD /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a
+
+.init           0x00000000       0xa0
+                0x00000000                        _sinit = .
+                0x00000000                        . = ALIGN (0x4)
+ *(SORT_NONE(.init))
+ .init          0x00000000       0xa0 /tmp/cclMdpnH.ltrans0.ltrans.o
+                0x00000000                InterruptVectorDefault
+                0x00000000                InterruptVector
+                0x000000a0                        . = ALIGN (0x4)
+                0x000000a0                        _einit = .
+
+.highcodelalign
+                0x000000a0        0x0
+                0x000000a0                        . = ALIGN (0x4)
+                0x000000a0                        PROVIDE (_highcode_lma = .)
+
+.highcode       0x20000000        0x0 load address 0x000000a0
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_highcode_vma_start = .)
+ *(.highcode*)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_highcode_vma_end = .)
+
+.text           0x000000a0      0x210
+                0x000000a0                        . = ALIGN (0x4)
+ *(.text)
+ *(.text.*)
+ .text.DelaySysTick
+                0x000000a0       0x16 /tmp/cclMdpnH.ltrans0.ltrans.o
+ .text.handle_reset
+                0x000000b6       0x9e /tmp/cclMdpnH.ltrans0.ltrans.o
+                0x000000b6                handle_reset
+ .text.vector_handler
+                0x00000154        0x2 /tmp/cclMdpnH.ltrans0.ltrans.o
+                0x00000154                EXTI2_IRQHandler
+                0x00000154                TIM8_TRG_COM_IRQHandler
+                0x00000154                TIM8_CC_IRQHandler
+                0x00000154                USART_WKUP_IRQHandler
+                0x00000154                UART8_IRQHandler
+                0x00000154                SPI4_IRQHandler
+                0x00000154                NFC_IRQHandler
+                0x00000154                DFSDM0_IRQHandler
+                0x00000154                TIM1_CC_IRQHandler
+                0x00000154                HardFault_Handler
+                0x00000154                TIM10_IRQHandler
+                0x00000154                GPIOB_IRQHandler
+                0x00000154                IPC_CH2_Handler
+                0x00000154                USBPD_IRQHandler
+                0x00000154                TIM6_IRQHandler
+                0x00000154                GPIOA_IRQHandler
+                0x00000154                SysTick_Handler
+                0x00000154                CAN3_RX1_IRQHandler
+                0x00000154                I3C_ER_IRQHandler
+                0x00000154                PVD_IRQHandler
+                0x00000154                SDIO_IRQHandler
+                0x00000154                TIM9_BRK_IRQHandler
+                0x00000154                DMA2_Channel8_IRQHandler
+                0x00000154                NMI_Handler
+                0x00000154                CAN2_RX1_IRQHandler
+                0x00000154                EXTI3_IRQHandler
+                0x00000154                HSEM_Handler
+                0x00000154                UART1_IRQHandler
+                0x00000154                USBHS_IRQHandler
+                0x00000154                LPTIM2_IRQHandler
+                0x00000154                DMA2_Channel9_IRQHandler
+                0x00000154                TIM10_CC_IRQHandler
+                0x00000154                EXTI25_16_IRQHandler
+                0x00000154                I2C3_ER_IRQHandler
+                0x00000154                USBFS_IRQHandler
+                0x00000154                UART0_IRQHandler
+                0x00000154                USART8_IRQHandler
+                0x00000154                EXTI0_IRQHandler
+                0x00000154                I2C2_EV_IRQHandler
+                0x00000154                TIM10_TRG_COM_IRQHandler
+                0x00000154                LPTIM_IRQHandler
+                0x00000154                CAN1_RX0_IRQHandler
+                0x00000154                CAN3_SCE_IRQHandler
+                0x00000154                CAN2_SCE_IRQHandler
+                0x00000154                ADC1_2_IRQHandler
+                0x00000154                BB_IRQHandler
+                0x00000154                Break_Point_Handler
+                0x00000154                IPC_CH0_Handler
+                0x00000154                TIM2_CC_IRQHandler
+                0x00000154                SPI1_IRQHandler
+                0x00000154                USART5_IRQHandler
+                0x00000154                TAMPER_IRQHandler
+                0x00000154                TMR0_IRQHandler
+                0x00000154                AWU_IRQHandler
+                0x00000154                EXTI7_0_IRQHandler
+                0x00000154                CAN2_RX0_IRQHandler
+                0x00000154                OSCWakeUp_IRQHandler
+                0x00000154                TIM8_UP_IRQHandler
+                0x00000154                Ecall_M_Mode_Handler
+                0x00000154                ECDC_IRQHandler
+                0x00000154                SDMMC_IRQHandler
+                0x00000154                USART7_IRQHandler
+                0x00000154                DMA2_Channel2_IRQHandler
+                0x00000154                DMA1_Channel4_IRQHandler
+                0x00000154                ADC1_IRQHandler
+                0x00000154                TIM2_BRK_IRQHandler
+                0x00000154                USART6_IRQHandler
+                0x00000154                CAN3_RX0_IRQHandler
+                0x00000154                HSADC_IRQHandler
+                0x00000154                TIM9_UP_IRQHandler
+                0x00000154                USART3_IRQHandler
+                0x00000154                RTC_IRQHandler
+                0x00000154                DMA1_Channel7_IRQHandler
+                0x00000154                LED_IRQHandler
+                0x00000154                CAN1_RX1_IRQHandler
+                0x00000154                DVP_IRQHandler
+                0x00000154                UART5_IRQHandler
+                0x00000154                USBSS_IRQHandler
+                0x00000154                SWPMI_IRQHandler
+                0x00000154                USBPDWakeUp_IRQHandler
+                0x00000154                EXTI15_8_IRQHandler
+                0x00000154                TIM4_IRQHandler
+                0x00000154                DMA2_Channel1_IRQHandler
+                0x00000154                SWPMI_WKUP_IRQHandler
+                0x00000154                USBPD_WKUP_IRQHandler
+                0x00000154                I2C1_EV_IRQHandler
+                0x00000154                USBSSWakeup_IRQHandler
+                0x00000154                UART2_IRQHandler
+                0x00000154                USART4_IRQHandler
+                0x00000154                PWMX_IRQHandler
+                0x00000154                DMA1_Channel6_IRQHandler
+                0x00000154                UART4_IRQHandler
+                0x00000154                DMA2_Channel4_IRQHandler
+                0x00000154                TIM3_IRQHandler
+                0x00000154                RCC_IRQHandler
+                0x00000154                TIM1_TRG_COM_IRQHandler
+                0x00000154                DMA1_Channel1_IRQHandler
+                0x00000154                DMA2_Channel7_IRQHandler
+                0x00000154                QSPI1_IRQHandler
+                0x00000154                EXTI15_10_IRQHandler
+                0x00000154                ADC_IRQHandler
+                0x00000154                IPC_CH3_Handler
+                0x00000154                DMA1_Channel8_IRQHandler
+                0x00000154                I3C_EV_IRQHandler
+                0x00000154                TMR2_IRQHandler
+                0x00000154                I3C_WKUP_IRQHandler
+                0x00000154                DefaultIRQHandler
+                0x00000154                TIM12_IRQHandler
+                0x00000154                TIM7_IRQHandler
+                0x00000154                CAN2_TX_IRQHandler
+                0x00000154                TIM5_IRQHandler
+                0x00000154                I2C3_EV_IRQHandler
+                0x00000154                USB_IRQHandler
+                0x00000154                EXTI9_5_IRQHandler
+                0x00000154                PIOC_IRQHandler
+                0x00000154                TIM9_IRQHandler
+                0x00000154                LTDC_IRQHandler
+                0x00000154                SAI_IRQHandler
+                0x00000154                SPI2_IRQHandler
+                0x00000154                OSC32KCal_IRQHandler
+                0x00000154                IPC_CH1_Handler
+                0x00000154                I2C_IRQHandler
+                0x00000154                LPTIM1_WKUP_IRQHandler
+                0x00000154                TIM10_BRK_IRQHandler
+                0x00000154                TIM9_CC_IRQHandler
+                0x00000154                CAN1_TX_IRQHandler
+                0x00000154                DMA2_Channel5_IRQHandler
+                0x00000154                USB2_IRQHandler
+                0x00000154                USBHSWakeUp_IRQHandler
+                0x00000154                DMA1_Channel5_IRQHandler
+                0x00000154                EXTI4_IRQHandler
+                0x00000154                USB_LP_CAN1_RX0_IRQHandler
+                0x00000154                QSPI2_IRQHandler
+                0x00000154                RNG_IRQHandler
+                0x00000154                USB_HP_CAN1_TX_IRQHandler
+                0x00000154                LLE_IRQHandler
+                0x00000154                CMPWakeUp_IRQHandler
+                0x00000154                DMA1_Channel3_IRQHandler
+                0x00000154                FSMC_IRQHandler
+                0x00000154                ETH_IRQHandler
+                0x00000154                TIM1_UP_IRQHandler
+                0x00000154                LPTIMWakeUp_IRQHandler
+                0x00000154                WWDG_IRQHandler
+                0x00000154                USBHSWakeup_IRQHandler
+                0x00000154                DMA2_Channel11_IRQHandler
+                0x00000154                WDOG_BAT_IRQHandler
+                0x00000154                Ecall_U_Mode_Handler
+                0x00000154                I2C4_EV_IRQHandler
+                0x00000154                CAN3_TX_IRQHandler
+                0x00000154                TMR3_IRQHandler
+                0x00000154                DMA2_Channel6_IRQHandler
+                0x00000154                TIM2_IRQHandler
+                0x00000154                SW_Handler
+                0x00000154                TIM1_BRK_IRQHandler
+                0x00000154                GPHA_IRQHandler
+                0x00000154                OPA_IRQHandler
+                0x00000154                DMA2_Channel10_IRQHandler
+                0x00000154                EXTI1_IRQHandler
+                0x00000154                SPI0_IRQHandler
+                0x00000154                USB2_HOST_IRQHandler
+                0x00000154                LPTIM2_WKUP_IRQHandler
+                0x00000154                RTCAlarm_IRQHandler
+                0x00000154                TIM11_IRQHandler
+                0x00000154                TIM10_UP_IRQHandler
+                0x00000154                TIM9_TRG_COM_IRQHandler
+                0x00000154                UART7_IRQHandler
+                0x00000154                USART2_IRQHandler
+                0x00000154                UART6_IRQHandler
+                0x00000154                UHSIF_IRQHandler
+                0x00000154                ETHWakeUp_IRQHandler
+                0x00000154                I2C2_ER_IRQHandler
+                0x00000154                DMA1_Channel2_IRQHandler
+                0x00000154                TIM8_BRK_IRQHandler
+                0x00000154                TIM2_TRG_IRQHandler
+                0x00000154                CAN1_SCE_IRQHandler
+                0x00000154                FLASH_IRQHandler
+                0x00000154                USBFSWakeUp_IRQHandler
+                0x00000154                USART1_IRQHandler
+                0x00000154                OTG_FS_IRQHandler
+                0x00000154                SPI3_IRQHandler
+                0x00000154                USBFS_WakeUp_IRQHandler
+                0x00000154                UART3_IRQHandler
+                0x00000154                I2C1_ER_IRQHandler
+                0x00000154                FMC_IRQHandler
+                0x00000154                USB2_DEVICE_IRQHandler
+                0x00000154                LPTIM1_IRQHandler
+                0x00000154                DFSDM1_IRQHandler
+                0x00000154                TMR1_IRQHandler
+                0x00000154                I2C4_ER_IRQHandler
+                0x00000154                SERDES_IRQHandler
+                0x00000154                USBSS_LINK_IRQHandler
+                0x00000154                USBWakeUp_IRQHandler
+                0x00000154                DMA2_Channel3_IRQHandler
+ .text.SystemInit
+                0x00000156       0x60 /tmp/cclMdpnH.ltrans0.ltrans.o
+                0x00000156                SystemInit
+ .text.startup.main
+                0x000001b6       0xda /tmp/cclMdpnH.ltrans0.ltrans.o
+                0x000001b6                main
+ *(.rodata)
+ *(.rodata*)
+ .rodata.g_test_pattern
+                0x00000290       0x20 /tmp/cclMdpnH.ltrans0.ltrans.o
+ *(.gnu.linkonce.t.*)
+                0x000002b0                        . = ALIGN (0x4)
+
+.rela.dyn       0x000002b0        0x0
+ .rela.text.handle_reset
+                0x000002b0        0x0 /tmp/cclMdpnH.ltrans0.ltrans.o
+
+.fini           0x000002b0        0x0
+ *(SORT_NONE(.fini))
+                0x000002b0                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (_etext = .)
+                [!provide]                        PROVIDE (_eitcm = .)
+
+.preinit_array  0x000002b0        0x0
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+
+.init_array     0x000002b0        0x0
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
+ *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
+                [!provide]                        PROVIDE (__init_array_end = .)
+
+.fini_array     0x000002b0        0x0
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
+ *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+
+.dalign         0x20000000        0x0 load address 0x000002b0
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_data_vma = .)
+
+.dlalign        0x000002b0        0x0
+                0x000002b0                        . = ALIGN (0x4)
+                0x000002b0                        PROVIDE (_data_lma = .)
+
+.data           0x20000000        0x0 load address 0x000002b0
+                0x20000000                        . = ALIGN (0x4)
+                0x200003fc                        __global_pointer$ = (. + 0x3fc)
+ *(.gnu.linkonce.r.*)
+ *(.data .data.*)
+ *(.gnu.linkonce.d.*)
+                0x20000000                        . = ALIGN (0x8)
+ *(.sdata .sdata.*)
+ *(.sdata2*)
+ *(.gnu.linkonce.s.*)
+                0x20000000                        . = ALIGN (0x8)
+ *(.srodata.cst16)
+ *(.srodata.cst8)
+ *(.srodata.cst4)
+ *(.srodata.cst2)
+ *(.srodata .srodata.*)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_edata = .)
+
+.bss            0x20000000        0x0 load address 0x000002b0
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_sbss = .)
+ *(.sbss*)
+ *(.gnu.linkonce.sb.*)
+ *(.bss*)
+ *(.gnu.linkonce.b.*)
+ *(COMMON*)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_ebss = .)
+                [!provide]                        PROVIDE (_end = _ebss)
+                [!provide]                        PROVIDE (end = .)
+                0x20020000                        PROVIDE (_eusrstack = (ORIGIN (RAM) + LENGTH (RAM)))
+
+/DISCARD/
+ *(.note .note.*)
+ *(.eh_frame .eh_frame.*)
+ *(.comment .comment.*)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ *(.ARM.exidx*)
+OUTPUT(ch585_audio.elf elf32-littleriscv)
+
+.riscv.attributes
+                0x00000000       0x41
+ .riscv.attributes
+                0x00000000       0x41 /tmp/cclMdpnH.ltrans0.ltrans.o
+
+.debug_info     0x00000000     0x1d3c
+ .debug_info    0x00000000      0xdcc /tmp/cclMdpnH.ltrans0.ltrans.o
+ .debug_info    0x00000dcc      0xd76 /tmp/ccWC1fOy.debug.temp.o
+                0x00000dcc                ch32fun.c.708c8a24
+ .debug_info    0x00001b42      0x1fa /tmp/ccFAM73r.debug.temp.o
+                0x00001b42                ch585_audio.c.5951adc5
+
+.debug_abbrev   0x00000000      0x5a3
+ .debug_abbrev  0x00000000      0x15e /tmp/cclMdpnH.ltrans0.ltrans.o
+ .debug_abbrev  0x0000015e      0x2b1 /tmp/ccWC1fOy.debug.temp.o
+ .debug_abbrev  0x0000040f      0x194 /tmp/ccFAM73r.debug.temp.o
+
+.debug_loclists
+                0x00000000     0x124e
+ .debug_loclists
+                0x00000000     0x124e /tmp/cclMdpnH.ltrans0.ltrans.o
+
+.debug_aranges  0x00000000      0x128
+ .debug_aranges
+                0x00000000      0x128 /tmp/cclMdpnH.ltrans0.ltrans.o
+
+.debug_rnglists
+                0x00000000      0x1e2
+ .debug_rnglists
+                0x00000000      0x1e2 /tmp/cclMdpnH.ltrans0.ltrans.o
+
+.debug_line     0x00000000     0x2238
+ .debug_line    0x00000000     0x216c /tmp/cclMdpnH.ltrans0.ltrans.o
+ .debug_line    0x0000216c       0x76 /tmp/ccWC1fOy.debug.temp.o
+ .debug_line    0x000021e2       0x56 /tmp/ccFAM73r.debug.temp.o
+
+.debug_str      0x00000000      0x8b8
+ .debug_str     0x00000000      0x8b8 /tmp/cclMdpnH.ltrans0.ltrans.o
+                                0x18a (size before relaxing)
+ .debug_str     0x000008b8      0x799 /tmp/ccWC1fOy.debug.temp.o
+ .debug_str     0x000008b8      0x26d /tmp/ccFAM73r.debug.temp.o
+
+.debug_line_str
+                0x00000000      0x184
+ .debug_line_str
+                0x00000000      0x184 /tmp/cclMdpnH.ltrans0.ltrans.o
+                                 0xbe (size before relaxing)
+ .debug_line_str
+                0x00000184      0x168 /tmp/ccWC1fOy.debug.temp.o
+ .debug_line_str
+                0x00000184       0xc6 /tmp/ccFAM73r.debug.temp.o
+
+.debug_frame    0x00000000      0x370
+ .debug_frame   0x00000000      0x370 /tmp/cclMdpnH.ltrans0.ltrans.o

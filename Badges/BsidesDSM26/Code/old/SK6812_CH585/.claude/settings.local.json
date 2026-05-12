@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(///192.168.1.42/william/RickProjects/UntitledElectronics/Badges/BsidesDSM26/Code/**)",
+      "Read(//mnt/c/**)",
+      "Bash(find . -name \"*ws2812*\" -o -name \"*LED*\" -o -name \"*neopixel*\")",
+      "Bash(find . -name \"*.mk\" -o -name \"ch32fun.mk\")",
+      "Bash(find . -name \"*color*\" -o -name \"*utilities*\")"
+    ]
+  }
+}

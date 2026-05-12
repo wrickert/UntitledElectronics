@@ -1,0 +1,17 @@
+all : flash
+
+TARGET:=ch585_audio
+TARGET_MCU:=CH585
+TARGET_MCU_PACKAGE?=CH585M
+GENERATED_LD_FILE:=generated_$(TARGET_MCU_PACKAGE)_.ld
+LINKER_SCRIPT:=$(GENERATED_LD_FILE)
+
+include ../ch32fun/ch32fun/ch32fun.mk
+
+GENERATED_LD_FILE:=generated_$(TARGET_MCU_PACKAGE)_.ld
+
+generated_$(TARGET_MCU_PACKAGE)_.ld:
+	$(PREFIX)-gcc -E -P -x c -DTARGET_MCU=$(TARGET_MCU) -DMCU_PACKAGE=$(MCU_PACKAGE) -DTARGET_MCU_LD=$(TARGET_MCU_LD) -DTARGET_MCU_MEMORY_SPLIT=$(TARGET_MCU_MEMORY_SPLIT) $(CH32FUN)/ch32fun.ld > $@
+
+flash : cv_flash
+clean : cv_clean

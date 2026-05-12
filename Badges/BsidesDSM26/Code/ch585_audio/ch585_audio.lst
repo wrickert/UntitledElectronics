@@ -1,0 +1,274 @@
+
+ch585_audio.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <InterruptVector>:
+   0:	0b60006f          	j	b6 <handle_reset>
+   4:	00000000          	.word	0x00000000
+   8:	00000154          	.word	0x00000154
+   c:	00000154          	.word	0x00000154
+  10:	f3f9bda9          	.word	0xf3f9bda9
+  14:	00000154          	.word	0x00000154
+	...
+  20:	00000154          	.word	0x00000154
+  24:	00000154          	.word	0x00000154
+	...
+  30:	00000154          	.word	0x00000154
+  34:	00000000          	.word	0x00000000
+  38:	00000154          	.word	0x00000154
+  3c:	00000000          	.word	0x00000000
+  40:	00000154          	.word	0x00000154
+  44:	00000154          	.word	0x00000154
+  48:	00000154          	.word	0x00000154
+  4c:	00000154          	.word	0x00000154
+  50:	00000154          	.word	0x00000154
+  54:	00000154          	.word	0x00000154
+  58:	00000154          	.word	0x00000154
+  5c:	00000000          	.word	0x00000000
+  60:	00000154          	.word	0x00000154
+  64:	00000154          	.word	0x00000154
+  68:	00000154          	.word	0x00000154
+  6c:	00000154          	.word	0x00000154
+  70:	00000154          	.word	0x00000154
+  74:	00000154          	.word	0x00000154
+  78:	00000154          	.word	0x00000154
+  7c:	00000154          	.word	0x00000154
+  80:	00000154          	.word	0x00000154
+  84:	00000154          	.word	0x00000154
+  88:	00000154          	.word	0x00000154
+  8c:	00000154          	.word	0x00000154
+  90:	00000154          	.word	0x00000154
+  94:	00000154          	.word	0x00000154
+  98:	00000154          	.word	0x00000154
+  9c:	00000154          	.word	0x00000154
+
+Disassembly of section .text:
+
+000000a0 <DelaySysTick>:
+  a0:	e000f7b7          	lui	a5,0xe000f
+  a4:	479c                	lw	a5,8(a5)
+  a6:	e000f737          	lui	a4,0xe000f
+  aa:	953e                	add	a0,a0,a5
+  ac:	471c                	lw	a5,8(a4)
+  ae:	8f89                	sub	a5,a5,a0
+  b0:	fe07cee3          	bltz	a5,ac <DelaySysTick+0xc>
+  b4:	8082                	ret
+
+000000b6 <handle_reset>:
+  b6:	20000197          	auipc	gp,0x20000
+  ba:	34618193          	addi	gp,gp,838 # 200003fc <__global_pointer$>
+  be:	20020117          	auipc	sp,0x20020
+  c2:	f4210113          	addi	sp,sp,-190 # 20020000 <_eusrstack>
+  c6:	c0418513          	addi	a0,gp,-1020 # 20000000 <_data_vma>
+  ca:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+  ce:	00b57763          	bgeu	a0,a1,dc <handle_reset+0x26>
+  d2:	00052023          	sw	zero,0(a0)
+  d6:	0511                	addi	a0,a0,4
+  d8:	feb56de3          	bltu	a0,a1,d2 <handle_reset+0x1c>
+  dc:	0a000513          	li	a0,160
+  e0:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+  e4:	c0418613          	addi	a2,gp,-1020 # 20000000 <_data_vma>
+  e8:	00c5fa63          	bgeu	a1,a2,fc <handle_reset+0x46>
+  ec:	00052283          	lw	t0,0(a0)
+  f0:	0055a023          	sw	t0,0(a1)
+  f4:	0511                	addi	a0,a0,4
+  f6:	0591                	addi	a1,a1,4
+  f8:	fec5eae3          	bltu	a1,a2,ec <handle_reset+0x36>
+  fc:	2b000513          	li	a0,688
+ 100:	c0418593          	addi	a1,gp,-1020 # 20000000 <_data_vma>
+ 104:	c0418613          	addi	a2,gp,-1020 # 20000000 <_data_vma>
+ 108:	00c58a63          	beq	a1,a2,11c <handle_reset+0x66>
+ 10c:	00052283          	lw	t0,0(a0)
+ 110:	0055a023          	sw	t0,0(a1)
+ 114:	0511                	addi	a0,a0,4
+ 116:	0591                	addi	a1,a1,4
+ 118:	fec5eae3          	bltu	a1,a2,10c <handle_reset+0x56>
+ 11c:	00000793          	li	a5,0
+ 120:	42fd                	li	t0,31
+ 122:	bc029073          	csrw	0xbc0,t0
+ 126:	6289                	lui	t0,0x2
+ 128:	88828293          	addi	t0,t0,-1912 # 1888 <ch32fun.c.708c8a24+0xabc>
+ 12c:	3002a073          	csrs	mstatus,t0
+ 130:	00000297          	auipc	t0,0x0
+ 134:	ed028293          	addi	t0,t0,-304 # 0 <InterruptVector>
+ 138:	0032e293          	ori	t0,t0,3
+ 13c:	30529073          	csrw	mtvec,t0
+ 140:	e000f7b7          	lui	a5,0xe000f
+ 144:	4705                	li	a4,1
+ 146:	c398                	sw	a4,0(a5)
+ 148:	1b600793          	li	a5,438
+ 14c:	34179073          	csrw	mepc,a5
+ 150:	30200073          	mret
+
+00000154 <ADC1_2_IRQHandler>:
+ 154:	a001                	j	154 <ADC1_2_IRQHandler>
+
+00000156 <SystemInit>:
+ 156:	400017b7          	lui	a5,0x40001
+ 15a:	04078793          	addi	a5,a5,64 # 40001040 <_eusrstack+0x1ffe1040>
+ 15e:	05700593          	li	a1,87
+ 162:	00b78023          	sb	a1,0(a5)
+ 166:	fa800613          	li	a2,-88
+ 16a:	00c78023          	sb	a2,0(a5)
+ 16e:	0001                	nop
+ 170:	0001                	nop
+ 172:	40002737          	lui	a4,0x40002
+ 176:	80574683          	lbu	a3,-2043(a4) # 40001805 <_eusrstack+0x1ffe1805>
+ 17a:	0ef6f693          	andi	a3,a3,239
+ 17e:	80d702a3          	sb	a3,-2043(a4)
+ 182:	40002737          	lui	a4,0x40002
+ 186:	4685                	li	a3,1
+ 188:	80d703a3          	sb	a3,-2041(a4) # 40001807 <_eusrstack+0x1ffe1807>
+ 18c:	00078023          	sb	zero,0(a5)
+ 190:	0001                	nop
+ 192:	0001                	nop
+ 194:	00b78023          	sb	a1,0(a5)
+ 198:	00c78023          	sb	a2,0(a5)
+ 19c:	0001                	nop
+ 19e:	0001                	nop
+ 1a0:	40001737          	lui	a4,0x40001
+ 1a4:	14500693          	li	a3,325
+ 1a8:	00d71423          	sh	a3,8(a4) # 40001008 <_eusrstack+0x1ffe1008>
+ 1ac:	00078023          	sb	zero,0(a5)
+ 1b0:	0001                	nop
+ 1b2:	0001                	nop
+ 1b4:	8082                	ret
+
+000001b6 <main>:
+		Delay_Us(half_period_us);
+	}
+}
+
+int main(void)
+{
+ 1b6:	715d                	addi	sp,sp,-80
+ 1b8:	de4e                	sw	s3,60(sp)
+ 1ba:	da56                	sw	s5,52(sp)
+ 1bc:	d06a                	sw	s10,32(sp)
+ 1be:	ce6e                	sw	s11,28(sp)
+ 1c0:	c686                	sw	ra,76(sp)
+ 1c2:	c4a2                	sw	s0,72(sp)
+ 1c4:	c2a6                	sw	s1,68(sp)
+ 1c6:	c0ca                	sw	s2,64(sp)
+ 1c8:	dc52                	sw	s4,56(sp)
+ 1ca:	d85a                	sw	s6,48(sp)
+ 1cc:	d65e                	sw	s7,44(sp)
+ 1ce:	d462                	sw	s8,40(sp)
+ 1d0:	d266                	sw	s9,36(sp)
+	SystemInit();
+ 1d2:	3751                	jal	156 <SystemInit>
+	case GPIO_ModeOut_PP_5mA:
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) &= ~(pin & ~PB);
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    |= (pin & ~PB);
+		break;
+	case GPIO_ModeOut_PP_20mA:
+		*(&R32_PA_PD_DRV + OFFSET_FOR_GPIOB(pin)) |= (pin & ~PB);
+ 1d4:	400017b7          	lui	a5,0x40001
+ 1d8:	0d478793          	addi	a5,a5,212 # 400010d4 <_eusrstack+0x1ffe10d4>
+ 1dc:	4398                	lw	a4,0(a5)
+	uint16_t half_period_us = (uint16_t)(500000u / hz);
+ 1de:	0007ad37          	lui	s10,0x7a
+		GPIO_SetBits(AUDIO_OUTPUT_PIN);
+ 1e2:	40001db7          	lui	s11,0x40001
+ 1e6:	00176713          	ori	a4,a4,1
+ 1ea:	c398                	sw	a4,0(a5)
+		*(&R32_PA_DIR + OFFSET_FOR_GPIOB(pin))    |= (pin & ~PB);
+ 1ec:	400017b7          	lui	a5,0x40001
+ 1f0:	0c078793          	addi	a5,a5,192 # 400010c0 <_eusrstack+0x1ffe10c0>
+ 1f4:	4398                	lw	a4,0(a5)
+	uint16_t half_period_us = (uint16_t)(500000u / hz);
+ 1f6:	120d0d13          	addi	s10,s10,288 # 7a120 <ch585_audio.c.5951adc5+0x785de>
+		cycles = 1;
+ 1fa:	4985                	li	s3,1
+ 1fc:	00176713          	ori	a4,a4,1
+ 200:	c398                	sw	a4,0(a5)
+	GPIO_ResetBits(AUDIO_OUTPUT_PIN);
+ 202:	400017b7          	lui	a5,0x40001
+ 206:	0cc78793          	addi	a5,a5,204 # 400010cc <_eusrstack+0x1ffe10cc>
+ 20a:	4705                	li	a4,1
+ 20c:	c398                	sw	a4,0(a5)
+		GPIO_SetBits(AUDIO_OUTPUT_PIN);
+ 20e:	0d8d8d93          	addi	s11,s11,216 # 400010d8 <_eusrstack+0x1ffe10d8>
+ 212:	4a85                	li	s5,1
+	funGpioInitAll();
+	audio_pin_init();
+
+	while (1)
+	{
+		for (unsigned i = 0; i < (sizeof(g_test_pattern) / sizeof(g_test_pattern[0])); i++)
+ 214:	29000493          	li	s1,656
+		GPIO_ResetBits(AUDIO_OUTPUT_PIN);
+ 218:	40001937          	lui	s2,0x40001
+		Delay_Ms(duration_ms);
+ 21c:	6a09                	lui	s4,0x2
+ 21e:	02048b13          	addi	s6,s1,32
+	if (!cycles)
+ 222:	3e700b93          	li	s7,999
+		Delay_Us(half_period_us);
+ 226:	4c1d                	li	s8,7
+		GPIO_ResetBits(AUDIO_OUTPUT_PIN);
+ 228:	0cc90913          	addi	s2,s2,204 # 400010cc <_eusrstack+0x1ffe10cc>
+		Delay_Ms(duration_ms);
+ 22c:	e78a0a13          	addi	s4,s4,-392 # 1e78 <ch585_audio.c.5951adc5+0x336>
+		{
+			play_tone(g_test_pattern[i].hz, g_test_pattern[i].duration_ms);
+ 230:	0004d783          	lhu	a5,0(s1)
+ 234:	0024d503          	lhu	a0,2(s1)
+	if (!hz)
+ 238:	eb91                	bnez	a5,24c <main+0x96>
+		Delay_Ms(duration_ms);
+ 23a:	03450533          	mul	a0,a0,s4
+		GPIO_ResetBits(AUDIO_OUTPUT_PIN);
+ 23e:	01392023          	sw	s3,0(s2)
+		Delay_Ms(duration_ms);
+ 242:	3db9                	jal	a0 <DelaySysTick>
+		for (unsigned i = 0; i < (sizeof(g_test_pattern) / sizeof(g_test_pattern[0])); i++)
+ 244:	0491                	addi	s1,s1,4
+ 246:	fe9b15e3          	bne	s6,s1,230 <main+0x7a>
+ 24a:	b7e9                	j	214 <main+0x5e>
+	uint32_t cycles = ((uint32_t)hz * duration_ms) / 1000u;
+ 24c:	02f50533          	mul	a0,a0,a5
+	uint16_t half_period_us = (uint16_t)(500000u / hz);
+ 250:	02fd57b3          	divu	a5,s10,a5
+ 254:	843e                	mv	s0,a5
+ 256:	07c2                	slli	a5,a5,0x10
+ 258:	83c1                	srli	a5,a5,0x10
+ 25a:	e391                	bnez	a5,25e <main+0xa8>
+ 25c:	4405                	li	s0,1
+ 25e:	0442                	slli	s0,s0,0x10
+ 260:	8041                	srli	s0,s0,0x10
+		cycles = 1;
+ 262:	4c85                	li	s9,1
+	if (!cycles)
+ 264:	00abf663          	bgeu	s7,a0,270 <main+0xba>
+	uint32_t cycles = ((uint32_t)hz * duration_ms) / 1000u;
+ 268:	3e800c93          	li	s9,1000
+ 26c:	03955cb3          	divu	s9,a0,s9
+		Delay_Us(half_period_us);
+ 270:	038407b3          	mul	a5,s0,s8
+	for (uint32_t i = 0; i < cycles; i++)
+ 274:	4401                	li	s0,0
+		Delay_Us(half_period_us);
+ 276:	c63e                	sw	a5,12(sp)
+ 278:	4532                	lw	a0,12(sp)
+		GPIO_SetBits(AUDIO_OUTPUT_PIN);
+ 27a:	015da023          	sw	s5,0(s11)
+	for (uint32_t i = 0; i < cycles; i++)
+ 27e:	0405                	addi	s0,s0,1
+		Delay_Us(half_period_us);
+ 280:	3505                	jal	a0 <DelaySysTick>
+		Delay_Us(half_period_us);
+ 282:	4532                	lw	a0,12(sp)
+		GPIO_ResetBits(AUDIO_OUTPUT_PIN);
+ 284:	01392023          	sw	s3,0(s2)
+		Delay_Us(half_period_us);
+ 288:	3d21                	jal	a0 <DelaySysTick>
+	for (uint32_t i = 0; i < cycles; i++)
+ 28a:	fe8c97e3          	bne	s9,s0,278 <main+0xc2>
+ 28e:	bf5d                	j	244 <main+0x8e>
+
+00000290 <g_test_pattern>:
+ 290:	020b 00a0 0000 0028 0293 00a0 0000 0028     ......(.......(.
+ 2a0:	0310 00a0 0000 0028 0370 00f0 0000 0118     ......(.p.......

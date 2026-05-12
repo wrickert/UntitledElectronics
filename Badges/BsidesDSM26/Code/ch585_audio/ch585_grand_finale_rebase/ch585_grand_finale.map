@@ -1,0 +1,648 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+                              /tmp/ccc4D0MP.ltrans0.ltrans.o (__divdi3)
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+                              /tmp/ccc4D0MP.ltrans0.ltrans.o (__udivdi3)
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+                              /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o) (__clz_tab)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .data          0x00000000        0x0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss           0x00000000        0x0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.mini_pad
+                0x00000000       0x88 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text._puts    0x00000000       0x42 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.mini_itoa.part.0
+                0x00000000       0x90 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.__puts_uart
+                0x00000000       0x20 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strlen   0x00000000       0x12 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.mini_vpprintf
+                0x00000000      0x1da /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.printf   0x00000000       0x30 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.vprintf  0x00000000       0x16 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.mini_vsnprintf
+                0x00000000       0x3a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.snprintf
+                0x00000000       0x20 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sprintf  0x00000000       0x2a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strcpy   0x00000000       0x14 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strncpy  0x00000000       0x1c /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strcmp   0x00000000       0x1a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strncmp  0x00000000       0x2e /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strchr   0x00000000       0x16 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strrchr  0x00000000       0x3c /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.memcmp   0x00000000       0x20 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.memmove  0x00000000       0x5e /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.memchr   0x00000000       0x1a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strnlen  0x00000000       0x2a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.twoway_strstr
+                0x00000000      0x258 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.strstr   0x00000000      0x12a /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.puts.str1.4
+                0x00000000        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.puts     0x00000000       0x40 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.setjmp   0x00000000       0x38 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.longjmp  0x00000000       0x3c /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.usb_debug
+                0x00000000        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .comment       0x00000000       0x24 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .comment       0x00000000       0x24 /tmp/ccbjSlXt.debug.temp.o
+ .comment       0x00000000       0x24 /tmp/ccfTcSf6.debug.temp.o
+ .text          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .text.__divdi3
+                0x00000000      0x39e /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_info    0x00000000      0x793 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_abbrev  0x00000000      0x1bf /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_loclists
+                0x00000000      0x5e4 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_aranges
+                0x00000000       0x20 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_rnglists
+                0x00000000       0xa9 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_line    0x00000000      0x9ae /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_str     0x00000000      0x263 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .debug_line_str
+                0x00000000      0x180 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .comment       0x00000000       0x24 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .eh_frame      0x00000000       0x28 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .riscv.attributes
+                0x00000000       0x34 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_divdi3.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .comment       0x00000000       0x24 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .eh_frame      0x00000000       0x28 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .text          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+ .comment       0x00000000       0x24 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x00000000         0x00070000         xr
+RAM              0x20000000         0x00020000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccigYQ44.o
+LOAD /tmp/ccc4D0MP.ltrans0.ltrans.o
+LOAD /tmp/ccbjSlXt.debug.temp.o
+LOAD /tmp/ccfTcSf6.debug.temp.o
+LOAD /tmp/ccr8t4U2.o
+LOAD /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a
+
+.init           0x00000000       0xa0
+                0x00000000                        _sinit = .
+                0x00000000                        . = ALIGN (0x4)
+ *(SORT_NONE(.init))
+ .init          0x00000000       0xa0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00000000                InterruptVectorDefault
+                0x00000000                InterruptVector
+                0x000000a0                        . = ALIGN (0x4)
+                0x000000a0                        _einit = .
+
+.highcodelalign
+                0x000000a0        0x0
+                0x000000a0                        . = ALIGN (0x4)
+                0x000000a0                        PROVIDE (_highcode_lma = .)
+
+.highcode       0x20000000     0x1304 load address 0x000000a0
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        PROVIDE (_highcode_vma_start = .)
+ *(.highcode*)
+ .highcode      0x20000000     0x1302 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x20000000                blink
+                0x200000a8                HandleDataOut
+                0x2000011a                NFC_IRQHandler
+                0x20000318                nfca_pcd_lpcd_check
+                0x200003b6                ISO14443_CRCA
+                0x200003fe                ISO14443AAppendCRCA
+                0x2000045a                ISO14443ACheckOddParityBit
+                0x2000048c                ISO14443ACalOddParityBit
+                0x200004b4                PcdReq
+                0x20000876                process_usb_packet
+                0x20000882                send_heartbeat_if_free
+                0x200008a6                usb_send_blocking
+                0x20000928                usb_send_ntag_version_packet
+                0x2000098c                usb_send_ntag_page_packet
+                0x200009d8                usb_send_ntag_done_packet
+                0x200009f8                ntag_get_version
+                0x20000a9c                ntag_is_ntag215
+                0x20000aca                ntag_read_pages
+                0x20000b68                ntag_dump_read_only
+                0x20000c08                card_interaction
+                0x20000cea                main_task_loop
+                0x20001304                        . = ALIGN (0x4)
+ *fill*         0x20001302        0x2 
+                0x20001304                        PROVIDE (_highcode_vma_end = .)
+
+.text           0x000013a4     0x16d8
+                0x000013a4                        . = ALIGN (0x4)
+ *(.text)
+ *(.text.*)
+ .text.DelaySysTick
+                0x000013a4       0x16 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.USBFS_InternalFinishSetup
+                0x000013ba       0x82 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.USBFSReset
+                0x0000143c       0x34 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sk6812_send_bit_0
+                0x00001470       0x4e /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sk6812_send_bit_1
+                0x000014be       0x4e /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sk6812_send_byte
+                0x0000150c       0x30 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.nfca_pcd_start
+                0x0000153c       0x28 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.nfca_adc_get_ant_signal
+                0x00001564       0xe8 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.nfca_pcd_wait_comm_end
+                0x0000164c       0xe0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.nfca_pcd_comm.part.0.constprop.0
+                0x0000172c      0x11c /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sk6812_set_grbw.constprop.0
+                0x00001848       0x5c /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.sk6812_set_rgb
+                0x000018a4        0x8 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.audio_init.part.0
+                0x000018ac       0x84 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.handle_reset
+                0x00001930       0xb0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00001930                handle_reset
+ .text.vector_handler
+                0x000019e0      0x4cc /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x000019e0                EXTI2_IRQHandler
+                0x000019e0                TIM8_TRG_COM_IRQHandler
+                0x000019e0                TIM8_CC_IRQHandler
+                0x000019e0                USART_WKUP_IRQHandler
+                0x000019e0                UART8_IRQHandler
+                0x000019e0                SPI4_IRQHandler
+                0x000019e0                DFSDM0_IRQHandler
+                0x000019e0                TIM1_CC_IRQHandler
+                0x000019e0                HardFault_Handler
+                0x000019e0                TIM10_IRQHandler
+                0x000019e0                IPC_CH2_Handler
+                0x000019e0                USBPD_IRQHandler
+                0x000019e0                TIM6_IRQHandler
+                0x000019e0                GPIOA_IRQHandler
+                0x000019e0                SysTick_Handler
+                0x000019e0                CAN3_RX1_IRQHandler
+                0x000019e0                I3C_ER_IRQHandler
+                0x000019e0                PVD_IRQHandler
+                0x000019e0                SDIO_IRQHandler
+                0x000019e0                TIM9_BRK_IRQHandler
+                0x000019e0                DMA2_Channel8_IRQHandler
+                0x000019e0                NMI_Handler
+                0x000019e0                CAN2_RX1_IRQHandler
+                0x000019e0                EXTI3_IRQHandler
+                0x000019e0                HSEM_Handler
+                0x000019e0                UART1_IRQHandler
+                0x000019e0                USBHS_IRQHandler
+                0x000019e0                LPTIM2_IRQHandler
+                0x000019e0                DMA2_Channel9_IRQHandler
+                0x000019e0                TIM10_CC_IRQHandler
+                0x000019e0                EXTI25_16_IRQHandler
+                0x000019e0                I2C3_ER_IRQHandler
+                0x000019e0                USBFS_IRQHandler
+                0x000019e0                UART0_IRQHandler
+                0x000019e0                USART8_IRQHandler
+                0x000019e0                EXTI0_IRQHandler
+                0x000019e0                I2C2_EV_IRQHandler
+                0x000019e0                TIM10_TRG_COM_IRQHandler
+                0x000019e0                LPTIM_IRQHandler
+                0x000019e0                CAN1_RX0_IRQHandler
+                0x000019e0                CAN3_SCE_IRQHandler
+                0x000019e0                CAN2_SCE_IRQHandler
+                0x000019e0                ADC1_2_IRQHandler
+                0x000019e0                BB_IRQHandler
+                0x000019e0                Break_Point_Handler
+                0x000019e0                IPC_CH0_Handler
+                0x000019e0                TIM2_CC_IRQHandler
+                0x000019e0                SPI1_IRQHandler
+                0x000019e0                USART5_IRQHandler
+                0x000019e0                TAMPER_IRQHandler
+                0x000019e0                TMR0_IRQHandler
+                0x000019e0                AWU_IRQHandler
+                0x000019e0                EXTI7_0_IRQHandler
+                0x000019e0                CAN2_RX0_IRQHandler
+                0x000019e0                OSCWakeUp_IRQHandler
+                0x000019e0                TIM8_UP_IRQHandler
+                0x000019e0                Ecall_M_Mode_Handler
+                0x000019e0                ECDC_IRQHandler
+                0x000019e0                SDMMC_IRQHandler
+                0x000019e0                USART7_IRQHandler
+                0x000019e0                DMA2_Channel2_IRQHandler
+                0x000019e0                DMA1_Channel4_IRQHandler
+                0x000019e0                ADC1_IRQHandler
+                0x000019e0                TIM2_BRK_IRQHandler
+                0x000019e0                USART6_IRQHandler
+                0x000019e0                CAN3_RX0_IRQHandler
+                0x000019e0                HSADC_IRQHandler
+                0x000019e0                TIM9_UP_IRQHandler
+                0x000019e0                USART3_IRQHandler
+                0x000019e0                RTC_IRQHandler
+                0x000019e0                DMA1_Channel7_IRQHandler
+                0x000019e0                LED_IRQHandler
+                0x000019e0                CAN1_RX1_IRQHandler
+                0x000019e0                DVP_IRQHandler
+                0x000019e0                UART5_IRQHandler
+                0x000019e0                USBSS_IRQHandler
+                0x000019e0                SWPMI_IRQHandler
+                0x000019e0                USBPDWakeUp_IRQHandler
+                0x000019e0                EXTI15_8_IRQHandler
+                0x000019e0                TIM4_IRQHandler
+                0x000019e0                DMA2_Channel1_IRQHandler
+                0x000019e0                SWPMI_WKUP_IRQHandler
+                0x000019e0                USBPD_WKUP_IRQHandler
+                0x000019e0                I2C1_EV_IRQHandler
+                0x000019e0                USBSSWakeup_IRQHandler
+                0x000019e0                UART2_IRQHandler
+                0x000019e0                USART4_IRQHandler
+                0x000019e0                PWMX_IRQHandler
+                0x000019e0                DMA1_Channel6_IRQHandler
+                0x000019e0                UART4_IRQHandler
+                0x000019e0                DMA2_Channel4_IRQHandler
+                0x000019e0                TIM3_IRQHandler
+                0x000019e0                RCC_IRQHandler
+                0x000019e0                TIM1_TRG_COM_IRQHandler
+                0x000019e0                DMA1_Channel1_IRQHandler
+                0x000019e0                DMA2_Channel7_IRQHandler
+                0x000019e0                QSPI1_IRQHandler
+                0x000019e0                EXTI15_10_IRQHandler
+                0x000019e0                ADC_IRQHandler
+                0x000019e0                IPC_CH3_Handler
+                0x000019e0                DMA1_Channel8_IRQHandler
+                0x000019e0                I3C_EV_IRQHandler
+                0x000019e0                TMR2_IRQHandler
+                0x000019e0                I3C_WKUP_IRQHandler
+                0x000019e0                DefaultIRQHandler
+                0x000019e0                TIM12_IRQHandler
+                0x000019e0                TIM7_IRQHandler
+                0x000019e0                CAN2_TX_IRQHandler
+                0x000019e0                TIM5_IRQHandler
+                0x000019e0                I2C3_EV_IRQHandler
+                0x000019e0                EXTI9_5_IRQHandler
+                0x000019e0                PIOC_IRQHandler
+                0x000019e0                TIM9_IRQHandler
+                0x000019e0                LTDC_IRQHandler
+                0x000019e0                SAI_IRQHandler
+                0x000019e0                SPI2_IRQHandler
+                0x000019e0                OSC32KCal_IRQHandler
+                0x000019e0                IPC_CH1_Handler
+                0x000019e0                I2C_IRQHandler
+                0x000019e0                LPTIM1_WKUP_IRQHandler
+                0x000019e0                TIM10_BRK_IRQHandler
+                0x000019e0                TIM9_CC_IRQHandler
+                0x000019e0                CAN1_TX_IRQHandler
+                0x000019e0                DMA2_Channel5_IRQHandler
+                0x000019e0                USB2_IRQHandler
+                0x000019e0                USBHSWakeUp_IRQHandler
+                0x000019e0                DMA1_Channel5_IRQHandler
+                0x000019e0                EXTI4_IRQHandler
+                0x000019e0                USB_LP_CAN1_RX0_IRQHandler
+                0x000019e0                QSPI2_IRQHandler
+                0x000019e0                RNG_IRQHandler
+                0x000019e0                USB_HP_CAN1_TX_IRQHandler
+                0x000019e0                LLE_IRQHandler
+                0x000019e0                CMPWakeUp_IRQHandler
+                0x000019e0                DMA1_Channel3_IRQHandler
+                0x000019e0                FSMC_IRQHandler
+                0x000019e0                ETH_IRQHandler
+                0x000019e0                TIM1_UP_IRQHandler
+                0x000019e0                LPTIMWakeUp_IRQHandler
+                0x000019e0                WWDG_IRQHandler
+                0x000019e0                USBHSWakeup_IRQHandler
+                0x000019e0                DMA2_Channel11_IRQHandler
+                0x000019e0                WDOG_BAT_IRQHandler
+                0x000019e0                Ecall_U_Mode_Handler
+                0x000019e0                I2C4_EV_IRQHandler
+                0x000019e0                CAN3_TX_IRQHandler
+                0x000019e0                TMR3_IRQHandler
+                0x000019e0                DMA2_Channel6_IRQHandler
+                0x000019e0                TIM2_IRQHandler
+                0x000019e0                SW_Handler
+                0x000019e0                TIM1_BRK_IRQHandler
+                0x000019e0                GPHA_IRQHandler
+                0x000019e0                OPA_IRQHandler
+                0x000019e0                DMA2_Channel10_IRQHandler
+                0x000019e0                EXTI1_IRQHandler
+                0x000019e0                SPI0_IRQHandler
+                0x000019e0                USB2_HOST_IRQHandler
+                0x000019e0                LPTIM2_WKUP_IRQHandler
+                0x000019e0                RTCAlarm_IRQHandler
+                0x000019e0                TIM11_IRQHandler
+                0x000019e0                TIM10_UP_IRQHandler
+                0x000019e0                TIM9_TRG_COM_IRQHandler
+                0x000019e0                UART7_IRQHandler
+                0x000019e0                USART2_IRQHandler
+                0x000019e0                UART6_IRQHandler
+                0x000019e0                UHSIF_IRQHandler
+                0x000019e0                ETHWakeUp_IRQHandler
+                0x000019e0                I2C2_ER_IRQHandler
+                0x000019e0                DMA1_Channel2_IRQHandler
+                0x000019e0                TIM8_BRK_IRQHandler
+                0x000019e0                TIM2_TRG_IRQHandler
+                0x000019e0                CAN1_SCE_IRQHandler
+                0x000019e0                FLASH_IRQHandler
+                0x000019e0                USBFSWakeUp_IRQHandler
+                0x000019e0                USART1_IRQHandler
+                0x000019e0                OTG_FS_IRQHandler
+                0x000019e0                SPI3_IRQHandler
+                0x000019e0                USBFS_WakeUp_IRQHandler
+                0x000019e0                UART3_IRQHandler
+                0x000019e0                I2C1_ER_IRQHandler
+                0x000019e0                FMC_IRQHandler
+                0x000019e0                USB2_DEVICE_IRQHandler
+                0x000019e0                LPTIM1_IRQHandler
+                0x000019e0                DFSDM1_IRQHandler
+                0x000019e0                TMR1_IRQHandler
+                0x000019e0                I2C4_ER_IRQHandler
+                0x000019e0                SERDES_IRQHandler
+                0x000019e0                USBSS_LINK_IRQHandler
+                0x000019e0                USBWakeUp_IRQHandler
+                0x000019e0                DMA2_Channel3_IRQHandler
+ .text.memset   0x00001eac       0x12 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00001eac                memset
+ .text.memcpy   0x00001ebe       0x1c /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00001ebe                memcpy
+ .text.jump_isprom
+                0x00001eda       0x54 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.USBFS_SendEndpointNEW.constprop.0.isra.0
+                0x00001f2e       0x74 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.SystemInit
+                0x00001fa2       0x60 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00001fa2                SystemInit
+ .text.GPIOB_IRQHandler
+                0x00002002       0x80 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .text.startup.main
+                0x00002082      0x378 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                0x00002082                main
+ .text.__udivdi3
+                0x000023fa      0x35e /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+                0x000023fa                __udivdi3
+ *(.rodata)
+ .rodata        0x00002758       0x30 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *(.rodata*)
+ .rodata.vector_handler
+                0x00002788       0x30 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.str1.4
+                0x000027b8        0xb /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x000027c3        0x1 
+ .rodata.config_descriptor
+                0x000027c4       0x20 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.device_descriptor
+                0x000027e4       0x12 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x000027f6        0x2 
+ .rodata.g_sine32
+                0x000027f8       0x20 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.g_tag_cue
+                0x00002818       0x10 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.led_pattern_ms.0
+                0x00002828        0xc /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.byteParityBitsTable
+                0x00002834      0x100 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.descriptor_list
+                0x00002934       0x48 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .rodata.__clz_tab
+                0x0000297c      0x100 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+                0x0000297c                __clz_tab
+ *(.gnu.linkonce.t.*)
+                0x00002a7c                        . = ALIGN (0x4)
+
+.rela.dyn       0x00002a7c        0x0
+ .rela.text.handle_reset
+                0x00002a7c        0x0 /tmp/ccc4D0MP.ltrans0.ltrans.o
+
+.fini           0x00002a7c        0x0
+ *(SORT_NONE(.fini))
+                0x00002a7c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (_etext = .)
+                [!provide]                        PROVIDE (_eitcm = .)
+
+.preinit_array  0x00002a7c        0x0
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+
+.init_array     0x00002a7c        0x0
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
+ *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
+                [!provide]                        PROVIDE (__init_array_end = .)
+
+.fini_array     0x00002a7c        0x0
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
+ *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+
+.dalign         0x20001304        0x0 load address 0x00002a7c
+                0x20001304                        . = ALIGN (0x4)
+                0x20001304                        PROVIDE (_data_vma = .)
+
+.dlalign        0x00002a7c        0x0
+                0x00002a7c                        . = ALIGN (0x4)
+                0x00002a7c                        PROVIDE (_data_lma = .)
+
+.data           0x20001304        0xc load address 0x00002a7c
+                0x20001304                        . = ALIGN (0x4)
+                0x20001700                        __global_pointer$ = (. + 0x3fc)
+ *(.gnu.linkonce.r.*)
+ *(.data .data.*)
+ *(.gnu.linkonce.d.*)
+                0x20001308                        . = ALIGN (0x8)
+ *fill*         0x20001304        0x4 
+ *(.sdata .sdata.*)
+ .sdata.apdu_iblock_number
+                0x20001308        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *(.sdata2*)
+ *(.gnu.linkonce.s.*)
+                0x20001310                        . = ALIGN (0x8)
+ *fill*         0x20001309        0x7 
+ *(.srodata.cst16)
+ *(.srodata.cst8)
+ *(.srodata.cst4)
+ *(.srodata.cst2)
+ *(.srodata .srodata.*)
+                0x20001310                        . = ALIGN (0x4)
+                0x20001310                        PROVIDE (_edata = .)
+
+.bss            0x20001310      0xc30 load address 0x00002a88
+                0x20001310                        . = ALIGN (0x4)
+                0x20001310                        PROVIDE (_sbss = .)
+ *(.sbss*)
+ .sbss.g_audio_pwm_initialized
+                0x20001310        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x20001311        0x3 
+ .sbss.g_last_ntag_version
+                0x20001314        0x8 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_last_lpcd_hit
+                0x2000131c        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x2000131d        0x1 
+ .sbss.g_last_lpcd_base
+                0x2000131e        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.gs_lpcd_adc_base_value
+                0x20001320        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_last_nfc_ant_adc
+                0x20001322        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_nfca_pcd_buf_offset
+                0x20001324        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_last_nfc_comm_status
+                0x20001325        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x20001326        0x2 
+ .sbss.g_last_nfc_recv_bits
+                0x20001328        0x4 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_nfca_pcd_recv_word_idx
+                0x2000132c        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x2000132e        0x2 
+ .sbss.g_nfca_pcd_recv_bits
+                0x20001330        0x4 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_nfca_pcd_intf_mode
+                0x20001334        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x20001335        0x1 
+ .sbss.g_nfca_pcd_send_total_bytes
+                0x20001336        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_nfca_pcd_send_fifo_bytes
+                0x20001338        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .sbss.g_nfca_pcd_comm_status
+                0x2000133a        0x1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x2000133b        0x1 
+ .sbss.g_last_nfc_intf_status
+                0x2000133c        0x2 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *(.gnu.linkonce.sb.*)
+ *(.bss*)
+ *fill*         0x2000133e        0x2 
+ .bss.gs_picc_uid
+                0x20001340        0xa /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *fill*         0x2000134a        0x2 
+ .bss.g_nfca_pcd_recv_buf_chain
+                0x2000134c      0x400 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.g_nfca_pcd_send_buf
+                0x2000174c      0x100 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.gs_lpcd_adc_filter_buf
+                0x2000184c       0x10 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.g_nfca_parity_buf
+                0x2000185c      0x100 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.g_nfca_pcd_recv_buf
+                0x2000195c      0x100 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.gs_nfca_data_buf
+                0x20001a5c      0x200 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.gs_usb_data_buf
+                0x20001c5c      0x200 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .bss.USBFSCTX  0x20001e5c       0xe4 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ *(.gnu.linkonce.b.*)
+ *(COMMON*)
+                0x20001f40                        . = ALIGN (0x4)
+                0x20001f40                        PROVIDE (_ebss = .)
+                [!provide]                        PROVIDE (_end = _ebss)
+                [!provide]                        PROVIDE (end = .)
+                0x20020000                        PROVIDE (_eusrstack = (ORIGIN (RAM) + LENGTH (RAM)))
+
+/DISCARD/
+ *(.note .note.*)
+ *(.eh_frame .eh_frame.*)
+ *(.comment .comment.*)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ *(.ARM.exidx*)
+OUTPUT(ch585_grand_finale.elf elf32-littleriscv)
+
+.riscv.attributes
+                0x00000000       0x41
+ .riscv.attributes
+                0x00000000       0x41 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .riscv.attributes
+                0x00000041       0x34 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .riscv.attributes
+                0x00000075       0x34 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_info     0x00000000     0x6387
+ .debug_info    0x00000000     0x2d1b /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_info    0x00002d1b      0xd76 /tmp/ccbjSlXt.debug.temp.o
+                0x00002d1b                ch32fun.c.ebc72378
+ .debug_info    0x00003a91     0x20bd /tmp/ccfTcSf6.debug.temp.o
+                0x00003a91                ch585_grand_finale.c.9f3d4ca2
+ .debug_info    0x00005b4e      0x761 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_info    0x000062af       0xd8 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_abbrev   0x00000000      0xafb
+ .debug_abbrev  0x00000000      0x1fb /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_abbrev  0x000001fb      0x2b1 /tmp/ccbjSlXt.debug.temp.o
+ .debug_abbrev  0x000004ac      0x439 /tmp/ccfTcSf6.debug.temp.o
+ .debug_abbrev  0x000008e5      0x1a6 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x00000a8b       0x70 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_loclists
+                0x00000000     0x37ae
+ .debug_loclists
+                0x00000000     0x3066 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_loclists
+                0x00003066      0x748 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+
+.debug_aranges  0x00000000      0x290
+ .debug_aranges
+                0x00000000      0x258 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_aranges
+                0x00000258       0x20 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_aranges
+                0x00000278       0x18 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_rnglists
+                0x00000000      0x6a0
+ .debug_rnglists
+                0x00000000      0x5f1 /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_rnglists
+                0x000005f1       0xaf /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+
+.debug_line     0x00000000     0x7c49
+ .debug_line    0x00000000     0x720f /tmp/ccc4D0MP.ltrans0.ltrans.o
+ .debug_line    0x0000720f       0x76 /tmp/ccbjSlXt.debug.temp.o
+ .debug_line    0x00007285       0x80 /tmp/ccfTcSf6.debug.temp.o
+ .debug_line    0x00007305      0x905 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_line    0x00007c0a       0x3f /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_str      0x00000000     0x216c
+ .debug_str     0x00000000     0x216c /tmp/ccc4D0MP.ltrans0.ltrans.o
+                                0x1a7 (size before relaxing)
+ .debug_str     0x0000216c      0x799 /tmp/ccbjSlXt.debug.temp.o
+ .debug_str     0x0000216c     0x19fd /tmp/ccfTcSf6.debug.temp.o
+ .debug_str     0x0000216c      0x264 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_str     0x0000216c      0x1b1 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_line_str
+                0x00000000      0x304
+ .debug_line_str
+                0x00000000      0x304 /tmp/ccc4D0MP.ltrans0.ltrans.o
+                                0x135 (size before relaxing)
+ .debug_line_str
+                0x00000304      0x18b /tmp/ccbjSlXt.debug.temp.o
+ .debug_line_str
+                0x00000304      0x19c /tmp/ccfTcSf6.debug.temp.o
+ .debug_line_str
+                0x00000304      0x180 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_udivdi3.o)
+ .debug_line_str
+                0x00000304      0x180 /usr/lib/gcc/riscv64-unknown-elf/13.2.0/rv32imac/ilp32/libgcc.a(_clz.o)
+
+.debug_frame    0x00000000      0x87c
+ .debug_frame   0x00000000      0x87c /tmp/ccc4D0MP.ltrans0.ltrans.o
